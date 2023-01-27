@@ -1,1 +1,81 @@
-<mxfile host="app.diagrams.net" modified="2023-01-27T16:05:44.986Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36" etag="8NnAJP3QGlkBHZxE_Qgw" version="20.8.13" type="github"><diagram name="Page-1" id="I10tlLBvs1DCazHPwkPz">5Vlbb5swFP41PLbCGAg85rZNk6ZVqqq2jyy4wRvBkeM0yX79TLEB25BkGYFWe0mOj+/nfOfzsbHgdLX/TKN18o3EKLUcO95bcGY5DnChy/9yzaHQjHyhWFIci0aV4h7/RkJpC+0Wx2ijNGSEpAyvVeWCZBlaMEUXUUp2arMXkqqzrqMlMhT3iyg1tY84ZkmhDTy70n9BeJnImYEtalaRbCwUmySKya6mgnMLTikhrJBW+ylKc+NJuxT9PrXUlgujKGPndPj54G9W0/C7/4PQyH8ePTx+TW7EKK9RuhUbtubACqAVTqQw0zXjudHGllVSCF0pAEMzlkIgDMMO0tqUbLMY5Qu2LTjZJZih+3W0yGt3HF9cl7BVykuAi2LpiDK0b7UJKC3NIYrICjF64E1EB+h7RReBTih8tatcDaT/kpqbfaGLBLqW5ciVA7ggfPAX/nBMf+g2Qlk8zoHNS4s02mzwQjWLakNuCHp4ElVvhed6zWyvlA6ytMfsqSY/ywG4XHXJC7JHsUwUG9GkuYJvhWzpAp3GJIvoErEj7fxm19Z85zW4TuooSiOGX9XlNvlTzHBHMN9IDTm2gpwy7uUQxTZFr3pYagM5rjaQqw1U2MEY6A1e5bYvRxxsZYAylj0Z3Y7OCVW8B1LwWxlgDM9gAB7LTMXzhlHyC01JSijXZCTjLScvOE01VZTiZZYHBQcc4vpJzgyYM/lYVKxwHOfTNPKKGjUdUIsban51TG7xG/AJr0Ut7klHV940hf8PA5QwThAk73UDvG5A4WisEQyMCf9awV9Camy0sfMlO0cyBkfvMgb6GkykNkxU615OVw3u6fNWY8J2aPadoIDRaRbpN0MZdZ6hyFzjNnCder5xa4PR0ZwjL9whivnG8mD/h3xngOwlHDJ7cUdq3htemLy4WvJSXnZ6Sl6C64HRGyL19T8CeMrjSHJScCF6INDQo5PWldETtp5+5cV21HoeNmRNwcc9Z/SL8PA3YYmNY7Hd+2nsqYAtL4HDWanhAacjBjyb/wY/csMzWRPYzd7t6cXAC9QQu/jQDaGKQte7hYHrA0/8+r2yKGh4szIp0jEzdk+nSCVRD1vfH8O5QcrTplvGu7xVdsBC+iXy3Fuk/rDUHQk1vCF1Q0JgiCRs2Mxceza6mCU8/azy+k2uwBnvTccZABphbn5vcPTs6sRLU1f0Yn7eeK/PWB0Qjgd7IxxerL6IFVCsvivC+R8=</diagram></mxfile>
+<mxfile host="app.diagrams.net" modified="2023-01-27T16:33:28.203Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36" etag="vr2Q4RfTP2Dhi5AjQDE1" version="20.8.13" type="github">
+  <diagram name="Page-1" id="I10tlLBvs1DCazHPwkPz">
+    <mxGraphModel dx="1434" dy="796" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="pBzUVrvA_M_OSYsUVii--2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" edge="1" parent="1" source="jU6smC9O6bora6Y7UWJh-1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="420" y="140" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="jU6smC9O6bora6Y7UWJh-1" value="მომხმარებელი" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="365" y="10" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="jU6smC9O6bora6Y7UWJh-2" value="" style="endArrow=classic;html=1;rounded=0;entryX=1;entryY=0;entryDx=0;entryDy=0;exitX=0;exitY=1;exitDx=0;exitDy=0;" parent="1" source="jU6smC9O6bora6Y7UWJh-1" target="jU6smC9O6bora6Y7UWJh-6" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="360" y="100" as="sourcePoint" />
+            <mxPoint x="240" y="140" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="jU6smC9O6bora6Y7UWJh-3" value="ავტორიზებული" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="490" y="120" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="jU6smC9O6bora6Y7UWJh-4" value="არაავტორიზებული" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;rotation=-15;" parent="1" vertex="1">
+          <mxGeometry x="260" y="80" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="jU6smC9O6bora6Y7UWJh-6" value="ავტორიზაცია/ რეგისტრაციის გვერდი" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="170" y="120" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="jU6smC9O6bora6Y7UWJh-7" value="" style="endArrow=classic;html=1;rounded=0;exitX=0.842;exitY=1.017;exitDx=0;exitDy=0;exitPerimeter=0;entryX=1;entryY=0;entryDx=0;entryDy=0;" parent="1" source="jU6smC9O6bora6Y7UWJh-1" target="jU6smC9O6bora6Y7UWJh-9" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="475" y="90" as="sourcePoint" />
+            <mxPoint x="440" y="220" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="550" y="170" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="jU6smC9O6bora6Y7UWJh-8" value="" style="endArrow=classic;html=1;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" parent="1" source="jU6smC9O6bora6Y7UWJh-6" target="jU6smC9O6bora6Y7UWJh-9" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="230" y="180" as="sourcePoint" />
+            <mxPoint x="310" y="260" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="270" y="240" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="pBzUVrvA_M_OSYsUVii--1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="jU6smC9O6bora6Y7UWJh-9" target="jU6smC9O6bora6Y7UWJh-14">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="jU6smC9O6bora6Y7UWJh-9" value="მთავარი გვერდი" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="330" y="230" width="155" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="jU6smC9O6bora6Y7UWJh-10" value="" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="150" y="340" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="jU6smC9O6bora6Y7UWJh-11" value="" style="endArrow=classic;html=1;rounded=0;exitX=0;exitY=1;exitDx=0;exitDy=0;entryX=1;entryY=0;entryDx=0;entryDy=0;" parent="1" source="jU6smC9O6bora6Y7UWJh-9" target="jU6smC9O6bora6Y7UWJh-10" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="358" y="290" as="sourcePoint" />
+            <mxPoint x="493" y="345.38461538461536" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="410" y="320" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="jU6smC9O6bora6Y7UWJh-12" value="არ აქვს კომპანია" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="260" y="280" width="60" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="jU6smC9O6bora6Y7UWJh-13" value="" style="endArrow=classic;html=1;rounded=0;exitX=1;exitY=1;exitDx=0;exitDy=0;" parent="1" source="jU6smC9O6bora6Y7UWJh-9" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="490" y="290" as="sourcePoint" />
+            <mxPoint x="550" y="350" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="jU6smC9O6bora6Y7UWJh-14" value="აქვს დამატებული კომპანიები" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="530" y="280" width="60" height="40" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
