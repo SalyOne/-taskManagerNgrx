@@ -5,6 +5,8 @@ import { HeaderComponent } from './components/header/header.component';
 import { MatSidenavModule} from '@angular/material/sidenav';
 import { MatIconModule} from '@angular/material/icon';
 import { MatMenuModule} from '@angular/material/menu';
+import { RouterModule } from '@angular/router';
+
 
 
 
@@ -18,8 +20,14 @@ import { MatMenuModule} from '@angular/material/menu';
     CommonModule,
     MatSidenavModule,
     MatIconModule,
-    MatMenuModule
+    MatMenuModule,
+    RouterModule
+    
+   
 
+  ],
+  exports: [
+    MainLayoutComponent
   ]
 })
 export class MainLayoutModule { }
