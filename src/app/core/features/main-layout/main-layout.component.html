@@ -1,6 +1,9 @@
 <mat-sidenav-container #sidenav class="sidenav" >
-  <mat-sidenav (click)="sidenav.close()" mode="push" class="start-content">Start</mat-sidenav>
-  <mat-sidenav-content (click)="sidenav.open()" class="main-content" >
+  <mat-sidenav mode="push" #toggable class="start-content">Start</mat-sidenav>
+  <mat-sidenav-content class="main-content" >
+    <div>
+      <mat-icon (click)="toggable.toggle()">dehaze</mat-icon>
+    </div>
     <app-header></app-header>
   </mat-sidenav-content>
 </mat-sidenav-container>
