@@ -2,8 +2,9 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MainLayoutComponent } from './main-layout.component';
 import { HeaderComponent } from './components/header/header.component';
-import {MatSidenavModule} from '@angular/material/sidenav';
-import {MatIconModule} from '@angular/material/icon';
+import { MatSidenavModule} from '@angular/material/sidenav';
+import { MatIconModule} from '@angular/material/icon';
+import { MatMenuModule} from '@angular/material/menu';
 
 
 
@@ -16,7 +17,8 @@ import {MatIconModule} from '@angular/material/icon';
   imports: [
     CommonModule,
     MatSidenavModule,
-    MatIconModule
+    MatIconModule,
+    MatMenuModule
 
   ]
 })
