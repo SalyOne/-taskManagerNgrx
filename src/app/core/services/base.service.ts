@@ -30,6 +30,4 @@ export class BaseService {
  put<T>(url: string, body?: any): Observable<T>{
   return this.http.put<T>(this.apiUrl+ url, body)
 }
-
-
 }

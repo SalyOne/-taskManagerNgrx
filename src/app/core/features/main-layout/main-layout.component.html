@@ -1,0 +1,7 @@
+<mat-sidenav-container #sidenav class="sidenav" >
+  <mat-sidenav (click)="sidenav.close()" mode="push" class="start-content">Start</mat-sidenav>
+  <mat-sidenav-content (click)="sidenav.open()" class="main-content" >
+    <app-header></app-header>
+  </mat-sidenav-content>
+</mat-sidenav-container>
+
