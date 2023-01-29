@@ -3,10 +3,10 @@
     <img  src="assets/Logo/Logo.png" alt="Main Logo">
   </div>
   <div class="menu-container">
-      <button mat-button [matMenuTriggerFor]="menu">John Lennon</button>
+      <button mat-button [matMenuTriggerFor]="menu">User side</button>
       <mat-menu #menu="matMenu">
-        <button mat-menu-item>Settings</button>
-        <button mat-menu-item>Log out</button>
+        <button mat-menu-item  routerLink="/auth/login">Sign in</button>
+        <button mat-menu-item routerLink="/auth/register">Sign up</button>
       </mat-menu>
    </div >
 </header>
