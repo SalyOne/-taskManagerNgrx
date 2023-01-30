@@ -1,0 +1,22 @@
+.container-def{
+  width: 85%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.container-small{
+  width:71%;
+  max-width: 1100px;
+  margin: 0 auto;
+  @include mq(tablet){
+    width: 85%;
+  }
+}
+.container-xs{
+  width:65%;
+  max-width: 900px;
+  margin: 0 auto;
+  @include mq(tablet){
+    width: 85% ;
+  }
+
+}
