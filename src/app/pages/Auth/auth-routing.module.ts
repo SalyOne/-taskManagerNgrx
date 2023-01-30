@@ -18,16 +18,13 @@ const routes: Routes = [
     children: [
       {
         path: 'login',
-<<<<<<< HEAD
          component: LogInComponent
       },
 
       {
         path: 'register',
         component: RegisterComponent
-=======
-        component:LogInComponent
->>>>>>> 81b5115ea5dc4a3759dacd59b6eb480d738a0371
+
       }
     ]
   }
