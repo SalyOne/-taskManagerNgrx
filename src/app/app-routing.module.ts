@@ -7,9 +7,10 @@ import {HomeComponent} from "./pages/home/home.component";
 
 const routes: Routes = [
   {
+
     path: '', component: MainLayoutComponent,
   },
-  
+
   {
     path: 'auth',
     loadChildren: () =>import('./pages/Auth/auth.module').then(m=>m.AuthModule)
