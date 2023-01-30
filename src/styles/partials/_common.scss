@@ -1,3 +1,5 @@
+@use '../helpers/mixins' as *;
+
 .container-def{
   width: 85%;
   max-width: 1200px;

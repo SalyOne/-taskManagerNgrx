@@ -22,8 +22,6 @@ import { RouterModule } from '@angular/router';
     MatIconModule,
     MatMenuModule,
     RouterModule
-    
-   
 
   ],
   exports: [

@@ -2,6 +2,7 @@
 @use '../globals/variables' as *;
 .button{
   border: 0;
+  cursor: pointer;
   &-def{
     background-color: rgba(white,0.7);
     text-transform: capitalize;
