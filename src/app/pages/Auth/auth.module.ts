@@ -13,15 +13,12 @@ import { RegisterComponent } from './components/register/register.component';
     AuthComponent,
     LogInComponent,
     RegisterComponent,
-    
-    
+
+
   ],
   imports: [
     CommonModule,
     AuthRoutingModule,
-   
-   
-    
   ]
 })
 export class AuthModule { }
