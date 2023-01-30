@@ -4,8 +4,13 @@ import { AuthRoutingModule } from './auth-routing.module';
 import { AuthComponent } from './auth.component';
 import { LogInComponent } from './components/log-in/log-in.component';
 import { RegisterComponent } from './components/register/register.component';
+import { MatCardModule } from '@angular/material/card';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
 
 
+
+  
 
 
 @NgModule({
@@ -19,6 +24,10 @@ import { RegisterComponent } from './components/register/register.component';
   imports: [
     CommonModule,
     AuthRoutingModule,
+    MatCardModule,
+    MatInputModule,
+    MatButtonModule
+    
   ]
 })
 export class AuthModule { }
