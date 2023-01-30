@@ -7,9 +7,9 @@ import {HomeComponent} from "./pages/home/home.component";
 
 const routes: Routes = [
   {
+
     path: '', component: MainLayoutComponent,
   },
-
   {
     path: 'auth', component: AuthComponent
   },
