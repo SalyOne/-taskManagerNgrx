@@ -3,3 +3,8 @@
   flex-direction: column;
   align-items: flex-start;
 }
+.color-picker-container{
+  .mdc-text-field{
+    overflow: unset !important;
+  }
+}

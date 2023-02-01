@@ -21,7 +21,7 @@ import {WorkspaceModule} from "./pages/workspace/workspace.module";
     BrowserAnimationsModule,
     MainLayoutModule,
     HomeModule,
-    WorkspaceModule
+    WorkspaceModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -4,8 +4,8 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 @Injectable(
- 
-) 
+
+)
 export class BaseService {
 
   apiUrl = environment.apiUrl

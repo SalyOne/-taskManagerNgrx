@@ -1,21 +1,32 @@
+
+<section class="title-row">
+  <h1>Create Workspace:</h1>
+</section>
 <div class="form-container">
-  <form action="" [formGroup]="form">
+  <form action="" [formGroup]="form" (submit)="submit()">
     <mat-form-field appearance="fill" >
       <mat-label>Name</mat-label>
-      <input matInput placeholder="pat@example.com" formControlName="workName" required>
+      <input type="text" matInput placeholder="pat@example.com" formControlName="workName" required>
 <!--      <mat-error *ngIf="name.invalid"> {{getErrorMessage()}} </mat-error>-->
     </mat-form-field>
     <mat-form-field appearance="fill">
       <mat-label>abbreviation</mat-label>
-      <input matInput placeholder="pat@example.com" formControlName="abbr" required>
+      <input type="text" matInput placeholder="pat@example.com" formControlName="abbr" required>
 <!--      <mat-error *ngIf="abbr.invalid"> {{getErrorMessage()}} </mat-error>-->
     </mat-form-field>
+    <mat-form-field  class="color-picker-container">
+      <input type="color" matInput />
+    </mat-form-field>
+
+
     <mat-form-field appearance="fill">
       <mat-label>Description</mat-label>
       <textarea matInput></textarea>
     </mat-form-field>
-  </form>
 
+      <button type="submit" mat-button matInput>submit</button>
+
+  </form>
 </div>
 
 
