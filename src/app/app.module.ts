@@ -11,10 +11,11 @@ import {WorkspaceModule} from "./pages/workspace/workspace.module";
 
 
 
+
 @NgModule({
   declarations: [
     AppComponent
-  ],
+ ],
   imports: [
     BrowserModule,
     AppRoutingModule,
