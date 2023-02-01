@@ -1,1 +1,136 @@
-<p>register works!</p>
+<!-- <section class="register-form">
+    <form fxLayout="column" fxLayoutAlign="center center" #f="ngForm" (ngSubmit)="onSubmit(f)">
+        <mat-form-field>
+            <input 
+            type="text" 
+            matInput 
+            placeholder="First Name" 
+            ngModel 
+            name="firstNAme"
+            required
+            
+            >
+        </mat-form-field>
+        <mat-form-field>
+            <input 
+            type="input" 
+            matInput 
+            placeholder="Last Name" 
+            ngModel
+            name="lastNAme"
+            required
+            minlength="6">
+        </mat-form-field>
+        <mat-form-field>
+            <input 
+            type="email" 
+            matInput 
+            placeholder="Your Email" 
+            ngModel
+            name="email"
+            required
+            email>
+        </mat-form-field>
+        <mat-form-field>
+            <input 
+            type="password" 
+            matInput 
+            placeholder="Your Password" 
+            ngModel
+            name="password"
+            required
+            minlength="6">
+        </mat-form-field>
+  
+        <button type="submit" mat-raised-button color="primary">Submit</button>
+    </form>
+</section> -->
+
+<div class="login-page">
+    <mat-card class="mat-elevation-z12">
+      <mat-tab-group mat-stretch-tabs class="example-stretched-tabs">
+        <mat-tab label="Sign Up">
+          <mat-card-content>
+            <form action="">
+              <mat-form-field>
+                <input
+                  matInput
+                  placeholder="First Name"
+                  required
+                  name="firstName"
+                  ngModel
+                  #username="ngModel">
+                
+                <mat-error
+                  *ngIf="username.invalid">
+                  First Name is required
+                </mat-error>
+  
+              </mat-form-field>
+              <mat-form-field>
+                <input
+                  matInput
+                  placeholder="Last Name"
+                  required
+                  name="lastName"
+                  ngModel
+                  #username="ngModel">
+                
+                <mat-error
+                  *ngIf="username.invalid">
+                  Last Name is required
+                </mat-error>
+  
+              </mat-form-field>
+              <mat-form-field>
+                <input
+                  matInput
+                  placeholder="Email"
+                  required
+                  name="email"
+                  ngModel
+                  #email="ngModel">
+                  <mat-error *ngIf="email.invalid">Email is required</mat-error>
+                
+              </mat-form-field>
+              <mat-form-field>
+                <input
+                  matInput
+                  placeholder="Password"
+                  type="password"
+                  required
+                  minlength="6"
+                  name="password"
+                  ngModel
+                  #password="ngModel">
+                  <mat-error
+                    *ngIf="password.errors  ">
+                    Password is required
+                  </mat-error>
+                  <mat-error
+                    *ngIf="password.errors ">
+                    Password must be of length 6
+                  </mat-error>
+                
+  
+              </mat-form-field>
+
+              <button
+                mat-raised-button
+                color="primary"
+                class="login-button">
+                Sign Up
+              </button>
+              <button
+              routerLink="/auth/login"
+              mat-raised-button
+              color="warn"
+              class="login-button">
+              Log in
+            </button>
+            </form>
+          </mat-card-content>
+        </mat-tab> -->
+      </mat-tab-group>
+    </mat-card>
+  </div>

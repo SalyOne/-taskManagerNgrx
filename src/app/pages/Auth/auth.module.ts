@@ -7,7 +7,11 @@ import { RegisterComponent } from './components/register/register.component';
 import { MatCardModule } from '@angular/material/card';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { FormsModule } from '@angular/forms';
 
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 
   
@@ -26,7 +30,11 @@ import { MatButtonModule } from '@angular/material/button';
     AuthRoutingModule,
     MatCardModule,
     MatInputModule,
-    MatButtonModule
+    MatButtonModule,
+    FlexLayoutModule,
+    FormsModule,
+    MatTabsModule,
+    MatCheckboxModule
     
   ]
 })
