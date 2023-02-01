@@ -18,20 +18,10 @@ export class WorkspaceComponent implements OnDestroy{
   );
  sub$ = new Subject();
 
-
-  disabled = false;
-  selectedColor: ThemePalette = 'primary';
-  touchUi = false;
-
-  color: any;
-  colorCtr: any;
   constructor(
     private workspaceService:WorkspaceService
   ) {
   }
-
-
-
   submit(){
     this.form.markAllAsTouched();
     if(this.form.invalid) return;
