@@ -12,7 +12,7 @@ import { FormsModule } from '@angular/forms';
 
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatCheckboxModule } from '@angular/material/checkbox';
-
+import { ReactiveFormsModule } from '@angular/forms'
 
   
 
@@ -34,7 +34,8 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     FlexLayoutModule,
     FormsModule,
     MatTabsModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    ReactiveFormsModule
     
   ]
 })

@@ -49,9 +49,9 @@
 <div class="login-page">
     <mat-card class="mat-elevation-z12">
       <mat-tab-group mat-stretch-tabs class="example-stretched-tabs">
-        <mat-tab label="Sign Up">
+        <mat-tab label="Register">
           <mat-card-content>
-            <form action="">
+            <form [formGroup]="form" (ngSubmit)="submit()">
               <mat-form-field>
                 <input
                   matInput
@@ -59,12 +59,9 @@
                   required
                   name="firstName"
                   ngModel
-                  #username="ngModel">
+                  formControlName="firstName">
                 
-                <mat-error
-                  *ngIf="username.invalid">
-                  First Name is required
-                </mat-error>
+             
   
               </mat-form-field>
               <mat-form-field>
@@ -74,12 +71,10 @@
                   required
                   name="lastName"
                   ngModel
-                  #username="ngModel">
+                  formControlName="lastName">
                 
-                <mat-error
-                  *ngIf="username.invalid">
-                  Last Name is required
-                </mat-error>
+                
+                  
   
               </mat-form-field>
               <mat-form-field>
@@ -89,8 +84,8 @@
                   required
                   name="email"
                   ngModel
-                  #email="ngModel">
-                  <mat-error *ngIf="email.invalid">Email is required</mat-error>
+                  formControlName="email">
+                  
                 
               </mat-form-field>
               <mat-form-field>
@@ -102,17 +97,7 @@
                   minlength="6"
                   name="password"
                   ngModel
-                  #password="ngModel">
-                  <mat-error
-                    *ngIf="password.errors  ">
-                    Password is required
-                  </mat-error>
-                  <mat-error
-                    *ngIf="password.errors ">
-                    Password must be of length 6
-                  </mat-error>
-                
-  
+                  formControlName="password">
               </mat-form-field>
 
               <button
