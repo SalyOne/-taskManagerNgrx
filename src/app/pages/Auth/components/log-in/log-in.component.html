@@ -44,11 +44,12 @@
                   <input
                     matInput
                     placeholder="Email"
-                    required
+                    type="email"
                     name="email"
-                    ngModel
-                    formControlName="email">
-                    
+                    formControlName="email"
+                    id="email"
+                     >
+                    <mat-error>Email is required</mat-error>
                   
                 </mat-form-field>
                 <mat-form-field>
@@ -56,12 +57,11 @@
                     matInput
                     placeholder="Password"
                     type="password"
-                    required
                     minlength="6"
                     name="password"
-                    ngModel
-                    formControlName="password"
-                    >
+                    email="required"
+                    formControlName="password">
+                    <mat-error>Password is required</mat-error>
                    
                   
                 </mat-form-field>
