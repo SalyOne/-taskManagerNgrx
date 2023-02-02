@@ -1,0 +1,12 @@
+
+@import 'src/styles/partials/buttons';
+@import 'src/styles/partials/common';
+@import 'src/styles/globals/variables';
+
+.page-content-container{
+  .page-title{
+    text-transform: capitalize;
+    font-size: $big;
+  }
+}
+
