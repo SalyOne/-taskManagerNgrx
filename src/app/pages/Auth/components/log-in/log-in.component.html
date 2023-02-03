@@ -49,8 +49,8 @@
                     formControlName="email"
                     id="email"
                      >
-                    <mat-error>Email is required</mat-error>
-                  
+                     <mat-error 
+                      >Email is required</mat-error>
                 </mat-form-field>
                 <mat-form-field>
                   <input
@@ -59,12 +59,19 @@
                     type="password"
                     minlength="6"
                     name="password"
+                    id="password"
                     email="required"
-                    formControlName="password">
-                    <mat-error>Password is required</mat-error>
-                   
+                    formControlName="password"
+                    matInput [type]="hide ? 'password' : 'text'">
                   
+                    <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                      <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                    </button>
+                    
+                    <mat-error 
+                    >Password is required</mat-error>
                 </mat-form-field>
+                
                 <mat-checkbox>Remember Me!</mat-checkbox>
                 <button
                   mat-raised-button

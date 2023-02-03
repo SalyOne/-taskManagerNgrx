@@ -10,6 +10,9 @@ import { AuthService } from 'src/app/core/services';
 })
 export class LogInComponent implements OnInit {
 
+  hide = true
+
+
   constructor(
     private authService: AuthService,
     private router: Router
@@ -17,10 +20,15 @@ export class LogInComponent implements OnInit {
 
   form: FormGroup = new FormGroup({
 
-    email: new FormControl('', [Validators.required, Validators.email]),
+    email : new FormControl('', [Validators.required, Validators.email]),
     password: new FormControl('', Validators.required)
-  })
 
+
+    
+  })
+  
+
+  
   ngOnInit(): void {
     
   }
@@ -28,7 +36,7 @@ export class LogInComponent implements OnInit {
   submit(){
 
     this.authService.login(this.form.value).subscribe(res =>{
-      this.router.navigate(['/'])
+      this.router.navigate(['/work'])
     })
 
   }
