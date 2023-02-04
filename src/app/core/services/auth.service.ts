@@ -1,7 +1,7 @@
 
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Login, LoginResponse, Register } from '../interfaces/auth';
+import { AuthResponse, Login,Register } from '../interfaces/auth';
 import { User } from '../interfaces/user';
 import { BaseService } from './base.service';
 
@@ -10,12 +10,12 @@ import { BaseService } from './base.service';
 })
 export class AuthService extends BaseService {
 
-login(payload:Login): Observable<LoginResponse>{
-  return this.post<LoginResponse>( 'auth/login', payload)
+login(payload:Login): Observable<AuthResponse>{
+  return this.post<AuthResponse>( 'auth/login', payload)
 }
 
-register(payload:Register): Observable<User>{
-  return this.post<User>('auth/signup', payload)
+register(payload:Register): Observable<AuthResponse>{
+  return this.post<AuthResponse>('auth/signup', payload)
 }
 
 

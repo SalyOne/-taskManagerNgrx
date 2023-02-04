@@ -10,6 +10,15 @@ import { AuthService } from 'src/app/core/services';
 })
 export class LogInComponent implements OnInit {
 
+  hide = true
+  get getEmail(){
+    return this.form.get('email')
+  }
+
+  get getPassword(){
+    return this.form.get('password')
+  }
+
   constructor(
     private authService: AuthService,
     private router: Router
@@ -17,10 +26,12 @@ export class LogInComponent implements OnInit {
 
   form: FormGroup = new FormGroup({
 
-    email: new FormControl('', Validators.required),
-    password: new FormControl('', Validators.required)
+    email : new FormControl('', [Validators.required, Validators.email]),
+    password: new FormControl('', [Validators.required, Validators.minLength(5),Validators.maxLength(25)])
   })
+  
 
+  
   ngOnInit(): void {
     
   }
@@ -28,7 +39,7 @@ export class LogInComponent implements OnInit {
   submit(){
 
     this.authService.login(this.form.value).subscribe(res =>{
-      this.router.navigate(['/'])
+      this.router.navigate(['/work'])
     })
 
   }

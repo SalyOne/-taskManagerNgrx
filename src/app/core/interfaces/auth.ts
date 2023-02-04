@@ -19,7 +19,7 @@ export interface Token {
     refreshToken: string;
 }
 
-export interface LoginResponse {
+export interface AuthResponse {
     user: User;
     token: Token;
 }
