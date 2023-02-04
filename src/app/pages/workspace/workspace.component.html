@@ -15,7 +15,9 @@
       <mat-error *ngIf="form.get('abbr')?.invalid && form.get('abbr')?.touched"> please fill in </mat-error>
     </mat-form-field>
     <mat-form-field  class="color-picker-container">
-      <input type="color" matInput/>
+      <mat-label>color</mat-label>
+      <span> color is: {{ form.get('color')?.value}} </span>
+      <input type="color" formControlName="color" required matInput/>
     </mat-form-field>
     <mat-form-field appearance="fill">
       <mat-label>Description</mat-label>
