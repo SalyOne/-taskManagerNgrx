@@ -13,7 +13,7 @@ export class WorkspaceComponent implements OnDestroy{
   form: FormGroup = new FormGroup({
     workName : new FormControl('', [Validators.required]),
     abbr : new FormControl('', [Validators.required]),
-    colorCtr : new FormControl('',[Validators.required]),
+    color : new FormControl('',[Validators.required]),
     }
   );
  sub$ = new Subject();
