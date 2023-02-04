@@ -11,7 +11,13 @@ import { AuthService } from 'src/app/core/services';
 export class LogInComponent implements OnInit {
 
   hide = true
+  get getEmail(){
+    return this.form.get('email')
+  }
 
+  get getPassword(){
+    return this.form.get('password')
+  }
 
   constructor(
     private authService: AuthService,
@@ -21,10 +27,7 @@ export class LogInComponent implements OnInit {
   form: FormGroup = new FormGroup({
 
     email : new FormControl('', [Validators.required, Validators.email]),
-    password: new FormControl('', Validators.required)
-
-
-    
+    password: new FormControl('', [Validators.required, Validators.minLength(5),Validators.maxLength(25)])
   })
   
 

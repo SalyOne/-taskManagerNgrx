@@ -47,10 +47,9 @@
                     type="email"
                     name="email"
                     formControlName="email"
-                    id="email"
-                     >
-                     <mat-error 
-                      >Email is required</mat-error>
+                    id="email">
+                     <mat-error *ngIf="getEmail?.errors?.['required']">Email is required</mat-error>
+                     <mat-error *ngIf="getEmail?.errors?.['email']">Email form is required</mat-error>
                 </mat-form-field>
                 <mat-form-field>
                   <input
@@ -68,11 +67,12 @@
                       <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
                     </button>
                     
-                    <mat-error 
-                    >Password is required</mat-error>
+                    <mat-error *ngIf="getPassword?.errors?.['required']">Password is required</mat-error>
+                    <mat-error *ngIf="getPassword?.errors?.['minlength']">Password minlength must be at least 5 characters</mat-error>
+                    <mat-error *ngIf="getPassword?.errors?.['maxlength']">Password minlength must be less than 25 characters</mat-error>
                 </mat-form-field>
                 
-                <mat-checkbox>Remember Me!</mat-checkbox>
+                
                 <button
                   mat-raised-button
                   color="primary"
