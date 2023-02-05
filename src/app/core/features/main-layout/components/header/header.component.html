@@ -6,7 +6,7 @@
       <button mat-button [matMenuTriggerFor]="menu">User side</button>
       <mat-menu #menu="matMenu">
         <button mat-menu-item >Settings</button>
-        <button mat-menu-item routerLink="/auth/login">Log Out</button>
+        <button (click)="signOut()" mat-menu-item routerLink="/auth/login">Log Out</button>
       </mat-menu>
    </div>
 </header>

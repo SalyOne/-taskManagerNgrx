@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { MainLayoutComponent } from './core/features/main-layout/main-layout.component';
+import { AuthGuard } from './core/guards/auth.guard';
 
 import {HomeComponent} from "./pages/home/home.component";
 import {WorkspaceComponent} from "./pages/workspace/workspace.component";
@@ -13,6 +14,7 @@ const routes: Routes = [
     children:[
       {
         path:'work',
+        canActivate: [AuthGuard],
         loadChildren: ()=> import('./pages/workspace/workspace.module').then(m=> m.WorkspaceModule)
       },
       {
@@ -23,6 +25,7 @@ const routes: Routes = [
   },
   {
     path: 'auth',
+    
     loadChildren: () =>import('./pages/Auth/auth.module').then(m=>m.AuthModule)
   }
 ];
