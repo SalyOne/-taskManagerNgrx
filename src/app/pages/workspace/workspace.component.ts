@@ -10,26 +10,11 @@ import {ThemePalette} from "@angular/material/core";
   styleUrls: ['./workspace.component.scss']
 })
 export class WorkspaceComponent implements OnDestroy{
-  form: FormGroup = new FormGroup({
-    workName : new FormControl('', [Validators.required]),
-    abbr : new FormControl('', [Validators.required]),
-    color : new FormControl('',[Validators.required]),
-    }
-  );
+
  sub$ = new Subject();
 
-  constructor(
-    private workspaceService:WorkspaceService
-  ) {
-  }
-  submit(){
-    this.form.markAllAsTouched();
-    if(this.form.invalid) return;
-    console.log(this.form.value)
-    this.workspaceService.addWorkspace(this.form.value)
-      .pipe(takeUntil(this.sub$))
-      .subscribe()
-  }
+
+  constructor() { }
 
   ngOnDestroy(): void {
     this.sub$.next(null);

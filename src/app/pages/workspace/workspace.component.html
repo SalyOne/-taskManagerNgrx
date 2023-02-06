@@ -1,31 +1,7 @@
 
 <section class="title-row">
-  <h1>Create Workspace:</h1>
+  <h1>Workspace:</h1>
 </section>
-<div class="form-container">
-  <form action="" [formGroup]="form" (submit)="submit()">
-    <mat-form-field appearance="fill" >
-      <mat-label>Name</mat-label>
-      <input type="text" matInput placeholder="workspaceName" formControlName="workName" required>
-      <mat-error *ngIf="form.get('workName')?.invalid && form.get('workName')?.touched"> please fill in  </mat-error>
-    </mat-form-field>
-    <mat-form-field appearance="fill">
-      <mat-label>abbreviation</mat-label>
-      <input type="text" matInput placeholder="wkn" formControlName="abbr" required>
-      <mat-error *ngIf="form.get('abbr')?.invalid && form.get('abbr')?.touched"> please fill in </mat-error>
-    </mat-form-field>
-    <mat-form-field  class="color-picker-container">
-      <mat-label>color</mat-label>
-      <span> color is: {{ form.get('color')?.value}} </span>
-      <input type="color" formControlName="color" required matInput/>
-    </mat-form-field>
-    <mat-form-field appearance="fill">
-      <mat-label>Description</mat-label>
-      <textarea matInput></textarea>
-    </mat-form-field>
 
-    <button type="submit" color="primary" mat-raised-button matInput class="form-button">submit</button>
-  </form>
-</div>
 
 

@@ -16,8 +16,12 @@
     }
   }
   .color-picker-container{
-    .mdc-text-field{
-      overflow: unset !important;
+    .flex-input{
+      display: flex;
+      span{
+        display: block;
+        min-width:80px;
+      }
     }
   }
   .title-row{

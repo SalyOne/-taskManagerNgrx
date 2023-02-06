@@ -8,11 +8,13 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {MatInputModule} from "@angular/material/input";
 import {HttpClientModule} from "@angular/common/http";
 import {MatButtonModule} from "@angular/material/button";
+import { CreateWorkspaceComponent } from './components/create-workspace/create-workspace.component';
 
 
 @NgModule({
   declarations: [
-    WorkspaceComponent
+    WorkspaceComponent,
+    CreateWorkspaceComponent
   ],
   imports: [
     CommonModule,
