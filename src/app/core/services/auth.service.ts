@@ -1,19 +1,25 @@
 
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, tap } from 'rxjs';
 import { User } from '../interfaces';
 import { AuthResponse, Login,Register } from '../interfaces/auth';
 import { BaseService } from './base.service';
+import { CookieStorageService } from './cookie.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService extends BaseService {
 
-  get token(): string | null {
-  return localStorage.getItem('token')
-    
-  } 
+
+  constructor(
+    private cookieStorageService: CookieStorageService,
+    http: HttpClient
+  ){
+   super(http)
+  }
+
 
   get user(): User | null {
 
@@ -26,14 +32,24 @@ login(payload:Login): Observable<AuthResponse>{
   return this.post<AuthResponse>( 'auth/login', payload)
   .pipe(
     tap((response: AuthResponse) => {
-      this.setToken(response.token.accessToken),
+    const cookieExpire = new Date(Date.now()+24)
+
+
+    this.cookieStorageService.setCookie(
+         'token',
+         response.token.accessToken,
+          cookieExpire
+      )
       this.setUser(response.user)
     })
   )
 }
-  setToken(token: string): void {
-   localStorage.setItem('token', token);
-  }
+
+
+get token(): string{
+  return this.cookieStorageService.getCookie('token')
+}
+
 
 
   setUser(user: User): void {
@@ -46,6 +62,8 @@ register(payload:Register): Observable<AuthResponse>{
 
 signOut(){
   localStorage.clear()
+  this.cookieStorageService.deleteCookie('token')
+  this.cookieStorageService.deleteAllcookies()
 }
 
 }
