@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {BaseService} from "./base.service";
-import {IWorkspace} from "../interfaces/workspace.interface";
+import {IGetWorkspace, IWorkspace} from "../interfaces/workspace.interface";
 import {Observable} from "rxjs";
 
 @Injectable({
@@ -12,6 +12,10 @@ export class WorkspaceService extends BaseService{
     return this.post<IWorkspace>('project', param)
   }
 
+
+  getAllWorkspacesForUser():Observable<IGetWorkspace[]>{
+    return  this.get<IGetWorkspace[]>('project/my');
+  }
 
 
 }

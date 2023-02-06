@@ -1,10 +1,36 @@
-import { Component } from '@angular/core';
+import {Component, OnDestroy} from '@angular/core';
+import {Observable, Subject, takeUntil} from "rxjs";
+import {IGetWorkspace} from "../../core/interfaces";
+import {WorkspaceService} from "../../core/services/workspace.service";
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
-export class HomeComponent {
+export class HomeComponent implements OnDestroy{
+  getWorkspacesForMyUser$: Observable<IGetWorkspace[]> = this.workspaceService.getAllWorkspacesForUser();
+  getWorkspacesForMyUser :IGetWorkspace[] = []
+
+  sub$ = new Subject();
+  constructor(
+    private workspaceService:WorkspaceService
+  ) {
+      this.getAllWorkspacesForUser()
+  }
+
+  getAllWorkspacesForUser(){
+    return this.workspaceService.getAllWorkspacesForUser()
+      .pipe(takeUntil(this.sub$))
+      .subscribe(res =>{
+      console.log(res)
+    })
+  }
+
+
+  ngOnDestroy(): void {
+    this.sub$.next(null);
+    this.sub$.complete()
+  }
 
 }
