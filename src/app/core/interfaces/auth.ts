@@ -24,8 +24,3 @@ export interface AuthResponse {
     token: Token;
 }
 
-export interface Token {
-    expiresIn: number;
-    accessToken: string;
-    refreshToken: string;
-}

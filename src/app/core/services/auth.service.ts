@@ -32,14 +32,22 @@ login(payload:Login): Observable<AuthResponse>{
   return this.post<AuthResponse>( 'auth/login', payload)
   .pipe(
     tap((response: AuthResponse) => {
-    const cookieExpire = new Date(Date.now()+24)
+    const cookieExpire = new Date(Date.now()+24 * 60 * 60 * 1000)
 
 
     this.cookieStorageService.setCookie(
          'token',
          response.token.accessToken,
-          cookieExpire
+         cookieExpire
+         
+      );
+
+      this.cookieStorageService.setCookie(
+        'refreshToken',
+        response.token.refreshToken
       )
+
+
       this.setUser(response.user)
     })
   )
@@ -48,6 +56,11 @@ login(payload:Login): Observable<AuthResponse>{
 
 get token(): string{
   return this.cookieStorageService.getCookie('token')
+}
+
+
+get refreshToken():string{
+  return this.cookieStorageService.getCookie('refreshToken')
 }
 
 
@@ -63,7 +76,9 @@ register(payload:Register): Observable<AuthResponse>{
 signOut(){
   localStorage.clear()
   this.cookieStorageService.deleteCookie('token')
+  this.cookieStorageService.deleteCookie('refreshToken')
   this.cookieStorageService.deleteAllcookies()
+  
 }
 
 }
