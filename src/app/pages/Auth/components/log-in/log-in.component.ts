@@ -41,7 +41,7 @@ export class LogInComponent implements OnInit {
   submit(){
 
     this.authService.login(this.form.value).subscribe(res =>{
-      this.router.navigate(['/work'])
+      this.router.navigate(['/home'])
     })
 
   }
