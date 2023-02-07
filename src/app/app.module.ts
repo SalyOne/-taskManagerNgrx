@@ -6,9 +6,10 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MainLayoutModule } from './core/features/main-layout/main-layout.module';
 import { HomeModule} from "./pages/home/home.module";
-import {WorkspaceModule} from "./pages/workspace/workspace.module";
+import { WorkspaceModule} from "./pages/workspace/workspace.module";
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './core/interceptors';
+
 
 
 
@@ -25,9 +26,11 @@ import { AuthInterceptor } from './core/interceptors';
     MainLayoutModule,
     HomeModule,
     WorkspaceModule,
-    HttpClientModule
+    HttpClientModule,
+   
   ],
   providers: [
+    
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,
