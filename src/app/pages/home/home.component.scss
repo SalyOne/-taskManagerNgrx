@@ -6,7 +6,111 @@
 .page-content-container{
   .page-title{
     text-transform: capitalize;
-    font-size: $big;
+    font-size: $large;
+  }
+}
+.title-row{
+  border-bottom: 1px solid $main-1;
+  box-shadow: 0 4px 5px -5px rgba($main-1, 0.3);
+  margin-bottom: 40px;
+  text-transform: uppercase;
+}
+.tasks-row{
+  margin-bottom: 30px;
+  .section-title{
+    text-transform: capitalize;
+    font-size: $large;
+    display: flex;
+    align-items: center;
+    margin-bottom: 16px;
+    .title{
+      flex-shrink: 0;
+      margin: 0;
+      padding-right: 15px;
+      text-transform: uppercase;
+      font-weight: bold;
+      letter-spacing: 1px;
+      color: $main-1;
+    }
+    .line{
+      height: 1px;
+      width: 100%;
+      background-color: $main-1;
+      display: inline-block;
+      margin: 0 15px;
+    }
+
+    .button-container{
+      display: flex;
+      gap: 10px;
+      flex-shrink: 0;
+
+    }
+  }
+  .content-row{
+    display: flex;
+    gap: 15px;
+    .each-card{
+      mat-card-footer{
+        padding: 16px;
+        span{
+          display: block;
+        }
+      }
+    }
+  }
+  .content-list{
+    .each-workspace{
+      margin-bottom: 30px;
+      .workspace-title-row{
+        display: flex;
+        align-items: center;
+        margin-bottom: 16px;
+        .title{
+          flex-shrink: 0;
+          margin: 0;
+          display: flex;
+          align-items: center;
+          .first-letter{
+            text-transform: capitalize;
+            font-size: $med;
+            width: 35px;
+            height: 35px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            margin-right: 10px;
+
+
+            background-color: #182978;
+            color: white;
+          }
+        }
+        .line{
+          height: 1px;
+          width: 100%;
+          background-color: $main-1;
+          display: inline-block;
+          margin: 0 15px;
+        }
+        .button-container{
+          display: flex;
+          gap: 10px;
+          flex-shrink: 0;
+        }
+      }
+      .workspace-content-row{
+        display: flex;
+        gap: 15px ;
+        mat-card{
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          width: 15%;
+        }
+      }
+    }
   }
 }
 
