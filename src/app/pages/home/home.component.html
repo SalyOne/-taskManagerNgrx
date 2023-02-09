@@ -54,8 +54,11 @@
     <div class="each-workspace" *ngFor="let eachWork of getWorkspacesForMyUser$ | async">
       <div class="workspace-title-row">
         <h3 class="title">
-          <span class="first-letter" >W</span>
-          {{eachWork.name}} </h3>
+          <span class="first-letter" style="background: {{ eachWork.color }}">
+           <span> {{ getFirstLetter(eachWork.name) }}</span>
+          </span>
+          {{eachWork.name}}
+        </h3>
         <span class="line"></span>
         <div class="button-container">
           <button mat-stroked-button color="primary"> Members</button>

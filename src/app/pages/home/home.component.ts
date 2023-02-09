@@ -13,6 +13,7 @@ export class HomeComponent implements OnDestroy{
   getWorkspacesForMyUser :IGetWorkspace[] = []
 
   sub$ = new Subject();
+  firstLetter!: string;
   constructor(
     private workspaceService:WorkspaceService
   ) {
@@ -25,6 +26,9 @@ export class HomeComponent implements OnDestroy{
       .subscribe(res =>{
       console.log(res)
     })
+  }
+  getFirstLetter(a:string){
+    return a.charAt(0)
   }
 
 
