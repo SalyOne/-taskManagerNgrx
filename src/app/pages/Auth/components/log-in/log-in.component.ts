@@ -10,6 +10,8 @@ import { AuthService } from 'src/app/core/services';
 })
 export class LogInComponent implements OnInit {
 
+  
+
   hide = true
   get getEmail(){
     return this.form.get('email')
@@ -39,7 +41,7 @@ export class LogInComponent implements OnInit {
   submit(){
 
     this.authService.login(this.form.value).subscribe(res =>{
-      this.router.navigate(['/work'])
+      this.router.navigate(['/home'])
     })
 
   }
