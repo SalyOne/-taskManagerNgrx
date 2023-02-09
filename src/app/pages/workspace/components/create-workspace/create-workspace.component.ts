@@ -2,6 +2,7 @@ import {Component, OnDestroy} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {Subject, takeUntil} from "rxjs";
 import {WorkspaceService} from "../../../../core/services/workspace.service";
+import {Router, RouterModule} from "@angular/router";
 
 @Component({
   selector: 'app-create-workspace',
@@ -21,7 +22,8 @@ export class CreateWorkspaceComponent implements OnDestroy{
 
 
   constructor(
-    private workspaceService:WorkspaceService
+    private workspaceService:WorkspaceService,
+    private router: Router
   ) {
   }
   submit(){
@@ -36,12 +38,11 @@ export class CreateWorkspaceComponent implements OnDestroy{
               this.errorMsg = ""
             }
             console.log("ress: ", res)
+
+            this.router.navigate(['/home'])
           },
           error: err=>{
             this.errorMsg = err.error.message;
-            console.log("error: ", err)
-            console.log("error: ", err.error.message)
-            console.log("error: ", err.message)
           }
         }
       )
