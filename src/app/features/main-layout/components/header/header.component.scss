@@ -1,24 +1,20 @@
 .header {
   width: 100%;
   height: 70px;
-  background-color: red;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  
 
+  .example-spacer{
+    flex: 1 1 auto;
+  }
   .img-container {
     height: 50px;
     img {
-     
       height: 100%;
-      
-    } 
+    }
   }
-
   .menu-container {
 
-
-    
   }
 }
