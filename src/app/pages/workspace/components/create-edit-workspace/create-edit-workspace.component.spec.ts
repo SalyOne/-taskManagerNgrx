@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CreateWorkspaceComponent } from './create-workspace.component';
+import { CreateEditWorkspaceComponent } from './create-edit-workspace.component';
 
 describe('CreateWorkspaceComponent', () => {
-  let component: CreateWorkspaceComponent;
-  let fixture: ComponentFixture<CreateWorkspaceComponent>;
+  let component: CreateEditWorkspaceComponent;
+  let fixture: ComponentFixture<CreateEditWorkspaceComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ CreateWorkspaceComponent ]
+      declarations: [ CreateEditWorkspaceComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(CreateWorkspaceComponent);
+    fixture = TestBed.createComponent(CreateEditWorkspaceComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

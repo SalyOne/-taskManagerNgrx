@@ -1,6 +1,6 @@
 import {Component, OnDestroy} from '@angular/core';
 import {Observable, Subject, takeUntil} from "rxjs";
-import {IGetWorkspace} from "../../core/interfaces";
+import {IWorkspace} from "../../core/interfaces";
 import {WorkspaceService} from "../../core/services/workspace.service";
 
 @Component({
@@ -9,8 +9,8 @@ import {WorkspaceService} from "../../core/services/workspace.service";
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnDestroy{
-  getWorkspacesForMyUser$: Observable<IGetWorkspace[]> = this.workspaceService.getAllWorkspacesForUser();
-  getWorkspacesForMyUser :IGetWorkspace[] = []
+  getWorkspacesForMyUser$: Observable<IWorkspace[]> = this.workspaceService.getAllWorkspacesForUser();
+  getWorkspacesForMyUser :IWorkspace[] = []
 
   sub$ = new Subject();
   firstLetter!: string;
