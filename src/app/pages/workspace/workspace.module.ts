@@ -9,12 +9,18 @@ import {MatInputModule} from "@angular/material/input";
 import {HttpClientModule} from "@angular/common/http";
 import {MatButtonModule} from "@angular/material/button";
 import { CreateWorkspaceComponent } from './components/create-workspace/create-workspace.component';
+import {MatCardModule} from '@angular/material/card';
+import { BoardComponent } from './components/board/board.component';
+import {MatIconModule} from '@angular/material/icon';
+import {DragDropModule} from '@angular/cdk/drag-drop';
+
 
 
 @NgModule({
   declarations: [
     WorkspaceComponent,
-    CreateWorkspaceComponent
+    CreateWorkspaceComponent,
+    BoardComponent
   ],
   imports: [
     CommonModule,
@@ -26,6 +32,10 @@ import { CreateWorkspaceComponent } from './components/create-workspace/create-w
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    MatCardModule,
+    MatIconModule,
+    DragDropModule
+    
 
   ],
 })
