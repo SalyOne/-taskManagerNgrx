@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import {HomeComponent} from "./home.component";
-import {CreateWorkspaceComponent} from "../workspace/components/create-workspace/create-workspace.component";
+import {CreateEditWorkspaceComponent} from "../workspace/components/create-edit-workspace/create-edit-workspace.component";
 
 const routes: Routes = [
   {
@@ -10,7 +10,7 @@ const routes: Routes = [
   },
   {
     path:'add',
-    component: CreateWorkspaceComponent
+    component: CreateEditWorkspaceComponent
   }
 ];
 
