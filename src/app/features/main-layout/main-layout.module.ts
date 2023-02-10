@@ -6,6 +6,9 @@ import { MatSidenavModule} from '@angular/material/sidenav';
 import { MatIconModule} from '@angular/material/icon';
 import { MatMenuModule} from '@angular/material/menu';
 import { RouterModule } from '@angular/router';
+import {MatToolbarModule} from "@angular/material/toolbar";
+import {MatButtonModule} from "@angular/material/button";
+import { SidebarComponent } from './components/sidebar/sidebar.component';
 
 
 
@@ -14,14 +17,17 @@ import { RouterModule } from '@angular/router';
 @NgModule({
   declarations: [
     MainLayoutComponent,
-    HeaderComponent
+    HeaderComponent,
+    SidebarComponent
   ],
   imports: [
     CommonModule,
     MatSidenavModule,
     MatIconModule,
     MatMenuModule,
-    RouterModule
+    RouterModule,
+    MatToolbarModule,
+    MatButtonModule
 
   ],
   exports: [

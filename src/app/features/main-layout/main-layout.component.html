@@ -1,10 +1,12 @@
 <mat-sidenav-container #sidenav class="sidenav" >
-  <mat-sidenav mode="push" #toggable class="start-content">Start</mat-sidenav>
+  <mat-sidenav mode="side" #toggable class="start-content" position="end">
+    <app-sidebar>
+
+    </app-sidebar>
+  </mat-sidenav>
   <mat-sidenav-content class="main-content" >
+
     <app-header></app-header>
-    <div>
-      <mat-icon (click)="toggable.toggle()">dehaze</mat-icon>
-    </div>
     <div class="container-def">
       <router-outlet></router-outlet>
     </div>
