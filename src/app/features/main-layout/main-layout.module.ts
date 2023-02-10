@@ -9,6 +9,7 @@ import { RouterModule } from '@angular/router';
 import {MatToolbarModule} from "@angular/material/toolbar";
 import {MatButtonModule} from "@angular/material/button";
 import { SidebarComponent } from './components/sidebar/sidebar.component';
+import {MatListModule} from "@angular/material/list";
 
 
 
@@ -27,7 +28,8 @@ import { SidebarComponent } from './components/sidebar/sidebar.component';
     MatMenuModule,
     RouterModule,
     MatToolbarModule,
-    MatButtonModule
+    MatButtonModule,
+    MatListModule
 
   ],
   exports: [
