@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import {WorkspaceComponent} from "./workspace.component";
 import {CreateWorkspaceComponent} from "./components/create-workspace/create-workspace.component";
+import { BoardComponent } from './components/board/board.component';
 
 const routes: Routes = [
   {
@@ -11,6 +12,10 @@ const routes: Routes = [
   {
     path:'add',
     component: CreateWorkspaceComponent
+  },
+  {
+    path:'board',
+    component: BoardComponent
   }
 ];
 
