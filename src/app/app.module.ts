@@ -9,6 +9,7 @@ import { HomeModule} from "./pages/home/home.module";
 import { WorkspaceModule} from "./pages/workspace/workspace.module";
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './core/interceptors';
+import {ProjectInterceptor} from "./core/interceptors/project.interceptor";
 
 
 
@@ -27,16 +28,19 @@ import { AuthInterceptor } from './core/interceptors';
     HomeModule,
     WorkspaceModule,
     HttpClientModule,
-   
+
   ],
   providers: [
-    
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,
       multi: true
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: ProjectInterceptor,
+      multi: true
     }
-
   ],
   bootstrap: [AppComponent]
 })

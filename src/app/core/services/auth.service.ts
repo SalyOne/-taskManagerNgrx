@@ -22,7 +22,6 @@ export class AuthService extends BaseService {
 
 
   get user(): User | null {
-
     const user = localStorage.getItem('user')
     return user ? JSON.parse(user) : null
   }
@@ -39,7 +38,7 @@ login(payload:Login): Observable<AuthResponse>{
          'token',
          response.token.accessToken,
          cookieExpire
-         
+
       );
 
       this.cookieStorageService.setCookie(
@@ -78,7 +77,7 @@ signOut(){
   this.cookieStorageService.deleteCookie('token')
   this.cookieStorageService.deleteCookie('refreshToken')
   this.cookieStorageService.deleteAllcookies()
-  
+
 }
 
 }

@@ -1,12 +1,23 @@
-<header class="header">
-  <div class="img-container">
-    <img src="../../../../../assets/Logo/Logo.png" alt="Main Logo">
-  </div>
-  <div class="menu-container">
-      <button mat-button [matMenuTriggerFor]="menu">User side</button>
-      <mat-menu #menu="matMenu">
-        <button mat-menu-item >Settings</button>
-        <button (click)="signOut()" mat-menu-item routerLink="/auth/login">Log Out</button>
-      </mat-menu>
-   </div>
+<header>
+<!--  <div class="menu-container">-->
+<!--      <button mat-button [matMenuTriggerFor]="menu" (click)="toggleMenu()"><mat-icon >menu</mat-icon></button>-->
+
+<!--      <mat-menu #menu="matMenu">-->
+<!--        <button mat-menu-item >Settings</button>-->
+<!--        <button (click)="signOut()" mat-menu-item routerLink="/auth/login">Log Out</button>-->
+<!--      </mat-menu>-->
+<!--   </div>-->
+  <mat-toolbar color="primary" class="header">
+    <mat-toolbar-row>
+      <span>My App</span>
+      <div class="img-container">
+        <img src="../../../../../assets/Logo/Logo.png" alt="Main Logo">
+      </div>
+      <span class="example-spacer"></span>
+      <button mat-icon-button (click)="toggleMenu()" class="example-icon" aria-label="Example icon-button with menu icon">
+        <mat-icon>menu</mat-icon>
+      </button>
+    </mat-toolbar-row>
+  </mat-toolbar>
+
 </header>

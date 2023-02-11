@@ -8,21 +8,22 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {MatInputModule} from "@angular/material/input";
 import {HttpClientModule} from "@angular/common/http";
 import {MatButtonModule} from "@angular/material/button";
-import { CreateWorkspaceComponent } from './components/create-workspace/create-workspace.component';
 import {MatCardModule} from '@angular/material/card';
 import { BoardComponent } from './components/board/board.component';
 import {MatIconModule} from '@angular/material/icon';
 import {DragDropModule} from '@angular/cdk/drag-drop';
 import { AddEditComponent } from './components/board/components/add-edit/add-edit.component';
+import { CreateEditWorkspaceComponent } from './components/create-edit-workspace/create-edit-workspace.component';
 
 
 
 @NgModule({
   declarations: [
     WorkspaceComponent,
-    CreateWorkspaceComponent,
+    
     BoardComponent,
-    AddEditComponent
+    AddEditComponent,
+    CreateEditWorkspaceComponent
   ],
   imports: [
     CommonModule,
