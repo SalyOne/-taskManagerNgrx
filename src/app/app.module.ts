@@ -9,6 +9,10 @@ import { HomeModule} from "./pages/home/home.module";
 import { WorkspaceModule} from "./pages/workspace/workspace.module";
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './core/interceptors';
+import { UsersComponent } from './pages/users/users.component';
+import { UsersListComponent } from './pages/users/containers/users-list/users-list.component';
+import { AddOrEditUsersComponent } from './pages/users/components/add-or-edit-users/add-or-edit-users.component';
+import {MatTableModule} from "@angular/material/table";
 
 
 
@@ -17,7 +21,10 @@ import { AuthInterceptor } from './core/interceptors';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    UsersComponent,
+    UsersListComponent,
+    AddOrEditUsersComponent
  ],
   imports: [
     BrowserModule,
@@ -27,10 +34,11 @@ import { AuthInterceptor } from './core/interceptors';
     HomeModule,
     WorkspaceModule,
     HttpClientModule,
-   
+    MatTableModule,
+
   ],
   providers: [
-    
+
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,

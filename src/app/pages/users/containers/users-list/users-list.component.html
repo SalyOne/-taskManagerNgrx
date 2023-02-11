@@ -1,0 +1,6 @@
+<router-outlet></router-outlet>
+<div *ngFor="let user of users$ | async">
+  <p >
+    {{user?.lastName}}
+  </p>
+</div>
