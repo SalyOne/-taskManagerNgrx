@@ -13,6 +13,7 @@ import {MatCardModule} from '@angular/material/card';
 import { BoardComponent } from './components/board/board.component';
 import {MatIconModule} from '@angular/material/icon';
 import {DragDropModule} from '@angular/cdk/drag-drop';
+import { AddEditComponent } from './components/board/components/add-edit/add-edit.component';
 
 
 
@@ -20,7 +21,8 @@ import {DragDropModule} from '@angular/cdk/drag-drop';
   declarations: [
     WorkspaceComponent,
     CreateWorkspaceComponent,
-    BoardComponent
+    BoardComponent,
+    AddEditComponent
   ],
   imports: [
     CommonModule,
