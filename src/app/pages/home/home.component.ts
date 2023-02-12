@@ -9,7 +9,7 @@ import {WorkspaceService} from "../../core/services/workspace.service";
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnDestroy{
-  getWorkspacesForMyUser$: Observable<IWorkspace[]> = this.workspaceService.getAllWorkspacesForUser();
+  // getWorkspacesForMyUser$: Observable<IWorkspace[]> = this.workspaceService.getAllWorkspacesForUser();
   getWorkspacesForMyUser :IWorkspace[] = []
 
   sub$ = new Subject();
@@ -25,12 +25,20 @@ export class HomeComponent implements OnDestroy{
       .pipe(takeUntil(this.sub$))
       .subscribe(res =>{
       console.log(res)
+        this.getWorkspacesForMyUser = res
     })
   }
   getFirstLetter(a:string){
     return a.charAt(0)
   }
 
+  deleteProject(id?: number) {
+    return this.workspaceService.deleteProject(String(id))
+      .pipe(takeUntil(this.sub$)).subscribe(res=>{
+        console.log(res)
+       this.getAllWorkspacesForUser()
+      })
+  }
 
   ngOnDestroy(): void {
     this.sub$.next(null);
