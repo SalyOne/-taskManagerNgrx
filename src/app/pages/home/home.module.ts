@@ -6,6 +6,7 @@ import { HomeComponent } from './home.component';
 import {MatCardModule} from '@angular/material/card';
 import {MatDividerModule} from '@angular/material/divider';
 import {MatButtonModule} from '@angular/material/button';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 
 
@@ -19,7 +20,8 @@ import {MatButtonModule} from '@angular/material/button';
     HomeRoutingModule,
     MatCardModule,
     MatDividerModule,
-    MatButtonModule
+    MatButtonModule,
+    MatProgressSpinnerModule
   ],
   exports:[
     HomeComponent

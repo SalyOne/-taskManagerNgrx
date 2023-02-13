@@ -14,6 +14,7 @@ import {MatIconModule} from '@angular/material/icon';
 import {DragDropModule} from '@angular/cdk/drag-drop';
 import { AddEditComponent } from './components/board/components/add-edit/add-edit.component';
 import { CreateEditWorkspaceComponent } from './components/create-edit-workspace/create-edit-workspace.component';
+import { InnerWorkspaceComponent } from './components/inner-workspace/inner-workspace.component';
 
 
 
@@ -23,7 +24,8 @@ import { CreateEditWorkspaceComponent } from './components/create-edit-workspace
     
     BoardComponent,
     AddEditComponent,
-    CreateEditWorkspaceComponent
+    CreateEditWorkspaceComponent,
+    InnerWorkspaceComponent
   ],
   imports: [
     CommonModule,

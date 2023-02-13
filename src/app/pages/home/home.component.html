@@ -51,35 +51,47 @@
     </div>
   </div>
   <div class="content-list">
-    <div class="each-workspace" *ngFor="let eachWork of getWorkspacesForMyUser">
-      <div class="workspace-title-row">
-        <h3 class="title">
-          <span class="first-letter" style="background: {{ eachWork.color }}">
-           <span> {{ getFirstLetter(eachWork.name) }}</span>
-          </span>
-          {{eachWork.name}}
-        </h3>
-        <span class="line"></span>
-        <div class="button-container">
-          <button mat-stroked-button color="primary"> Members</button>
-          <button mat-stroked-button color="primary" [routerLink]="['/work/edit', eachWork.id]"> Edit</button>
-          <button mat-stroked-button color="primary" (click)="deleteProject(eachWork.id)"> Delete</button>
+
+    <ng-container *ngIf="loading; else loaded">
+      <div class="loader-container">
+        <mat-progress-spinner
+          [color]="color"
+          [mode]="mode"
+          [value]="value">
+        </mat-progress-spinner>
+      </div>
+    </ng-container>
+    <ng-template #loaded>
+      <div class="each-workspace" *ngFor="let eachWork of getWorkspacesForMyUser">
+        <div class="workspace-title-row">
+          <h3 class="title" [routerLink]="['/work', eachWork.id]">
+            <span class="first-letter" style="background: {{ eachWork.color }}">
+             <span > {{ getFirstLetter(eachWork.name) }}</span>
+            </span>
+            {{eachWork.name}}
+          </h3>
+          <span class="line"></span>
+          <div class="button-container">
+            <button mat-stroked-button color="primary"> Members</button>
+            <button mat-stroked-button color="primary" [routerLink]="['/work/edit', eachWork.id]"> Edit</button>
+            <button mat-stroked-button color="primary" (click)="deleteProject(eachWork.id)"> Delete</button>
+          </div>
+        </div>
+        <div class="workspace-content-row">
+          <mat-card>
+            <mat-card-content>
+              <button mat-stroked-button color="primary"> + add board</button>
+            </mat-card-content>
+          </mat-card>
+          <mat-card>
+            <mat-card-content>Board Name</mat-card-content>
+          </mat-card>
+          <mat-card>
+            <mat-card-content> Task Managera sdasdaasd asd asa das d</mat-card-content>
+          </mat-card>
         </div>
       </div>
-      <div class="workspace-content-row">
-        <mat-card>
-          <mat-card-content>
-            <button mat-stroked-button color="primary"> + add board</button>
-          </mat-card-content>
-        </mat-card>
-        <mat-card>
-          <mat-card-content>Board Name</mat-card-content>
-        </mat-card>
-        <mat-card>
-          <mat-card-content> Task Managera sdasdaasd asd asa das d</mat-card-content>
-        </mat-card>
-      </div>
-    </div>
+    </ng-template>
   </div>
 </section>
 
