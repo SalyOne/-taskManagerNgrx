@@ -14,6 +14,9 @@ export class WorkspaceService extends BaseService{
   getAllWorkspacesForUser():Observable<IWorkspace[]>{
     return  this.get<IWorkspace[]>('project/my');
   }
+  getAllWorkspaces():Observable<IWorkspace[]>{
+    return  this.get<IWorkspace[]>('project/all');
+  }
   getOneProject(id:any):Observable<IWorkspace>{
     return  this.get<IWorkspace>(`project/${id}`);
   }

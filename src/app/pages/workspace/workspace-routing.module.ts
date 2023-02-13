@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import {WorkspaceComponent} from "./workspace.component";
 import {CreateEditWorkspaceComponent} from "./components/create-edit-workspace/create-edit-workspace.component";
 import { BoardComponent } from './components/board/board.component';
+import {InnerWorkspaceComponent} from "./components/inner-workspace/inner-workspace.component";
 
 const routes: Routes = [
   {
@@ -16,12 +17,16 @@ const routes: Routes = [
   {
     path:'board',
     component: BoardComponent
-    
+
   },
   {
     path:'edit/:id',
     component: CreateEditWorkspaceComponent
-  }
+  },
+  {
+    path: ':id',
+    component: InnerWorkspaceComponent
+  },
 ];
 
 @NgModule({

@@ -1,0 +1,19 @@
+
+@import 'src/styles/partials/buttons';
+@import 'src/styles/partials/common';
+@import 'src/styles/globals/variables';
+
+
+
+.title-row{
+  border-bottom: 1px solid $main-1;
+  box-shadow: 0 4px 5px -5px rgba($main-1, 0.3);
+  margin: 40px 0;
+  text-transform: uppercase;
+  display: flex;
+  justify-content: space-between;
+  .title{
+    color: $main-1
+  }
+}
+
