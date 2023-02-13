@@ -38,7 +38,7 @@ export class InnerWorkspaceComponent implements OnDestroy, OnInit{
   sub$ = new Subject();
   color: ThemePalette = 'primary';
   mode: ProgressSpinnerMode = 'indeterminate';
-  value = 50;
+
 
   constructor(
     private workspaceService : WorkspaceService,
@@ -90,8 +90,6 @@ export class InnerWorkspaceComponent implements OnDestroy, OnInit{
     this.sub$.complete()
   }
 }
-
-
 
 @Component({
   selector: 'delete-dialog',

@@ -22,6 +22,7 @@ import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatTableModule} from '@angular/material/table';
 import {MatDialogModule} from '@angular/material/dialog';
+import {MatPaginatorModule} from "@angular/material/paginator";
 
 
 
@@ -37,20 +38,22 @@ import {MatDialogModule} from '@angular/material/dialog';
   imports: [
     CommonModule,
     WorkspaceRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
+    HttpClientModule,
     MatFormFieldModule,
     MatSelectModule,
     MatInputModule,
     MatButtonModule,
-    FormsModule,
-    ReactiveFormsModule,
-    HttpClientModule,
     MatCardModule,
     MatIconModule,
     DragDropModule,
     MatProgressSpinnerModule,
     MatTabsModule,
     MatTableModule,
-    MatDialogModule
+    MatDialogModule,
+    MatPaginatorModule,
+    MatIconModule,
 
   ],
 })
