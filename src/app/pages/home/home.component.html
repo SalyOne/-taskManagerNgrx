@@ -51,7 +51,7 @@
     </div>
   </div>
   <div class="content-list">
-    <div class="each-workspace" *ngFor="let eachWork of getWorkspacesForMyUser$ | async">
+    <div class="each-workspace" *ngFor="let eachWork of getWorkspacesForMyUser">
       <div class="workspace-title-row">
         <h3 class="title">
           <span class="first-letter" style="background: {{ eachWork.color }}">
@@ -62,7 +62,8 @@
         <span class="line"></span>
         <div class="button-container">
           <button mat-stroked-button color="primary"> Members</button>
-          <button mat-stroked-button color="primary"> Settings</button>
+          <button mat-stroked-button color="primary" [routerLink]="['/work/edit', eachWork.id]"> Edit</button>
+          <button mat-stroked-button color="primary" (click)="deleteProject(eachWork.id)"> Delete</button>
         </div>
       </div>
       <div class="workspace-content-row">
