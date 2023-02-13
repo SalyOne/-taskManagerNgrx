@@ -11,10 +11,6 @@ const routes: Routes = [
     component: WorkspaceComponent
   },
   {
-    path: ':id',
-    component: InnerWorkspaceComponent
-  },
-  {
     path:'add',
     component: CreateEditWorkspaceComponent
   },
@@ -26,7 +22,11 @@ const routes: Routes = [
   {
     path:'edit/:id',
     component: CreateEditWorkspaceComponent
-  }
+  },
+  {
+    path: ':id',
+    component: InnerWorkspaceComponent
+  },
 ];
 
 @NgModule({

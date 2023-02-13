@@ -2,9 +2,10 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {IWorkspace} from "../../../../core/interfaces";
 import {Subject, takeUntil} from "rxjs";
 import {WorkspaceService} from "../../../../core/services";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {ThemePalette} from "@angular/material/core";
 import {ProgressSpinnerMode} from "@angular/material/progress-spinner";
+import {MatDialog, MatDialogRef} from "@angular/material/dialog";
 
 export interface PeriodicElement {
   name: string;
@@ -41,7 +42,9 @@ export class InnerWorkspaceComponent implements OnDestroy, OnInit{
 
   constructor(
     private workspaceService : WorkspaceService,
-    private route : ActivatedRoute
+    private route : ActivatedRoute,
+    private router:Router,
+    public dialog: MatDialog
   ) {}
 
   displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
@@ -64,12 +67,36 @@ export class InnerWorkspaceComponent implements OnDestroy, OnInit{
       })
   }
 
-  deleteProject(id: any) {
-
+  deleteProject(id?: number):void {
+    this.openDialog().afterClosed().subscribe(res=>{
+        if(res){
+          this.workspaceService.deleteProject(String(id))
+            .pipe(takeUntil(this.sub$))
+            .subscribe(res=>{
+              this.router.navigate(['/home'])
+            })
+        }
+      }
+    )
+  }
+  openDialog(){
+    return  this.dialog.open(DeleteDialog, {
+      width: '250px',
+    });
   }
 
   ngOnDestroy(): void {
     this.sub$.next(null)
     this.sub$.complete()
   }
+}
+
+
+
+@Component({
+  selector: 'delete-dialog',
+  templateUrl: 'delete-dialog.html',
+})
+export class DeleteDialog {
+  constructor(public dialogRef: MatDialogRef<DeleteDialog>) {}
 }

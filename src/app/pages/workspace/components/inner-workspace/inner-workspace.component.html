@@ -7,12 +7,14 @@
     </mat-progress-spinner>
   </div>
 </ng-container>
+
 <ng-template #loaded>
 <div class="title-row">
   <h1 class="title"> {{workspace.name}}</h1>
   <div class="button-container">
     <button mat-stroked-button color="primary" [routerLink]="['/work/edit', workspace?.id]">Edit</button>
     <button mat-stroked-button color="primary" (click)="deleteProject(workspace.id)"> Delete</button>
+    <button mat-raised-button (click)="openDialog()">Delete</button>
   </div>
 </div>
 <div class="info-row">
@@ -81,6 +83,8 @@
 </div>
 
 </ng-template>
+
+
 
 
 

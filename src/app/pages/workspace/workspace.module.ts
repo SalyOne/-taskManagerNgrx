@@ -14,17 +14,21 @@ import {MatIconModule} from '@angular/material/icon';
 import {DragDropModule} from '@angular/cdk/drag-drop';
 import { AddEditComponent } from './components/board/components/add-edit/add-edit.component';
 import { CreateEditWorkspaceComponent } from './components/create-edit-workspace/create-edit-workspace.component';
-import { InnerWorkspaceComponent } from './components/inner-workspace/inner-workspace.component';
+import {
+  DeleteDialog,
+  InnerWorkspaceComponent
+} from './components/inner-workspace/inner-workspace.component';
 import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatTableModule} from '@angular/material/table';
+import {MatDialogModule} from '@angular/material/dialog';
 
 
 
 @NgModule({
   declarations: [
     WorkspaceComponent,
-
+    DeleteDialog,
     BoardComponent,
     AddEditComponent,
     CreateEditWorkspaceComponent,
@@ -46,7 +50,7 @@ import {MatTableModule} from '@angular/material/table';
     MatProgressSpinnerModule,
     MatTabsModule,
     MatTableModule,
-
+    MatDialogModule
 
   ],
 })
