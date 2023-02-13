@@ -1,0 +1,89 @@
+
+<ng-container *ngIf="loading; else loaded">
+  <div class="loader-container">
+    <mat-progress-spinner
+      [color]="color"
+      [mode]="mode">
+    </mat-progress-spinner>
+  </div>
+</ng-container>
+
+<ng-template #loaded>
+<div class="title-row">
+  <h1 class="title"> {{workspace.name}}</h1>
+  <div class="button-container">
+    <button mat-stroked-button color="primary" [routerLink]="['/work/edit', workspace?.id]">Edit</button>
+    <button mat-stroked-button color="primary" (click)="deleteProject(workspace.id)"> Delete</button>
+  </div>
+</div>
+<div class="info-row">
+  <h4>description: </h4>
+  <div>
+    <p>{{workspace.description}}</p>
+  </div>
+
+  <mat-tab-group animationDuration="0ms">
+    <mat-tab label="Boards">
+      <ng-template matTabContent>
+
+        <div class="workspace-content-row">
+          <mat-card>
+            <mat-card-content>
+              <button mat-stroked-button color="primary"> + add board</button>
+            </mat-card-content>
+          </mat-card>
+          <mat-card>
+            <mat-card-content>Board Name</mat-card-content>
+          </mat-card>
+          <mat-card>
+            <mat-card-content> Task Managera sdasdaasd asd asa das d</mat-card-content>
+          </mat-card>
+        </div>
+
+      </ng-template>
+    </mat-tab>
+    <mat-tab label="Members">
+      <ng-template matTabContent>
+        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+          <!--- Note that these columns can be defined in any order.
+                The actual rendered columns are set as a property on the row definition" -->
+
+          <!-- Position Column -->
+          <ng-container matColumnDef="position">
+            <th mat-header-cell *matHeaderCellDef> No. </th>
+            <td mat-cell *matCellDef="let element"> {{element.position}} </td>
+          </ng-container>
+
+          <!-- Name Column -->
+          <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef> Name </th>
+            <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+          </ng-container>
+
+          <!-- Weight Column -->
+          <ng-container matColumnDef="weight">
+            <th mat-header-cell *matHeaderCellDef> Weight </th>
+            <td mat-cell *matCellDef="let element"> {{element.weight}} </td>
+          </ng-container>
+
+          <!-- Symbol Column -->
+          <ng-container matColumnDef="symbol">
+            <th mat-header-cell *matHeaderCellDef> Symbol </th>
+            <td mat-cell *matCellDef="let element"> {{element.symbol}} </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+      </ng-template>
+    </mat-tab>
+  </mat-tab-group>
+</div>
+
+</ng-template>
+
+
+
+
+
