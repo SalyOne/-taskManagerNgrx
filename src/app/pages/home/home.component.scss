@@ -60,13 +60,6 @@
     }
   }
   .content-list{
-    .loader-container{
-      width: 100%;
-      height: 100%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
     .each-workspace{
       margin-bottom: 30px;
       .workspace-title-row{
@@ -110,16 +103,6 @@
           display: flex;
           gap: 10px;
           flex-shrink: 0;
-        }
-      }
-      .workspace-content-row{
-        display: flex;
-        gap: 15px ;
-        mat-card{
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          width: 15%;
         }
       }
     }

@@ -20,5 +20,25 @@
   @include mq(tablet){
     width: 85% ;
   }
+}
 
+.loader-container{
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 50px;
+}
+
+.workspace-content-row{
+  display: flex;
+  gap: 15px ;
+  margin: 20px 0;
+  mat-card{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 15%;
+  }
 }

@@ -19,7 +19,6 @@ export class HomeComponent implements OnDestroy{
   loading: Boolean = false;
   color: ThemePalette = 'primary';
   mode: ProgressSpinnerMode = 'indeterminate';
-  value = 50;
   constructor(
     private workspaceService:WorkspaceService
   ) {
@@ -32,9 +31,7 @@ export class HomeComponent implements OnDestroy{
       .pipe(takeUntil(this.sub$))
       .subscribe(res =>{
         console.log(res)
-        setTimeout(()=>{
-          this.loading = false
-        },1000)
+        this.loading = false
         this.getWorkspacesForMyUser = res
     })
   }

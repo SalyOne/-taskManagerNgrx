@@ -15,13 +15,16 @@ import {DragDropModule} from '@angular/cdk/drag-drop';
 import { AddEditComponent } from './components/board/components/add-edit/add-edit.component';
 import { CreateEditWorkspaceComponent } from './components/create-edit-workspace/create-edit-workspace.component';
 import { InnerWorkspaceComponent } from './components/inner-workspace/inner-workspace.component';
+import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
+import {MatTabsModule} from '@angular/material/tabs';
+import {MatTableModule} from '@angular/material/table';
 
 
 
 @NgModule({
   declarations: [
     WorkspaceComponent,
-    
+
     BoardComponent,
     AddEditComponent,
     CreateEditWorkspaceComponent,
@@ -39,8 +42,11 @@ import { InnerWorkspaceComponent } from './components/inner-workspace/inner-work
     HttpClientModule,
     MatCardModule,
     MatIconModule,
-    DragDropModule
-    
+    DragDropModule,
+    MatProgressSpinnerModule,
+    MatTabsModule,
+    MatTableModule,
+
 
   ],
 })
