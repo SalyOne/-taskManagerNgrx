@@ -13,6 +13,7 @@ import { UsersComponent } from './pages/users/users.component';
 import { UsersListComponent } from './pages/users/containers/users-list/users-list.component';
 import { AddOrEditUsersComponent } from './pages/users/components/add-or-edit-users/add-or-edit-users.component';
 import {MatTableModule} from "@angular/material/table";
+import {ProjectInterceptor} from "./core/interceptors/project.interceptor";
 
 
 
@@ -42,6 +43,11 @@ import {MatTableModule} from "@angular/material/table";
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,
+      multi: true
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: ProjectInterceptor,
       multi: true
     }
 
