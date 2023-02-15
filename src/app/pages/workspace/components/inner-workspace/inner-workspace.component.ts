@@ -5,7 +5,8 @@ import {WorkspaceService} from "../../../../core/services";
 import {ActivatedRoute, Router} from "@angular/router";
 import {ThemePalette} from "@angular/material/core";
 import {ProgressSpinnerMode} from "@angular/material/progress-spinner";
-import {MatDialog, MatDialogRef} from "@angular/material/dialog";
+import {MatDialog} from "@angular/material/dialog";
+import {DeletePopupComponent} from "../../../../shared/popups/delete-popup/delete-popup.component";
 
 export interface PeriodicElement {
   name: string;
@@ -80,7 +81,7 @@ export class InnerWorkspaceComponent implements OnDestroy, OnInit{
     )
   }
   openDialog(){
-    return  this.dialog.open(DeleteDialog, {
+    return  this.dialog.open(DeletePopupComponent, {
       width: '250px',
     });
   }
@@ -91,10 +92,3 @@ export class InnerWorkspaceComponent implements OnDestroy, OnInit{
   }
 }
 
-@Component({
-  selector: 'delete-dialog',
-  templateUrl: 'delete-dialog.html',
-})
-export class DeleteDialog {
-  constructor(public dialogRef: MatDialogRef<DeleteDialog>) {}
-}
