@@ -9,3 +9,12 @@ export interface IWorkspace {
   "updatedAt"?: string,
   "deletedAt"?: string
 }
+
+
+export interface IWorkspaceTable{
+  data: IWorkspace[],
+  totalCount: number,
+  page: number,
+  limit: number,
+}
+

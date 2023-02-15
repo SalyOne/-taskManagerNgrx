@@ -15,7 +15,6 @@ import {DragDropModule} from '@angular/cdk/drag-drop';
 import { AddEditComponent } from './components/board/components/add-edit/add-edit.component';
 import { CreateEditWorkspaceComponent } from './components/create-edit-workspace/create-edit-workspace.component';
 import {
-  DeleteDialog,
   InnerWorkspaceComponent
 } from './components/inner-workspace/inner-workspace.component';
 import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
@@ -23,17 +22,19 @@ import {MatTabsModule} from '@angular/material/tabs';
 import {MatTableModule} from '@angular/material/table';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatPaginatorModule} from "@angular/material/paginator";
+import { WorkspaceListComponent } from './components/workspace-list/workspace-list.component';
+import {MatProgressBarModule} from "@angular/material/progress-bar";
 
 
 
 @NgModule({
   declarations: [
     WorkspaceComponent,
-    DeleteDialog,
     BoardComponent,
     AddEditComponent,
     CreateEditWorkspaceComponent,
-    InnerWorkspaceComponent
+    InnerWorkspaceComponent,
+    WorkspaceListComponent
   ],
   imports: [
     CommonModule,
@@ -54,6 +55,7 @@ import {MatPaginatorModule} from "@angular/material/paginator";
     MatDialogModule,
     MatPaginatorModule,
     MatIconModule,
+    MatProgressBarModule
 
   ],
 })

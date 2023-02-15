@@ -26,7 +26,6 @@ export class BaseService {
   return this.http.delete<T>(this.apiUrl + url)
 
  }
-
  put<T>(url: string, body?: any): Observable<T>{
   return this.http.put<T>(this.apiUrl+ url, body)
 }

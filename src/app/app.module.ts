@@ -10,6 +10,8 @@ import { WorkspaceModule} from "./pages/workspace/workspace.module";
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './core/interceptors';
 import {ProjectInterceptor} from "./core/interceptors/project.interceptor";
+import { DeletePopupComponent } from './shared/popups/delete-popup/delete-popup.component';
+import {SharedModule} from "./shared/shared.module";
 
 
 
@@ -28,6 +30,7 @@ import {ProjectInterceptor} from "./core/interceptors/project.interceptor";
     HomeModule,
     WorkspaceModule,
     HttpClientModule,
+    SharedModule
 
   ],
   providers: [
