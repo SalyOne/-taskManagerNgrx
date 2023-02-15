@@ -80,6 +80,7 @@ export class InnerWorkspaceComponent implements OnDestroy, OnInit{
       }
     )
   }
+
   openDialog(){
     return  this.dialog.open(DeletePopupComponent, {
       width: '250px',

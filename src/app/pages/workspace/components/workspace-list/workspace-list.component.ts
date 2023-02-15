@@ -1,7 +1,7 @@
-import {AfterViewInit, Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import {IWorkspace} from "../../../../core/interfaces";
-import {Subject, takeUntil} from "rxjs";
-import {MatPaginator} from "@angular/material/paginator";
+import {AfterViewInit, ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {IWorkspace, IWorkspaceTable} from "../../../../core/interfaces";
+import {catchError, map, of, startWith, Subject, switchMap, takeUntil} from "rxjs";
+import {MatPaginator, PageEvent} from "@angular/material/paginator";
 import {WorkspaceService} from "../../../../core/services";
 import {MatTableDataSource} from "@angular/material/table";
 import {DeletePopupComponent} from "../../../../shared/popups/delete-popup/delete-popup.component";
@@ -13,20 +13,29 @@ import {MatDialog} from "@angular/material/dialog";
   templateUrl: './workspace-list.component.html',
   styleUrls: ['./workspace-list.component.scss']
 })
-export class WorkspaceListComponent implements OnDestroy, AfterViewInit, OnInit{
+export class WorkspaceListComponent implements OnDestroy,AfterViewInit, OnInit{
 
   displayedColumns: string[] = ['id', 'name', 'abbreviation',  'description', 'color','createdAt','updatedAt','actions'];
-  workspaces:IWorkspace[] = []
-  dataSource!: any
   sub$ = new Subject();
-  @ViewChild(MatPaginator) paginator!: MatPaginator ;
 
+
+  workspaces:IWorkspace[] = [] // EmpData
+
+  empTable!: IWorkspaceTable;
+  isLoading = false;
+
+  totalData?: number;
+  pageSizes = [3, 5, 7];
+  dataSource = new MatTableDataSource<IWorkspace>();
+
+  @ViewChild('paginator') paginator!: MatPaginator;
 
   constructor(
-  private workspaceService : WorkspaceService,
-  private route : ActivatedRoute,
-  private router:Router,
-  public dialog: MatDialog
+    private workspaceService : WorkspaceService,
+    private route : ActivatedRoute,
+    private router:Router,
+    public dialog: MatDialog,
+    private cd: ChangeDetectorRef
   ) { }
 
   getWorkspaces(){
@@ -36,24 +45,63 @@ export class WorkspaceListComponent implements OnDestroy, AfterViewInit, OnInit{
         this.workspaces =res;
         this.dataSource =  new MatTableDataSource<IWorkspace>(this.workspaces);
         this.dataSource.paginator = this.paginator;
-        console.log(this.workspaces)
+        // console.log(this.paginator)
       })
   }
 
-  ngOnInit(): void {
-    this.getWorkspaces()
+  getProjectsByParams(limit:number,pageIndex:number ){
+    return this.workspaceService.getProjectsByParams({
+      page:pageIndex,
+      totalCount:length,
+      limit:limit
+    })
+      // .pipe(takeUntil(this.sub$))
+      // .subscribe(res=>{
+      //   console.log("asdasd")
+      //   this.workspaces = res;
+      //   this.dataSource =  new MatTableDataSource<IWorkspace>(this.workspaces);
+      //   console.log(this.pageEvent)
+      // })
   }
+
+
   ngAfterViewInit() {
-
+    this.dataSource.paginator = this.paginator;
+    // console.log(this.paginator.page)
+    this.paginator.page
+      .pipe(
+        startWith({}),
+        switchMap(() => {
+          this.isLoading = true;
+          return this.getProjectsByParams(
+            this.paginator.pageSize,
+            this.paginator.pageIndex + 1
+          ).pipe(catchError(() => of(null)));
+        }),
+        map((empData) => {
+          // console.log("empData", empData)
+          if (empData == null) return [];
+          this.totalData = empData.totalCount;
+          this.isLoading = false;
+          return empData.data;
+        })
+      )
+      .subscribe((empData) => {
+        // console.log(empData)
+        this.workspaces = empData;
+        this.dataSource = new MatTableDataSource(this.workspaces);
+      });
+    // imistvis rom afterViewInit-is mere shecvlilma isLoading cvladma erori ar amoagdos
+    this.cd.detectChanges()
   }
-  ngOnDestroy(): void {
-    this.sub$.next(null);
-    this.sub$.complete()
+
+  ngOnInit(): void {
+    // this.getWorkspaces()
+    // this.getProjectsByParams(6,1)
   }
 
-  // dataSource = new MatTableDataSource<IWorkspace>(this.workspaces);
 
-  // const ELEMENT_DATA: IWorkspace[] =
+
   deleteProject(id?: number):void {
     this.openDialog().afterClosed().subscribe(res=>{
         if(res){
@@ -71,4 +119,14 @@ export class WorkspaceListComponent implements OnDestroy, AfterViewInit, OnInit{
       width: '250px',
     });
   }
+
+
+
+  ngOnDestroy(): void {
+    this.sub$.next(null);
+    this.sub$.complete()
+  }
+
+
+
 }

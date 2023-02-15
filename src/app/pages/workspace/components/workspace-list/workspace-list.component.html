@@ -65,9 +65,14 @@
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
 
-  <mat-paginator [pageSizeOptions]="[5, 10, 20]"
-                 showFirstLastButtons
-                 aria-label="Select page of periodic elements">
-  </mat-paginator>
+
+  <mat-progress-bar mode="indeterminate" *ngIf="isLoading"></mat-progress-bar>
+  <mat-paginator
+    #paginator
+    [length]="totalData"
+    [pageSizeOptions]="pageSizes"
+    showFirstLastButtons
+  ></mat-paginator>
+<!--  <div> Output event: {{(pageEvent | json) || 'No events dispatched yet'}} </div>-->
 </div>
 

@@ -23,6 +23,7 @@ import {MatTableModule} from '@angular/material/table';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatPaginatorModule} from "@angular/material/paginator";
 import { WorkspaceListComponent } from './components/workspace-list/workspace-list.component';
+import {MatProgressBarModule} from "@angular/material/progress-bar";
 
 
 
@@ -54,6 +55,7 @@ import { WorkspaceListComponent } from './components/workspace-list/workspace-li
     MatDialogModule,
     MatPaginatorModule,
     MatIconModule,
+    MatProgressBarModule
 
   ],
 })
