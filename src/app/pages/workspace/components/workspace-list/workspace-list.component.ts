@@ -1,5 +1,5 @@
 import {AfterViewInit, ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import {IWorkspace, IWorkspaceTable} from "../../../../core/interfaces";
+import {IWorkspace,IQueryTable} from "../../../../core/interfaces";
 import {catchError, map, of, startWith, Subject, switchMap, takeUntil} from "rxjs";
 import {MatPaginator, PageEvent} from "@angular/material/paginator";
 import {WorkspaceService} from "../../../../core/services";
@@ -21,7 +21,7 @@ export class WorkspaceListComponent implements OnDestroy,AfterViewInit, OnInit{
 
   workspaces:IWorkspace[] = [] // EmpData
 
-  empTable!: IWorkspaceTable;
+  empTable!: IQueryTable<IWorkspace>;
   isLoading = false;
 
   totalData?: number;
