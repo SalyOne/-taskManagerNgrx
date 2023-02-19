@@ -11,10 +11,14 @@ export interface IWorkspace {
 }
 
 
-export interface IWorkspaceTable{
-  data: IWorkspace[],
+export interface IQueryTable<T>{
+  data: T[],
   totalCount: number,
   page: number,
   limit: number,
+}
+export interface IWorksoaceUsers{
+  projectId: number;
+  userIds: string[];
 }
 
