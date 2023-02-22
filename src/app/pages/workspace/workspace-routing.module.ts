@@ -4,11 +4,16 @@ import {WorkspaceComponent} from "./workspace.component";
 import {CreateEditWorkspaceComponent} from "./components/create-edit-workspace/create-edit-workspace.component";
 import { BoardComponent } from './components/board/board.component';
 import {InnerWorkspaceComponent} from "./components/inner-workspace/inner-workspace.component";
+import {WorkspaceListComponent} from "./components/workspace-list/workspace-list.component";
 
 const routes: Routes = [
   {
     path: '',
     component: WorkspaceComponent
+  },
+  {
+    path: 'list',
+    component: WorkspaceListComponent
   },
   {
     path:'add',

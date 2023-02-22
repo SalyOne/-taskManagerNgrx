@@ -1,8 +1,10 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {of, Subject, switchMap, takeUntil} from "rxjs";
+import {Observable, of, Subject, switchMap, takeUntil} from "rxjs";
 import {WorkspaceService} from "../../../../core/services/workspace.service";
 import {ActivatedRoute, Router, RouterModule} from "@angular/router";
+import {IWorkspace} from "../../../../core/interfaces";
+import {CookieService} from "ngx-cookie-service";
 
 @Component({
   selector: 'app-create-workspace',
@@ -22,10 +24,12 @@ export class CreateEditWorkspaceComponent implements OnDestroy , OnInit{
   errorMsg? : string
   pageTitle:string = "create workspace"
 
+  projects$: Observable<IWorkspace[]> = this.workspaceService.getAllWorkspacesForUser()
   constructor(
     private workspaceService:WorkspaceService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private CS:CookieService
   ) {
   }
 
@@ -45,7 +49,8 @@ export class CreateEditWorkspaceComponent implements OnDestroy , OnInit{
     })
 
   }
-
+  ProjectID?:number;
+  isEditable: boolean = false;
   submit(){
     this.form.markAllAsTouched();
     if(this.form.invalid) return;
@@ -61,7 +66,7 @@ export class CreateEditWorkspaceComponent implements OnDestroy , OnInit{
               this.errorMsg = ""
             }
             // console.log("ress: ", res)
-            this.router.navigate(['/home'])
+            // this.router.navigate(['/home'])
           },
           error: err=>{
             this.errorMsg = err.error.message;
@@ -75,8 +80,11 @@ export class CreateEditWorkspaceComponent implements OnDestroy , OnInit{
               if (this.errorMsg){
                 this.errorMsg = ""
               }
-              // console.log("ress: ", res)
-              this.router.navigate(['/home'])
+              console.log("ress: ", res)
+              this.ProjectID = res.id
+              // this.router.navigate(['/home'])
+
+              console.log(this.ProjectID)
             },
             error: err=>{
               this.errorMsg = err.error.message;

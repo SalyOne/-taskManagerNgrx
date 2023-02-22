@@ -9,3 +9,16 @@ export interface IWorkspace {
   "updatedAt"?: string,
   "deletedAt"?: string
 }
+
+
+export interface IQueryTable<T>{
+  data: T[],
+  totalCount: number,
+  page: number,
+  limit: number,
+}
+export interface IWorksoaceUsers{
+  projectId: number;
+  userIds: string[];
+}
+
