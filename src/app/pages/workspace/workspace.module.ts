@@ -25,7 +25,7 @@ import {MatPaginatorModule} from "@angular/material/paginator";
 import { WorkspaceListComponent } from './components/workspace-list/workspace-list.component';
 import {MatProgressBarModule} from "@angular/material/progress-bar";
 import {MatStepperModule} from '@angular/material/stepper';
-
+import {MatSidenavModule} from "@angular/material/sidenav";
 
 
 @NgModule({
@@ -57,9 +57,8 @@ import {MatStepperModule} from '@angular/material/stepper';
     MatPaginatorModule,
     MatIconModule,
     MatProgressBarModule,
-    MatStepperModule
-
-
+    MatStepperModule,
+    MatSidenavModule
   ],
 })
 export class WorkspaceModule { }
