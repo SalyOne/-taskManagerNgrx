@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import {AuthService} from "../../../../core/services";
-import {User} from "../../../../core/interfaces";
-import {Observable} from "rxjs";
+
 
 @Component({
   selector: 'app-sidebar',
@@ -12,13 +11,13 @@ export class SidebarComponent {
  userName! :string;
   constructor(
     private authService: AuthService,
-    private userService: AuthService
+    
   ) {
     this.getLoggedInUser()
   }
 
   getLoggedInUser(){
-   this.userName =  this.userService.user?.firstName + " " + this.userService.user?.lastName
+   this.userName =  this.authService.user?.firstName + " " + this.authService.user?.lastName
   }
 
 
