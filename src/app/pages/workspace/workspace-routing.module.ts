@@ -2,9 +2,11 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import {WorkspaceComponent} from "./workspace.component";
 import {CreateEditWorkspaceComponent} from "./components/create-edit-workspace/create-edit-workspace.component";
-import { BoardComponent } from './components/board/board.component';
+
 import {InnerWorkspaceComponent} from "./components/inner-workspace/inner-workspace.component";
 import {WorkspaceListComponent} from "./components/workspace-list/workspace-list.component";
+import { BoardAddEditComponent } from './components/board-add-edit/board-add-edit.component';
+import { ProjectBoardComponent } from './components/project-board/project-board.component';
 
 const routes: Routes = [
   {
@@ -20,10 +22,20 @@ const routes: Routes = [
     component: CreateEditWorkspaceComponent
   },
   {
-    path:'board',
-    component: BoardComponent
-
+    path: 'boards',
+    children: [
+      {
+        path: '',
+        component: ProjectBoardComponent
+      },
+      {
+        path: 'add',
+        component: BoardAddEditComponent
+      },
+    
+    ]
   },
+  
   {
     path:'edit/:id',
     component: CreateEditWorkspaceComponent
