@@ -14,8 +14,11 @@ import { UsersListComponent } from './pages/users/containers/users-list/users-li
 import { AddOrEditUsersComponent } from './pages/users/components/add-or-edit-users/add-or-edit-users.component';
 import {MatTableModule} from "@angular/material/table";
 import {ProjectInterceptor} from "./core/interceptors/project.interceptor";
-import { DeletePopupComponent } from './shared/popups/delete-popup/delete-popup.component';
 import {SharedModule} from "./shared/shared.module";
+import {ReactiveFormsModule} from "@angular/forms";
+import {MatFormFieldModule} from "@angular/material/form-field";
+import {MatProgressBarModule} from "@angular/material/progress-bar";
+import {MatPaginatorModule} from "@angular/material/paginator";
 
 
 
@@ -37,7 +40,12 @@ import {SharedModule} from "./shared/shared.module";
     HomeModule,
     WorkspaceModule,
     HttpClientModule,
-    SharedModule
+    SharedModule,
+    MatTableModule,
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatProgressBarModule,
+    MatPaginatorModule
 
   ],
   providers: [
