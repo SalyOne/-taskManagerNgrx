@@ -26,6 +26,7 @@ import { WorkspaceListComponent } from './components/workspace-list/workspace-li
 import {MatProgressBarModule} from "@angular/material/progress-bar";
 import {MatStepperModule} from '@angular/material/stepper';
 import {MatSidenavModule} from "@angular/material/sidenav";
+import { IssueTypesComponent } from './components/issue-types/issue-types.component';
 
 
 @NgModule({
@@ -35,7 +36,8 @@ import {MatSidenavModule} from "@angular/material/sidenav";
     AddEditComponent,
     CreateEditWorkspaceComponent,
     InnerWorkspaceComponent,
-    WorkspaceListComponent
+    WorkspaceListComponent,
+    IssueTypesComponent
   ],
   imports: [
     CommonModule,
