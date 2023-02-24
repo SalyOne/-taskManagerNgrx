@@ -6,7 +6,7 @@ import {MatTableDataSource} from "@angular/material/table";
 import {MatDialog} from "@angular/material/dialog";
 import {MatPaginator} from "@angular/material/paginator";
 import {ActivatedRoute, Router} from "@angular/router";
-import {DeletePopupComponent} from "../../../../shared/popups/delete-popup/delete-popup.component";
+
 
 @Component({
   selector: 'app-users-list',
@@ -44,7 +44,8 @@ export class UsersListComponent implements OnInit {
     this.usersService.getUsers()
       .subscribe(res => {
         console.log(res, ' log res')
-        this.user.data = res
+        this.dataSource.data = res;
+
       });
   }
 
@@ -53,12 +54,6 @@ export class UsersListComponent implements OnInit {
 
   }
 
-
-  openDialog() {
-    return this.dialog.open(DeletePopupComponent, {
-      width: '250px',
-    });
-  }
 
 
   ngOnDestroy(): void {

@@ -1,5 +1,4 @@
 export interface User {
-  data: User[];
   id: number;
   firstName: string;
   lastName: string;

@@ -1,6 +1,7 @@
 import { ETaskStatus } from "../enums/task-status.enum";
 import { ITask } from "./task";
 import { IWorkspace } from "./workspace.interface";
+import {User} from "./user";
 
 
 
@@ -10,6 +11,7 @@ export interface IBoard {
   description: string;
   position: number;
   projectId: number;
+  user: User[];
   project: IWorkspace;
   columns: Column[];
   tasks: ITask[];
