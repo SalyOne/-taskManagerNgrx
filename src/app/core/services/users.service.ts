@@ -19,4 +19,7 @@ export class UsersService extends BaseService {
   }):Observable<IQueryTable<User>>{
     return  this.get<IQueryTable<User>>(`users/all`, params);
   }
+  deleteUser(id:any):Observable<User>{
+    return  this.delete<User>(`users/${id}`);
+  }
 }

@@ -1,11 +1,12 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {Subject} from "rxjs";
+import {Subject, takeUntil} from "rxjs";
 import {UsersService} from "../../../../core/services/users.service";
 import {QueryTable, User} from "../../../../core/interfaces";
 import {MatTableDataSource} from "@angular/material/table";
 import {MatDialog} from "@angular/material/dialog";
 import {MatPaginator} from "@angular/material/paginator";
 import {ActivatedRoute, Router} from "@angular/router";
+import {DeletePopupComponent} from "../../../../shared/popups/delete-popup/delete-popup.component";
 
 
 @Component({
@@ -53,8 +54,23 @@ export class UsersListComponent implements OnInit {
     this.getUser()
 
   }
-
-
+  deleteProject(id?: number):void {
+    this.openDialog().afterClosed().subscribe(res=>{
+        if(res){
+          this.usersService.deleteUser(String(id))
+            .pipe(takeUntil(this.sub$))
+            .subscribe(res=>{
+              this.router.navigate(['/users'])
+            })
+        }
+      }
+    )
+  }
+  openDialog(){
+    return  this.dialog.open(DeletePopupComponent, {
+      width: '250px',
+    });
+  }
 
   ngOnDestroy(): void {
     this.sub$.next(null);
