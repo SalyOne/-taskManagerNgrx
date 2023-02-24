@@ -52,6 +52,8 @@ export class CreateEditWorkspaceComponent implements OnDestroy , OnInit{
   ProjectID?:number;
   isEditable: boolean = false;
   submit(){
+
+    console.log("test test")
     this.form.markAllAsTouched();
     if(this.form.invalid) return;
 
@@ -66,7 +68,7 @@ export class CreateEditWorkspaceComponent implements OnDestroy , OnInit{
               this.errorMsg = ""
             }
             // console.log("ress: ", res)
-            // this.router.navigate(['/home'])
+            this.router.navigate(['/home'])
           },
           error: err=>{
             this.errorMsg = err.error.message;
@@ -82,7 +84,7 @@ export class CreateEditWorkspaceComponent implements OnDestroy , OnInit{
               }
               console.log("ress: ", res)
               this.ProjectID = res.id
-              // this.router.navigate(['/home'])
+              this.router.navigate(['/home'])
 
               console.log(this.ProjectID)
             },

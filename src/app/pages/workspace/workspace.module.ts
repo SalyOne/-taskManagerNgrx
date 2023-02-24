@@ -2,17 +2,15 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { WorkspaceRoutingModule } from './workspace-routing.module';
 import { WorkspaceComponent } from './workspace.component';
-import {MatFormFieldModule, MatLabel} from "@angular/material/form-field";
+import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatSelectModule} from "@angular/material/select";
-import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {FormGroup, FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {MatInputModule} from "@angular/material/input";
 import {HttpClientModule} from "@angular/common/http";
 import {MatButtonModule} from "@angular/material/button";
 import {MatCardModule} from '@angular/material/card';
-import { BoardComponent } from './components/board/board.component';
 import {MatIconModule} from '@angular/material/icon';
 import {DragDropModule} from '@angular/cdk/drag-drop';
-import { AddEditComponent } from './components/board/components/add-edit/add-edit.component';
 import { CreateEditWorkspaceComponent } from './components/create-edit-workspace/create-edit-workspace.component';
 import {
   InnerWorkspaceComponent
@@ -26,16 +24,23 @@ import { WorkspaceListComponent } from './components/workspace-list/workspace-li
 import {MatProgressBarModule} from "@angular/material/progress-bar";
 import {MatStepperModule} from '@angular/material/stepper';
 import {MatSidenavModule} from "@angular/material/sidenav";
+import { IssueTypesComponent } from './components/issue-types/issue-types.component';
+import { BoardAddEditComponent } from './components/board-add-edit/board-add-edit.component';
+import { ProjectBoardComponent } from './components/project-board/project-board.component';
+
+
 
 
 @NgModule({
   declarations: [
     WorkspaceComponent,
-    BoardComponent,
-    AddEditComponent,
     CreateEditWorkspaceComponent,
     InnerWorkspaceComponent,
-    WorkspaceListComponent
+    WorkspaceListComponent,
+    IssueTypesComponent,
+    BoardAddEditComponent,
+    ProjectBoardComponent
+    
   ],
   imports: [
     CommonModule,
@@ -58,7 +63,10 @@ import {MatSidenavModule} from "@angular/material/sidenav";
     MatIconModule,
     MatProgressBarModule,
     MatStepperModule,
-    MatSidenavModule
+    MatSidenavModule,
+    FormsModule
+  
+    
   ],
 })
 export class WorkspaceModule { }

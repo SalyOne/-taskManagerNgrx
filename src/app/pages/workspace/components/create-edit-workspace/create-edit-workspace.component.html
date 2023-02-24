@@ -2,11 +2,6 @@
   <section class="title-row">
     <h1>{{pageTitle}}:</h1>
   </section>
-
-
-      <ng-template matStepLabel>Step 1</ng-template>
-      <ng-template matStepContent>
-
         <div class="form-container">
           <form action="" [formGroup]="form" (submit)="submit()">
             <mat-error *ngIf="errorMsg"> {{errorMsg}}</mat-error>
@@ -33,13 +28,10 @@
               <mat-error *ngIf="form.get('description')?.invalid && form.get('description')?.touched"> please fill in </mat-error>
             </mat-form-field>
 
-<!--            <button type="button" color="primary" mat-raised-button matInput class="form-button">next</button>-->
+            <button type="submit" color="primary" mat-raised-button matInput class="form-button">submit</button>
           </form>
         </div>
 
-        <button mat-button matStepperNext>Next</button>
-
-      </ng-template>
 </div>
 
 
