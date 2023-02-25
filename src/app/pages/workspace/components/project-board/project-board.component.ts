@@ -7,6 +7,7 @@ import {MatTableDataSource} from "@angular/material/table";
 import {MatDialog} from "@angular/material/dialog";
 import { BoardService } from 'src/app/core/services/board.service';
 import { IBoard } from 'src/app/core/interfaces/board';
+import { DeletePopupComponent } from 'src/app/shared/popups/delete-popup/delete-popup.component';
 
 @Component({
   selector: 'app-project-board',
@@ -50,23 +51,23 @@ export class ProjectBoardComponent implements OnInit, OnDestroy {
     this.sub$.complete();
   }
 
-  // deleteBoard(id: number) {
-  //   const dialogRef = this.dialog.open(ConfirmationPopupComponent);
+  deleteBoard(id: number) {
+    const dialogRef = this.dialog.open(DeletePopupComponent);
 
-  //   dialogRef.afterClosed()
-  //     .pipe(
-  //       takeUntil(this.sub$),
-  //       switchMap((result) => {
-  //         if (result) {
-  //           return this.boardService.deleteBoard(id);
-  //         }
-  //         return of(null);
-  //       })
-  //     )
-  //     .subscribe(result => {
-  //       if (result) {
-  //         this.getBoards();
-  //       }
-  //     });
-  // }
+    dialogRef.afterClosed()
+      .pipe(
+        takeUntil(this.sub$),
+        switchMap((result) => {
+          if (result) {
+            return this.boardService.deleteBoard(id);
+          }
+          return of(null);
+        })
+      )
+      .subscribe(result => {
+        if (result) {
+          this.getBoards();
+        }
+      });
+  }
 }

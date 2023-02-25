@@ -32,6 +32,10 @@ const routes: Routes = [
         path: 'add',
         component: BoardAddEditComponent
       },
+      {
+        path:'edit/:id',
+        component: BoardAddEditComponent
+      },
     
     ]
   },
