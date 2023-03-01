@@ -10,6 +10,7 @@ export class ProjectFacade {
 
 
   setProject(project: IWorkspace):void{
+    console.log("in setProkect: ", project)
     if(project && project.id){
       localStorage.setItem('project',JSON.stringify(project))
     }
