@@ -67,7 +67,7 @@
       </div>
       <div class="each-workspace" *ngFor="let eachWork of getWorkspacesForMyUser">
         <div class="workspace-title-row">
-          <h3 class="title" [routerLink]="['/work', eachWork.id]">
+          <h3 class="title" [routerLink]="['/work/inner', eachWork.id]">
             <span class="first-letter" style="background: {{ eachWork.color }}">
              <span > {{ getFirstLetter(eachWork.name) }}</span>
             </span>

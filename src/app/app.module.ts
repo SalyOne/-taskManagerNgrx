@@ -21,6 +21,7 @@ import {MatProgressBarModule} from "@angular/material/progress-bar";
 import {MatPaginatorModule} from "@angular/material/paginator";
 import {MatIconModule} from "@angular/material/icon";
 import {MatButtonModule} from "@angular/material/button";
+import {InnerWorkspaceModule} from "./pages/workspace/components/inner-workspace/inner-workspace.module";
 
 
 
@@ -49,8 +50,7 @@ import {MatButtonModule} from "@angular/material/button";
     MatProgressBarModule,
     MatPaginatorModule,
     MatIconModule,
-    MatButtonModule
-
+    MatButtonModule,
   ],
   providers: [
     {

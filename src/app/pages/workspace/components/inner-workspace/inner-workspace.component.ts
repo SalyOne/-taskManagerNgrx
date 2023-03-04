@@ -1,12 +1,7 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {IWorkspace} from "../../../../core/interfaces";
-import {Subject, takeUntil, tap} from "rxjs";
 import {WorkspaceService} from "../../../../core/services";
 import {ActivatedRoute, Router} from "@angular/router";
-import {ThemePalette} from "@angular/material/core";
-import {ProgressSpinnerMode} from "@angular/material/progress-spinner";
-import {MatDialog} from "@angular/material/dialog";
-import {DeletePopupComponent} from "../../../../shared/popups/delete-popup/delete-popup.component";
 import {ProjectFacade} from "../../../../facades/project.facade";
 
 export interface PeriodicElement {
@@ -33,73 +28,46 @@ const ELEMENT_DATA: PeriodicElement[] = [
   styleUrls: ['./inner-workspace.component.scss']
 })
 
-export class InnerWorkspaceComponent implements OnDestroy, OnInit{
+export class InnerWorkspaceComponent implements  OnInit{
   workspace!:IWorkspace
-  workspaceId! : string;
-  loading: boolean = true;
-  sub$ = new Subject();
-  color: ThemePalette = 'primary';
-  mode: ProgressSpinnerMode = 'indeterminate';
-
 
   constructor(
-    private workspaceService : WorkspaceService,
     private projectFacade : ProjectFacade,
+    private workspaceService: WorkspaceService,
     private route : ActivatedRoute,
     private router:Router,
-    public dialog: MatDialog
-  ) {}
+  ) {
+
+  }
 
   displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
   dataSource = ELEMENT_DATA;
-  ngOnInit(): void {
-      this.route.params.subscribe(params =>{
-        this.workspaceId = params['id']
-        this.getOneProject(this.workspaceId)
-      })
-  }
 
   selectProject(projectId: any) {
+    console.log("in selectProject: " , projectId)
     this.projectFacade.setProject(projectId)
   }
 
+  ngOnInit(): void {
+    console.log("facade :", this.projectFacade.getProject())
+    this.workspace = this.projectFacade.getProject()
+
+
+    this.route.params.subscribe(params =>{
+      // this.workspaceId = params['id']
+      console.log("in facade page: ", params)
+      this.getOneProject(params['id'])
+      // this.getOneProject(this.workspaceId)
+    })
+  }
+
   getOneProject(id: any){
-    this.loading  = true
     return this.workspaceService.getOneProject(id)
-      .pipe(
-        takeUntil(this.sub$)
-      )
       .subscribe(res =>{
-        console.log(res)
-        this.loading = false
         this.workspace = res
-        console.log("localstorage", id)
         this.selectProject(res)
+        // console.log("localstorage", id)
       })
-  }
-
-  deleteProject(id?: number):void {
-    this.openDialog().afterClosed().subscribe(res=>{
-        if(res){
-          this.workspaceService.deleteProject(String(id))
-            .pipe(takeUntil(this.sub$))
-            .subscribe(res=>{
-              this.router.navigate(['/home'])
-            })
-        }
-      }
-    )
-  }
-
-  openDialog(){
-    return  this.dialog.open(DeletePopupComponent, {
-      width: '250px',
-    });
-  }
-
-  ngOnDestroy(): void {
-    this.sub$.next(null)
-    this.sub$.complete()
   }
 }
 

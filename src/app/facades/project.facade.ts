@@ -19,4 +19,6 @@ export class ProjectFacade {
    const proj = localStorage.getItem('project');
    return proj? JSON.parse(proj): null
   }
+
+
 }

@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { WorkspaceRoutingModule } from './workspace-routing.module';
-import { WorkspaceComponent } from './workspace.component';
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatSelectModule} from "@angular/material/select";
 import {FormGroup, FormsModule, ReactiveFormsModule} from "@angular/forms";
@@ -12,9 +11,7 @@ import {MatCardModule} from '@angular/material/card';
 import {MatIconModule} from '@angular/material/icon';
 import {DragDropModule} from '@angular/cdk/drag-drop';
 import { CreateEditWorkspaceComponent } from './components/create-edit-workspace/create-edit-workspace.component';
-import {
-  InnerWorkspaceComponent
-} from './components/inner-workspace/inner-workspace.component';
+
 import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatTableModule} from '@angular/material/table';
@@ -24,23 +21,24 @@ import { WorkspaceListComponent } from './components/workspace-list/workspace-li
 import {MatProgressBarModule} from "@angular/material/progress-bar";
 import {MatStepperModule} from '@angular/material/stepper';
 import {MatSidenavModule} from "@angular/material/sidenav";
-import { IssueTypesComponent } from './components/issue-types/issue-types.component';
-import { BoardAddEditComponent } from './components/board-add-edit/board-add-edit.component';
-import { ProjectBoardComponent } from './components/project-board/project-board.component';
+import { IssueTypesComponent } from './components/inner-workspace/issue-types/issue-types/issue-types.component';
+import { BoardAddEditComponent } from './components/inner-workspace/board/board-add-edit/board-add-edit.component';
+import { ProjectBoardComponent } from './components/inner-workspace/board/project-board/project-board.component';
+import { InfoComponent } from './components/inner-workspace/info/info.component';
+import {InnerWorkspaceModule} from "./components/inner-workspace/inner-workspace.module";
 
 
 
 
 @NgModule({
   declarations: [
-    WorkspaceComponent,
     CreateEditWorkspaceComponent,
-    InnerWorkspaceComponent,
     WorkspaceListComponent,
     IssueTypesComponent,
     BoardAddEditComponent,
-    ProjectBoardComponent
-    
+    ProjectBoardComponent,
+    InfoComponent
+
   ],
   imports: [
     CommonModule,
@@ -64,9 +62,7 @@ import { ProjectBoardComponent } from './components/project-board/project-board.
     MatProgressBarModule,
     MatStepperModule,
     MatSidenavModule,
-    FormsModule
-  
-    
+    FormsModule,
   ],
 })
 export class WorkspaceModule { }
