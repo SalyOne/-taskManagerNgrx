@@ -1,0 +1,43 @@
+@import "./src/styles/globals/variables";
+
+.form-container {
+  display: flex;
+  justify-content: center;
+
+  form {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 40%;
+
+    mat-form-field {
+      width: 100%;
+    }
+
+    .form-button {
+      margin-left: auto;
+    }
+  }
+}
+
+.color-picker-container {
+  .flex-input {
+    display: flex;
+
+    span {
+      display: block;
+      min-width: 80px;
+    }
+  }
+}
+
+.title-row {
+  border-bottom: 1px solid $main-1;
+  box-shadow: 0 4px 5px -5px rgba($main-1, 0.3);
+  margin-bottom: 40px;
+
+  h1 {
+    text-transform: capitalize;
+  }
+}
+

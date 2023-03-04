@@ -7,6 +7,7 @@ import {MatDialog} from "@angular/material/dialog";
 import {MatPaginator} from "@angular/material/paginator";
 import {ActivatedRoute, Router} from "@angular/router";
 import {DeletePopupComponent} from "../../../../shared/popups/delete-popup/delete-popup.component";
+import {AddOrEditUsersComponent} from "../../components/add-or-edit-users/add-or-edit-users.component";
 
 
 @Component({
@@ -54,20 +55,34 @@ export class UsersListComponent implements OnInit {
     this.getUser()
 
   }
-  deleteProject(id?: number):void {
-    this.openDialog().afterClosed().subscribe(res=>{
-        if(res){
-          this.usersService.deleteUser(String(id))
-            .pipe(takeUntil(this.sub$))
-            .subscribe(res=>{
-              this.router.navigate(['/users'])
-            })
-        }
-      }
-    )
+
+  addUser() {
+
+    const dialogRef = this.dialog.open(AddOrEditUsersComponent);
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+    });
   }
-  openDialog(){
-    return  this.dialog.open(DeletePopupComponent, {
+
+
+  deleteProject(id?: number): void {
+    this.openDialog()
+      .afterClosed()
+      .subscribe(res => {
+          if (res) {
+            this.usersService.deleteUser(String(id))
+              .pipe(takeUntil(this.sub$))
+              .subscribe(res => {
+                this.router.navigate(['/users'])
+              })
+          }
+        }
+      )
+  }
+
+  openDialog() {
+    return this.dialog.open(DeletePopupComponent, {
       width: '250px',
     });
   }
