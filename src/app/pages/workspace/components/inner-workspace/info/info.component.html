@@ -27,17 +27,12 @@
           <ng-template matTabContent>
 
             <div class="workspace-content-row">
-              <mat-card>
-                <mat-card-content>
-                  <button mat-stroked-button color="primary"> + add board</button>
+              <mat-card class="boardNameCard" *ngFor="let board of boards$ |async">
+                <mat-card-content [routerLink]="['/dashboard', board.id]">
+                    {{board.name}}
                 </mat-card-content>
               </mat-card>
-              <mat-card>
-                <mat-card-content>Board Name</mat-card-content>
-              </mat-card>
-              <mat-card>
-                <mat-card-content> Task Managera sdasdaasd asd asa das d</mat-card-content>
-              </mat-card>
+
             </div>
 
           </ng-template>

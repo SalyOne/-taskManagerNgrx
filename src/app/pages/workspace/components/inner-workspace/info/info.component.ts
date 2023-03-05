@@ -8,6 +8,7 @@ import {ProjectFacade} from "../../../../../facades/project.facade";
 import {ActivatedRoute, Router} from "@angular/router";
 import {MatDialog} from "@angular/material/dialog";
 import {DeletePopupComponent} from "../../../../../shared/popups/delete-popup/delete-popup.component";
+import { BoardService } from 'src/app/core/services/board.service';
 export interface PeriodicElement {
   name: string;
   position: number;
@@ -47,11 +48,16 @@ export class InfoComponent implements OnDestroy, OnInit{
     private projectFacade : ProjectFacade,
     private route : ActivatedRoute,
     private router:Router,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private boardService: BoardService
+    
   ) {}
 
   displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
   dataSource = ELEMENT_DATA;
+
+
+  boards$ = this.boardService.getBoards()
 
   ngOnInit(): void {
     this.route.params.subscribe(params =>{

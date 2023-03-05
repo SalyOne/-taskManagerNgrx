@@ -14,6 +14,8 @@ export class HomeComponent implements OnDestroy{
   // getWorkspacesForMyUser$: Observable<IWorkspace[]> = this.workspaceService.getAllWorkspacesForUser();
   getWorkspacesForMyUser :IWorkspace[] = []
 
+  
+
   sub$ = new Subject();
   firstLetter!: string;
   loading: Boolean = false;
@@ -21,6 +23,7 @@ export class HomeComponent implements OnDestroy{
   mode: ProgressSpinnerMode = 'indeterminate';
   constructor(
     private workspaceService:WorkspaceService
+    
   ) {
       this.getAllWorkspacesForUser()
   }
