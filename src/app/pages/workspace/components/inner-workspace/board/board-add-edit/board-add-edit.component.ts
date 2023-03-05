@@ -4,6 +4,8 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {CdkDragDrop, moveItemInArray} from "@angular/cdk/drag-drop";
 import { ETaskStatus } from 'src/app/core/enums/task-status.enum';
 import { BoardService } from 'src/app/core/services/board.service';
+import { IWorkspace } from 'src/app/core/interfaces';
+import { ProjectFacade } from 'src/app/facades/project.facade';
 
 @Component({
   selector: 'app-board-add-edit',
@@ -22,6 +24,7 @@ export class BoardAddEditComponent implements OnInit {
   taskStatuses = Object.values(ETaskStatus);
 
   boardId!: number;
+  workspace!: IWorkspace 
 
   get columnsFormArray() {
     return this.form.get('columns') as FormArray;
@@ -30,7 +33,8 @@ export class BoardAddEditComponent implements OnInit {
   constructor(
     private readonly boardService: BoardService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private projectfacade: ProjectFacade
   ) { }
 
   ngOnInit(): void {
@@ -40,6 +44,8 @@ export class BoardAddEditComponent implements OnInit {
         this.getBoard()
       }
     })
+    this.workspace = this.projectfacade.getProject()
+    console.log(this.workspace)
   }
 
   getBoard() {
@@ -67,6 +73,11 @@ export class BoardAddEditComponent implements OnInit {
     }, Validators.required));
   }
 
+  deleteColumn(i: number){
+    this.columnsFormArray.removeAt(i)
+  }
+
+
 
   save() {
     this.form.markAllAsTouched()
@@ -76,12 +87,12 @@ export class BoardAddEditComponent implements OnInit {
     if (this.boardId) {
       this.boardService.updateBoard(this.form.value)
         .subscribe( res => {
-          this.router.navigate(['/board']).then()
+          this.router.navigate(['/work/inner', this.workspace.id, 'board']).then()
         })
     } else {
       this.boardService.createBoard(this.form.value)
         .subscribe( res => {
-          this.router.navigate(['/board']).then()
+          this.router.navigate(['/work/inner', this.workspace.id, 'board']).then()
         })
     }
 

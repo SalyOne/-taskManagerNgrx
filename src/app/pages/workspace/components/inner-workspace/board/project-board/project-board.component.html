@@ -1,7 +1,7 @@
 
 
 <div>
-    <button mat-raised-button color="primary" [routerLink]="['/board/add']">Add Board</button>
+    <button mat-raised-button color="primary" [routerLink]="['add']">Add Board</button>
   </div>
 
 
@@ -30,7 +30,7 @@
       <ng-container matColumnDef="actions">
         <th mat-header-cell *matHeaderCellDef>  </th>
         <td mat-cell *matCellDef="let element">
-            <button mat-raised-button color="primary" [routerLink]="['/board/edit', element.id]">Edit</button>
+            <button mat-raised-button color="primary" [routerLink]="['edit', element.id]">Edit</button>
             <button mat-raised-button color="warn" (click)="deleteBoard(element.id)">Delete</button>
 
         </td>

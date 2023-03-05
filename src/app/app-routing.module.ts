@@ -40,10 +40,10 @@ const routes: Routes = [
         loadChildren: () => import('./pages/users/users.module').then(m => m.UsersModule)
       },
       //es yoveltvis boloshi unda eweros
-      { path: '**',
-        pathMatch:"full",
-        component: PagenotfoundComponent
-      },
+      // { path: '**',
+      //   pathMatch:"full",
+      //   component: PagenotfoundComponent
+      // },
     ]
   },
 ];
