@@ -33,7 +33,7 @@ export class HomeComponent implements OnDestroy{
     return this.workspaceService.getAllWorkspacesForUser()
       .pipe(takeUntil(this.sub$))
       .subscribe(res =>{
-        console.log(res)
+        // console.log(res)
         this.loading = false
         this.getWorkspacesForMyUser = res
     })
@@ -45,7 +45,7 @@ export class HomeComponent implements OnDestroy{
   deleteProject(id?: number) {
     return this.workspaceService.deleteProject(String(id))
       .pipe(takeUntil(this.sub$)).subscribe(res=>{
-        console.log(res)
+        // console.log(res)
        this.getAllWorkspacesForUser()
       })
   }

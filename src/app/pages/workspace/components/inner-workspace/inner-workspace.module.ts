@@ -19,15 +19,22 @@ import {MatPaginatorModule} from "@angular/material/paginator";
 import {MatProgressBarModule} from "@angular/material/progress-bar";
 import {MatStepperModule} from "@angular/material/stepper";
 import {MatSidenavModule} from "@angular/material/sidenav";
-import {AppRoutingModule} from "../../../../app-routing.module";
-import {InnerWorkspaceComponent} from "./inner-workspace.component";
-import { IssueTypesAddEditComponent } from './issue-types/issue-types-add-edit/issue-types-add-edit.component';
+import {InnerWorkspaceComponent} from "./inner-workspace.component";import { IssueTypesComponent } from './issue-types/issue-types.component';
+import {IssueTypesAddEditComponent} from "./issue-types/issue-types-add-edit/issue-types-add-edit.component";
+import {BoardAddEditComponent} from "./board/board-add-edit/board-add-edit.component";
+import {ProjectBoardComponent} from "./board/project-board/project-board.component";
+import {InfoComponent} from "./info/info.component";
+import {MatCheckboxModule} from "@angular/material/checkbox";
 
 
 @NgModule({
   declarations: [
     InnerWorkspaceComponent,
-    IssueTypesAddEditComponent
+    BoardAddEditComponent,
+    ProjectBoardComponent,
+    InfoComponent,
+    IssueTypesAddEditComponent,
+    IssueTypesComponent
   ],
   imports: [
     CommonModule,
@@ -51,6 +58,7 @@ import { IssueTypesAddEditComponent } from './issue-types/issue-types-add-edit/i
     MatProgressBarModule,
     MatStepperModule,
     MatSidenavModule,
+    MatCheckboxModule,
   ],
   exports:[
     InnerWorkspaceComponent

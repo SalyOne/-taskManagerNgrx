@@ -1,3 +1,4 @@
+import {EIssueTypes} from "../enums/issue-type";
 
 export interface IIssueType {
   id: number;
@@ -6,7 +7,7 @@ export interface IIssueType {
   icon: string;
   color: string;
   isActive: boolean;
-  type: string;
+  type: EIssueTypes;
   issueTypeColumns: IssueTypeColumn[];
   createdAt: Date;
   updatedAt: Date;
