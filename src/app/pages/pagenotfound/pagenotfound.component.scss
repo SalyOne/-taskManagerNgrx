@@ -1,0 +1,11 @@
+
+@import 'src/styles/partials/buttons';
+@import 'src/styles/partials/common';
+@import 'src/styles/globals/variables';
+.svg-container{
+  width: 100%;
+  height: calc(100% - #{$header-height});
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

@@ -9,6 +9,11 @@ import {PagenotfoundComponent} from "./pages/pagenotfound/pagenotfound.component
 
 const routes: Routes = [
   {
+    path: 'auth',
+    canActivate: [LoginGuard],
+    loadChildren: () => import('./pages/Auth/auth.module').then(m => m.AuthModule)
+  },
+  {
     path: '',
     component: MainLayoutComponent,
     children: [
@@ -34,16 +39,13 @@ const routes: Routes = [
         canActivate: [AuthGuard],
         loadChildren: () => import('./pages/users/users.module').then(m => m.UsersModule)
       },
-      // //es yoveltvis boloshi unda eweros
-      // { path: '**', pathMatch: 'full',
-      //   component: PagenotfoundComponent },
+      //es yoveltvis boloshi unda eweros
+      { path: '**',
+        pathMatch:"full",
+        component: PagenotfoundComponent
+      },
     ]
   },
-  {
-    path: 'auth',
-    canActivate: [LoginGuard],
-    loadChildren: () => import('./pages/Auth/auth.module').then(m => m.AuthModule)
-  }
 ];
 
 @NgModule({

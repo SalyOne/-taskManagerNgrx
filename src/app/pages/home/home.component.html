@@ -63,7 +63,7 @@
 
       <div class="button-container message" *ngIf="getWorkspacesForMyUser.length == 0">
         <p> there are no workspaces </p>
-        <button mat-stroked-button color="primary" routerLink="/work/inner/add"> add Workspace</button>
+        <button mat-stroked-button color="primary" routerLink="/work/add"> add Workspace</button>
       </div>
       <div class="each-workspace" *ngFor="let eachWork of getWorkspacesForMyUser">
         <div class="workspace-title-row">
