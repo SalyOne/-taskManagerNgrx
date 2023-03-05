@@ -56,7 +56,7 @@ export class InfoComponent implements OnDestroy, OnInit{
   ngOnInit(): void {
     this.route.params.subscribe(params =>{
       this.workspaceId = params['id']
-      console.log("in info page: ", params)
+      // console.log("in info page: ", params)
       this.getOneProject(this.workspaceId)
     })
 
@@ -70,7 +70,7 @@ export class InfoComponent implements OnDestroy, OnInit{
         takeUntil(this.sub$)
       )
       .subscribe(res =>{
-        console.log(res)
+        // console.log(res)
         this.loading = false
         this.workspace = res
         // console.log("localstorage", id)

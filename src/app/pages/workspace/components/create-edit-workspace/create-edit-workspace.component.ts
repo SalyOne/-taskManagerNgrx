@@ -53,7 +53,7 @@ export class CreateEditWorkspaceComponent implements OnDestroy , OnInit{
   isEditable: boolean = false;
   submit(){
 
-    console.log("test test")
+    // console.log("test test")
     this.form.markAllAsTouched();
     if(this.form.invalid) return;
 
@@ -82,11 +82,11 @@ export class CreateEditWorkspaceComponent implements OnDestroy , OnInit{
               if (this.errorMsg){
                 this.errorMsg = ""
               }
-              console.log("ress: ", res)
+              // console.log("ress: ", res)
               this.ProjectID = res.id
               this.router.navigate(['/home'])
 
-              console.log(this.ProjectID)
+              // console.log(this.ProjectID)
             },
             error: err=>{
               this.errorMsg = err.error.message;

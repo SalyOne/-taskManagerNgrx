@@ -4,6 +4,8 @@ import {InfoComponent} from "./info/info.component";
 import {InnerWorkspaceComponent} from "./inner-workspace.component";
 import {ProjectBoardComponent} from "./board/project-board/project-board.component";
 import {BoardAddEditComponent} from "./board/board-add-edit/board-add-edit.component";
+import {IssueTypesComponent} from "./issue-types/issue-types.component";
+import {IssueTypesAddEditComponent} from "./issue-types/issue-types-add-edit/issue-types-add-edit.component";
 
 const routes: Routes = [
   {
@@ -28,6 +30,24 @@ const routes: Routes = [
           {
             path:'edit/:id',
             component: BoardAddEditComponent
+          },
+
+        ]
+      },
+      {
+        path: 'types',
+        children: [
+          {
+            path: '',
+            component: IssueTypesComponent
+          },
+          {
+            path: 'add',
+            component: IssueTypesAddEditComponent
+          },
+          {
+            path:'edit/:id',
+            component: IssueTypesAddEditComponent
           },
 
         ]

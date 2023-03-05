@@ -50,18 +50,18 @@ export class InnerWorkspaceComponent implements  OnInit{
   dataSource = ELEMENT_DATA;
 
   selectProject(projectId: any) {
-    console.log("in selectProject: " , projectId)
+    // console.log("in selectProject: " , projectId)
     this.projectFacade.setProject(projectId)
   }
 
   ngOnInit(): void {
-    console.log("facade :", this.projectFacade.getProject())
+    // console.log("facade :", this.projectFacade.getProject())
     this.workspace = this.projectFacade.getProject()
 
 
     this.route.params.subscribe(params =>{
       // this.workspaceId = params['id']
-      console.log("in facade page: ", params);
+      // console.log("in facade page: ", params);
       this.getOneProject(params['id']);
       // this.getOneProject(this.workspaceId)
     })

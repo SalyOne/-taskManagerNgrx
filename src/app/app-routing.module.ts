@@ -3,7 +3,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { MainLayoutComponent } from './features/main-layout/main-layout.component';
 import { AuthGuard } from './core/guards/auth.guard';
 import { LoginGuard } from './core/guards/login.guard';
-import { HomeComponent } from './pages/home/home.component';
 import {PagenotfoundComponent} from "./pages/pagenotfound/pagenotfound.component";
 
 
@@ -22,7 +21,6 @@ const routes: Routes = [
         path: '',
         redirectTo: 'home',
         pathMatch: 'full'
-
       },
       {
         path: 'work',

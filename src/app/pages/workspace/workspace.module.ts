@@ -21,11 +21,6 @@ import { WorkspaceListComponent } from './components/workspace-list/workspace-li
 import {MatProgressBarModule} from "@angular/material/progress-bar";
 import {MatStepperModule} from '@angular/material/stepper';
 import {MatSidenavModule} from "@angular/material/sidenav";
-import { IssueTypesComponent } from './components/inner-workspace/issue-types/issue-types/issue-types.component';
-import { BoardAddEditComponent } from './components/inner-workspace/board/board-add-edit/board-add-edit.component';
-import { ProjectBoardComponent } from './components/inner-workspace/board/project-board/project-board.component';
-import { InfoComponent } from './components/inner-workspace/info/info.component';
-import {InnerWorkspaceModule} from "./components/inner-workspace/inner-workspace.module";
 
 
 
@@ -34,10 +29,7 @@ import {InnerWorkspaceModule} from "./components/inner-workspace/inner-workspace
   declarations: [
     CreateEditWorkspaceComponent,
     WorkspaceListComponent,
-    IssueTypesComponent,
-    BoardAddEditComponent,
-    ProjectBoardComponent,
-    InfoComponent
+
 
   ],
   imports: [
