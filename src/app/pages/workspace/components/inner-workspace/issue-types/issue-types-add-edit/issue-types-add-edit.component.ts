@@ -15,7 +15,7 @@ import {DeletePopupComponent} from "../../../../../../shared/popups/delete-popup
 export class IssueTypesAddEditComponent  implements OnDestroy, OnInit{
 
   pageTitle: string =  "IssueType";
-  editId?:number;
+  editId!:string;
   sub$ = new Subject();
   form: FormGroup =  new FormGroup({
     id: new FormControl(null),
@@ -31,12 +31,19 @@ export class IssueTypesAddEditComponent  implements OnDestroy, OnInit{
   errorMsg?: string;
   constructor(
     private issueService: IssueTypesService,
-    private router: ActivatedRoute,
+    private route: ActivatedRoute,
+    private router: Router,
     private dialog: MatDialog
   ) {
   }
   ngOnInit(): void {
 
+    this.route.params.subscribe(params => {
+      if (params['id']) {
+        this.editId = params['id'];
+        // this.getBoard()
+      }
+    })
   }
   get issueFormArray(){
     return this.form.get("issueTypeColumns") as FormArray;
@@ -53,12 +60,26 @@ export class IssueTypesAddEditComponent  implements OnDestroy, OnInit{
     console.log("in issue submit")
     if (this.form.invalid) return;
     if(this.editId){
+      this.issueService.editIssueType(this.editId, this.form.value)
+        .pipe(takeUntil(this.sub$))
+        .subscribe({
+            next: res =>{
+              if (this.errorMsg){
+                this.errorMsg = ""
+              }
+              console.log("responce: ", res)
+              // this.router.navigate(['/home'])
+            },
+            error: err=>{
+              this.errorMsg = err.error.message;
+            }
+          }
+        )
 
     }else {
       this.issueService.addIssueType(this.form.value)
         .pipe(takeUntil(this.sub$))
-        .subscribe(
-          {
+        .subscribe({
             next: res =>{
               if (this.errorMsg){
                 this.errorMsg = ""

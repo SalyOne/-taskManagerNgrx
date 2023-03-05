@@ -12,4 +12,8 @@ export class IssueTypesService  extends BaseService{
   addIssueType(param: IIssueType):Observable<IIssueType>{
     return this.post<IIssueType>('issue-type', param)
   }
+
+  editIssueType(id:string, editedProject:IIssueType):Observable<IIssueType>{
+    return  this.put<IIssueType>(`issue-type/${id}`, editedProject);
+  }
 }
