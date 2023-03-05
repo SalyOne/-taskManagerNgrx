@@ -4,6 +4,7 @@ import { MainLayoutComponent } from './features/main-layout/main-layout.componen
 import { AuthGuard } from './core/guards/auth.guard';
 import { LoginGuard } from './core/guards/login.guard';
 import { HomeComponent } from './pages/home/home.component';
+import {PagenotfoundComponent} from "./pages/pagenotfound/pagenotfound.component";
 
 
 const routes: Routes = [
@@ -32,7 +33,10 @@ const routes: Routes = [
         path: 'users',
         canActivate: [AuthGuard],
         loadChildren: () => import('./pages/users/users.module').then(m => m.UsersModule)
-      }
+      },
+      // //es yoveltvis boloshi unda eweros
+      // { path: '**', pathMatch: 'full',
+      //   component: PagenotfoundComponent },
     ]
   },
   {

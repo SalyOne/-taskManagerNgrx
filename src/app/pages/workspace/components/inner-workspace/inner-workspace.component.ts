@@ -3,6 +3,9 @@ import {IWorkspace} from "../../../../core/interfaces";
 import {WorkspaceService} from "../../../../core/services";
 import {ActivatedRoute, Router} from "@angular/router";
 import {ProjectFacade} from "../../../../facades/project.facade";
+import {Subject} from "rxjs";
+import {ThemePalette} from "@angular/material/core";
+import {ProgressSpinnerMode} from "@angular/material/progress-spinner";
 
 export interface PeriodicElement {
   name: string;
@@ -29,13 +32,16 @@ const ELEMENT_DATA: PeriodicElement[] = [
 })
 
 export class InnerWorkspaceComponent implements  OnInit{
-  workspace!:IWorkspace
+  workspace!:IWorkspace;
+  loading: boolean = true;
+  color: ThemePalette = 'primary';
+  mode: ProgressSpinnerMode = 'indeterminate';
+  sub$ = new Subject();
 
   constructor(
     private projectFacade : ProjectFacade,
     private workspaceService: WorkspaceService,
     private route : ActivatedRoute,
-    private router:Router,
   ) {
 
   }
@@ -55,8 +61,8 @@ export class InnerWorkspaceComponent implements  OnInit{
 
     this.route.params.subscribe(params =>{
       // this.workspaceId = params['id']
-      console.log("in facade page: ", params)
-      this.getOneProject(params['id'])
+      console.log("in facade page: ", params);
+      this.getOneProject(params['id']);
       // this.getOneProject(this.workspaceId)
     })
   }
@@ -64,8 +70,10 @@ export class InnerWorkspaceComponent implements  OnInit{
   getOneProject(id: any){
     return this.workspaceService.getOneProject(id)
       .subscribe(res =>{
-        this.workspace = res
-        this.selectProject(res)
+        this.loading  = true;
+        this.workspace = res;
+        this.loading = false;
+        this.selectProject(res);
         // console.log("localstorage", id)
       })
   }

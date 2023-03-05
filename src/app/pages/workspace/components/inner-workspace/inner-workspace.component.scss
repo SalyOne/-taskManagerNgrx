@@ -102,4 +102,10 @@
   }
 }
 
+.loader-container{
+  height: calc(100% - #{$header-height});
+  width: 100%;
+  margin: 0;
+}
+
 

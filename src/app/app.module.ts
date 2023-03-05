@@ -26,6 +26,7 @@ import {MatCardModule} from "@angular/material/card";
 import {MatGridListModule} from "@angular/material/grid-list";
 import {MatInputModule} from "@angular/material/input";
 import {MatDividerModule} from "@angular/material/divider";
+import { PagenotfoundComponent } from './pages/pagenotfound/pagenotfound.component';
 
 
 
@@ -37,7 +38,8 @@ import {MatDividerModule} from "@angular/material/divider";
     AppComponent,
     UsersComponent,
     UsersListComponent,
-    AddOrEditUsersComponent
+    AddOrEditUsersComponent,
+    PagenotfoundComponent
  ],
   imports: [
     BrowserModule,

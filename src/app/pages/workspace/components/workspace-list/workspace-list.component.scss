@@ -1,4 +1,9 @@
-@import "./src/styles/globals/variables";
+
+
+@import 'src/styles/partials/buttons';
+@import 'src/styles/partials/common';
+@import 'src/styles/globals/variables';
+
 .form-container {
   display: flex;
   justify-content: center;
@@ -27,8 +32,15 @@
 .title-row{
   border-bottom: 1px solid $main-1;
   box-shadow: 0 4px 5px -5px rgba($main-1, 0.3);
+  color:$main-1;
   margin-bottom: 40px;
   margin-top: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  button{
+    color:$main-1;
+  }
 }
 
 .color-square{

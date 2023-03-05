@@ -14,9 +14,15 @@
 <!--        <img src="../../../../../assets/Logo/Logo.png" alt="Main Logo">-->
 <!--      </div>-->
       <span class="example-spacer"></span>
-      <button mat-icon-button (click)="toggleMenu()" class="example-icon" aria-label="Example icon-button with menu icon">
-        <mat-icon>menu</mat-icon>
-      </button>
+      <div class="header-right-side">
+        <button mat-button routerLink="/work/add" class="example-icon" aria-label="Example icon-button with menu icon">
+          <mat-icon>add</mat-icon> add Workspace
+        </button>
+
+        <button mat-icon-button (click)="toggleMenu()" class="example-icon" aria-label="Example icon-button with menu icon">
+          <mat-icon>menu</mat-icon>
+        </button>
+      </div>
     </mat-toolbar-row>
   </mat-toolbar>
 

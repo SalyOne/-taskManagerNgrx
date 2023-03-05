@@ -1,5 +1,15 @@
+<ng-container *ngIf="loading; else loaded">
+  <div class="loader-container">
+    <mat-progress-spinner
+      [color]="color"
+      [mode]="mode">
+    </mat-progress-spinner>
+  </div>
+</ng-container>
+<ng-template #loaded>
 <mat-sidenav-container #innerSidenav class="sidenav" >
   <mat-sidenav mode="side" #innerToggable class="start-content" opened="true" position="start">
+
     <div class="sidebar-container">
       <div class="sidebar-header">
         <h2 class="title">{{ workspace?.name}}</h2>
@@ -17,6 +27,7 @@
     <router-outlet ></router-outlet>
   </mat-sidenav-content>
 </mat-sidenav-container>
+</ng-template>
 
 
 
