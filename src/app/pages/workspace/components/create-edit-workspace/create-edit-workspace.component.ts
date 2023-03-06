@@ -68,7 +68,7 @@ export class CreateEditWorkspaceComponent implements OnDestroy , OnInit{
               this.errorMsg = ""
             }
             // console.log("ress: ", res)
-            this.router.navigate(['/home'])
+            this.router.navigate(['/work/list'])
           },
           error: err=>{
             this.errorMsg = err.error.message;

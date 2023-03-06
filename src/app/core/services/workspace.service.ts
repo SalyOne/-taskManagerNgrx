@@ -23,11 +23,7 @@ export class WorkspaceService extends BaseService{
     return  this.get<IWorkspace>(`project/${id}`);
   }
   // get projects by specific parameters
-  getProjectsByParams(params:{
-    page?:number,
-    limit?:number,
-    totalCount?:number,
-  }):Observable<IQueryTable<IWorkspace>>{
+  getProjectsByParams(params:{}):Observable<IQueryTable<IWorkspace>>{
     return  this.get<IQueryTable<IWorkspace>>(`project`, params);
   }
 

@@ -25,7 +25,7 @@ export class WorkspaceListComponent implements OnDestroy,AfterViewInit, OnInit{
   isLoading = false;
 
   totalData?: number;
-  pageSizes = [3, 5, 7];
+  pageSizes = [5,10,20];
   dataSource = new MatTableDataSource<IWorkspace>();
 
   @ViewChild('paginator') paginator!: MatPaginator;
@@ -99,8 +99,6 @@ export class WorkspaceListComponent implements OnDestroy,AfterViewInit, OnInit{
     // this.getWorkspaces()
     // this.getProjectsByParams(6,1)
   }
-
-
 
   deleteProject(id?: number):void {
     this.openDialog().afterClosed().subscribe(res=>{
