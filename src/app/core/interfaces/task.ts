@@ -31,4 +31,14 @@ export interface ITask {
   createdAt: Date;
   updatedAt: Date;
   deletedAt: Date;
+  taskProperty: ITaskProperty[];
 }
+
+export interface ITaskProperty {
+  id: number;
+  name: string;
+  filedName: string;
+  value: string;
+  isRequired: boolean;
+}
+

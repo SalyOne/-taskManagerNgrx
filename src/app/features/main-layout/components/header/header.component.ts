@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import {AuthService, SidenavService} from 'src/app/core/services';
+import { BoardService } from 'src/app/core/services/board.service';
 
 @Component({
   selector: 'app-header',
@@ -10,7 +11,8 @@ export class HeaderComponent {
 
   constructor(
     private authService: AuthService,
-    private sidenavService : SidenavService
+    private sidenavService : SidenavService,
+    private boardService: BoardService
   ){}
 
   signOut(){
@@ -19,4 +21,5 @@ export class HeaderComponent {
   toggleMenu(){
     this.sidenavService.toggleNav()
   }
+  boards$ = this.boardService.getBoards()
 }

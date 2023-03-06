@@ -23,6 +23,10 @@ const routes: Routes = [
         pathMatch: 'full'
       },
       {
+        path: 'dashboard',
+        loadChildren: () => import('./pages/dashboard/dashboard/dashboard.module').then(m => m.DashboardModule)
+      },
+      {
         path: 'work',
         canActivate: [AuthGuard],
         loadChildren: () => import('./pages/workspace/workspace.module').then(m => m.WorkspaceModule)

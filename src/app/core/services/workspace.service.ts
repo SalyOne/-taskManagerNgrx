@@ -42,4 +42,7 @@ export class WorkspaceService extends BaseService{
   addUsersToWorkspace(param: IWorkspace):Observable<IWorkspace>{
     return this.post<IWorkspace>('project', param)
   }
+  getProjectUsers(): Observable<any> {
+    return this.get(`project/users`);
+  }
 }
