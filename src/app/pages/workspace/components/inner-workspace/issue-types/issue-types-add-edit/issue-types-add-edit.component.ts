@@ -6,6 +6,7 @@ import {of, Subject, switchMap, takeUntil} from "rxjs";
 import {ActivatedRoute, Router} from "@angular/router";
 import {MatDialog} from "@angular/material/dialog";
 import {DeletePopupComponent} from "../../../../../../shared/popups/delete-popup/delete-popup.component";
+import {ProjectFacade} from "../../../../../../facades/project.facade";
 
 @Component({
   selector: 'app-issue-types-add-edit',
@@ -16,6 +17,7 @@ export class IssueTypesAddEditComponent  implements OnDestroy, OnInit{
 
   pageTitle: string =  "IssueType";
   editId!:string;
+  projectID?: number
   sub$ = new Subject();
   form: FormGroup =  new FormGroup({
     id: new FormControl(null),
@@ -31,17 +33,18 @@ export class IssueTypesAddEditComponent  implements OnDestroy, OnInit{
   errorMsg?: string;
   constructor(
     private issueService: IssueTypesService,
+    private projectFacade: ProjectFacade,
     private route: ActivatedRoute,
     private router: Router,
     private dialog: MatDialog
   ) {
   }
   ngOnInit(): void {
-
+    this.projectID = this.projectFacade.getProject().id
     this.route.params.subscribe(params => {
       if (params['id']) {
         this.editId = params['id'];
-        // this.getBoard()
+        this.getIssueType()
       }
     })
   }
@@ -50,10 +53,36 @@ export class IssueTypesAddEditComponent  implements OnDestroy, OnInit{
   }
   addColumn(){
     this.issueFormArray.push(new FormGroup({
+      id: new FormControl(null),
       name: new FormControl("", Validators.required),
       filedName: new FormControl("", Validators.required),
       isRequired: new FormControl(false, Validators.required),
     }, Validators.required));
+  }
+  getIssueType(){
+    return this.issueService.getIssueType(this.editId)
+      .pipe(takeUntil(this.sub$))
+      .subscribe(res=>{
+          this.form.patchValue(res)
+          res.issueTypeColumns.forEach(column =>{
+            this.issueFormArray.push(new FormGroup({
+              id: new FormControl(column.id),
+              name: new FormControl(column.name, Validators.required),
+              filedName: new FormControl(column.filedName, Validators.required),
+              isRequired: new FormControl(column.isRequired, Validators.required),
+            }, Validators.required));
+          })
+      })
+  }
+  deleteIssue(i :number) {
+    const  dialogRef = this.dialog.open(DeletePopupComponent);
+    dialogRef.afterClosed()
+      .pipe(takeUntil(this.sub$))
+      .subscribe(res=>{
+        if(res){
+          this.issueFormArray.removeAt(i)
+        }
+      })
   }
   submit() {
     this.form.markAllAsTouched()
@@ -67,8 +96,7 @@ export class IssueTypesAddEditComponent  implements OnDestroy, OnInit{
               if (this.errorMsg){
                 this.errorMsg = ""
               }
-              console.log("responce: ", res)
-              // this.router.navigate(['/home'])
+              this.router.navigate(['work/inner/', this.projectID,'types'])
             },
             error: err=>{
               this.errorMsg = err.error.message;
@@ -84,8 +112,7 @@ export class IssueTypesAddEditComponent  implements OnDestroy, OnInit{
               if (this.errorMsg){
                 this.errorMsg = ""
               }
-              console.log("responce: ", res)
-              // this.router.navigate(['/home'])
+              this.router.navigate(['work/inner/', this.projectID,'types'])
             },
             error: err=>{
               this.errorMsg = err.error.message;
@@ -93,16 +120,6 @@ export class IssueTypesAddEditComponent  implements OnDestroy, OnInit{
           }
         )
     }
-  }
-  deleteIssue(i :number) {
-    const  dialogRef = this.dialog.open(DeletePopupComponent);
-    dialogRef.afterClosed()
-      .pipe(takeUntil(this.sub$))
-      .subscribe(res=>{
-        if(res){
-          this.issueFormArray.removeAt(i)
-        }
-      })
   }
   ngOnDestroy(): void {
     this.sub$.next(null)
