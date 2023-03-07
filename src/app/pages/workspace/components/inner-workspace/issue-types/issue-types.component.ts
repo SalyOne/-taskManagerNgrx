@@ -18,19 +18,18 @@ import {IssueTypesService} from "../../../../../core/services/issue-types.servic
 export class IssueTypesComponent implements OnDestroy,AfterViewInit, OnInit{
 
   displayedColumns: string[] = ['id', 'name','description','icon', 'color','type','isActive','createdAt','updatedAt','actions'];
-  sub$ = new Subject();
+  dataSource = new MatTableDataSource<IIssueType>();
+  @ViewChild('paginator') paginator!: MatPaginator;
 
 
   issueTypes: IIssueType[] = [] // EmpData
-
+  sub$ = new Subject();
   empTable!: IQueryTable<IIssueType>;
   isLoading = false;
 
   totalData?: number;
   pageSizes = [5,10,20];
-  dataSource = new MatTableDataSource<IIssueType>();
 
-  @ViewChild('paginator') paginator!: MatPaginator;
 
   constructor(
     private issueTypesService : IssueTypesService,

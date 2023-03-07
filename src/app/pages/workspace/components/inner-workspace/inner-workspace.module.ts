@@ -25,6 +25,8 @@ import {BoardAddEditComponent} from "./board/board-add-edit/board-add-edit.compo
 import {ProjectBoardComponent} from "./board/project-board/project-board.component";
 import {InfoComponent} from "./info/info.component";
 import {MatCheckboxModule} from "@angular/material/checkbox";
+import { EpicComponent } from './epic/epic.component';
+import { EpicAddEditComponent } from './epic/epic-add-edit/epic-add-edit.component';
 
 
 @NgModule({
@@ -34,7 +36,9 @@ import {MatCheckboxModule} from "@angular/material/checkbox";
     ProjectBoardComponent,
     InfoComponent,
     IssueTypesAddEditComponent,
-    IssueTypesComponent
+    IssueTypesComponent,
+    EpicComponent,
+    EpicAddEditComponent
   ],
   imports: [
     CommonModule,
