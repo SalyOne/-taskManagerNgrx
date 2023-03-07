@@ -65,7 +65,7 @@
         <p> there are no workspaces </p>
         <button mat-stroked-button color="primary" routerLink="/work/add"> add Workspace</button>
       </div>
-      <div class="each-workspace" *ngFor="let eachWork of getWorkspacesForMyUser">
+      <div class="each-workspace" *ngFor="let eachWork of getWorkspacesForMyUser" >
         <div class="workspace-title-row">
           <h3 class="title" [routerLink]="['/work/inner', eachWork.id]">
             <span class="first-letter" style="background: {{ eachWork.color }}">
@@ -85,11 +85,8 @@
               <button mat-stroked-button color="primary"> + add board</button>
             </mat-card-content>
           </mat-card>
-          <mat-card>
-            <mat-card-content>Board Name</mat-card-content>
-          </mat-card>
-          <mat-card>
-            <mat-card-content> Task Managera sdasdaasd asd asa das d</mat-card-content>
+          <mat-card *ngFor="let eachBoard of boards" >
+            <mat-card-content> {{eachBoard.name}}</mat-card-content>
           </mat-card>
         </div>
       </div>
