@@ -1,7 +1,8 @@
-import { Injectable } from '@angular/core';
+
+
+import {Injectable } from '@angular/core';
 import {BaseService} from "./base.service";
 import {Observable} from "rxjs";
-import {IQueryTable} from "../interfaces";
 import {IEpic} from "../interfaces/epic";
 
 @Injectable({
