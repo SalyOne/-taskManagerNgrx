@@ -41,6 +41,11 @@ const routes: Routes = [
         canActivate: [AuthGuard],
         loadChildren: () => import('./pages/users/users.module').then(m => m.UsersModule)
       },
+      {
+        path: 'roles',
+        canActivate: [AuthGuard],
+        loadChildren: () => import('./pages/roles/roles.module').then(m => m.RolesModule)
+      },
       //es yoveltvis boloshi unda eweros
       // { path: '**',
       //   pathMatch:"full",
