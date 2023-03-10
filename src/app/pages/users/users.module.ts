@@ -7,11 +7,16 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {MatInputModule} from "@angular/material/input";
 import {HttpClientModule} from "@angular/common/http";
 import {MatButtonModule} from "@angular/material/button";
+import { AddRoleComponent } from './components/add-role/add-role.component';
+import {MatDialogModule} from "@angular/material/dialog";
+import {MatCardModule} from "@angular/material/card";
 
 
 @NgModule({
   declarations: [
 
+
+    AddRoleComponent
   ],
   imports: [
     CommonModule,
@@ -23,6 +28,8 @@ import {MatButtonModule} from "@angular/material/button";
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    MatDialogModule,
+    MatCardModule,
 
   ],
 })
