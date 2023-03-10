@@ -1,32 +1,32 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {Observable, of, Subject, switchMap, takeUntil} from "rxjs";
-import {WorkspaceService} from "../../../../core/services/workspace.service";
-import {ActivatedRoute, Router, RouterModule} from "@angular/router";
-import {IWorkspace} from "../../../../core/interfaces";
+import {WorkspaceService} from "../../../core/services";
+import {ActivatedRoute, Router} from "@angular/router";
 import {CookieService} from "ngx-cookie-service";
+import {IRoles} from "../../../core/interfaces/roles";
+import {RoleService} from "../../../core/services/role.service";
 
 @Component({
-  selector: 'app-create-workspace',
-  templateUrl: './create-edit-workspace.component.html',
-  styleUrls: ['./create-edit-workspace.component.scss']
+  selector: 'app-role-add-edit',
+  templateUrl: './role-add-edit.component.html',
+  styleUrls: ['./role-add-edit.component.scss']
 })
-export class CreateEditWorkspaceComponent implements OnDestroy , OnInit{
+export class RoleAddEditComponent implements OnDestroy , OnInit{
   form: FormGroup = new FormGroup({
-    id: new FormControl(null),
-      name : new FormControl('', [Validators.required]),
-      abbreviation : new FormControl('', [Validators.required]),
-      description : new FormControl('',[Validators.required]),
-      color : new FormControl('',[Validators.required]),
+      id: new FormControl(null),
+      name : new FormControl('', [Validators.required])
     }
   );
   sub$ = new Subject();
   errorMsg? : string
-  pageTitle:string = "create workspace"
+  pageTitle:string = "Create Role"
+  roleId?:string;
+  isEditable: boolean = false;
 
-  projects$: Observable<IWorkspace[]> = this.workspaceService.getAllWorkspacesForUser()
+  roles$: Observable<IRoles[]> = this.roleService.getAllRoless()
   constructor(
-    private workspaceService:WorkspaceService,
+    private roleService:RoleService,
     private router: Router,
     private route: ActivatedRoute,
     private CS:CookieService
@@ -37,8 +37,8 @@ export class CreateEditWorkspaceComponent implements OnDestroy , OnInit{
     this.route.params.pipe(
       switchMap((params: any) => {
         if (params['id']) {
-          this.pageTitle = "edit workspace"
-          return this.workspaceService.getOneProject(params['id'])
+          this.pageTitle = "Edit Role"
+          return this.roleService.getRole(params['id'])
         }
         return of(null)
       })
@@ -49,8 +49,6 @@ export class CreateEditWorkspaceComponent implements OnDestroy , OnInit{
     })
 
   }
-  ProjectID?:number;
-  isEditable: boolean = false;
   submit(){
 
     // console.log("test test")
@@ -60,7 +58,7 @@ export class CreateEditWorkspaceComponent implements OnDestroy , OnInit{
     // console.log(this.form.value)
 
     if(this.form.value.id){
-      this.workspaceService.editOneProject(this.form.value.id ,this.form.value)
+      this.roleService.editRoles(this.form.value.id ,this.form.value)
         .pipe(takeUntil(this.sub$))
         .subscribe({
           next: res =>{
@@ -68,14 +66,14 @@ export class CreateEditWorkspaceComponent implements OnDestroy , OnInit{
               this.errorMsg = ""
             }
             // console.log("ress: ", res)
-            this.router.navigate(['/work/inner', this.form.value.id])
+            this.router.navigate(['/roles/permissions/', this.form.value.id])
           },
           error: err=>{
             this.errorMsg = err.error.message;
           }
         })
     }else{
-      this.workspaceService.addWorkspace(this.form.value)
+      this.roleService.addRoles(this.form.value)
         .pipe(takeUntil(this.sub$))
         .subscribe({
             next: res =>{
@@ -83,10 +81,10 @@ export class CreateEditWorkspaceComponent implements OnDestroy , OnInit{
                 this.errorMsg = ""
               }
               // console.log("ress: ", res)
-              this.ProjectID = res.id
-              this.router.navigate(['/work/inner', res.id])
+              this.roleId = res.id
+              this.router.navigate(['/roles/permissions/', res.id])
 
-              // console.log(this.ProjectID)
+              // console.log(this.roleId)
             },
             error: err=>{
               this.errorMsg = err.error.message;

@@ -9,12 +9,17 @@ import {MatProgressBarModule} from "@angular/material/progress-bar";
 import {MatPaginatorModule} from "@angular/material/paginator";
 import {MatButtonModule} from "@angular/material/button";
 import { PermissionsAddEditComponent } from './permissions-add-edit/permissions-add-edit.component';
+import { RoleAddEditComponent } from './role-add-edit/role-add-edit.component';
+import {ReactiveFormsModule} from "@angular/forms";
+import {MatFormFieldModule} from "@angular/material/form-field";
+import {MatInputModule} from "@angular/material/input";
 
 
 @NgModule({
   declarations: [
     RolesComponent,
-    PermissionsAddEditComponent
+    PermissionsAddEditComponent,
+    RoleAddEditComponent
   ],
   imports: [
     CommonModule,
@@ -23,7 +28,10 @@ import { PermissionsAddEditComponent } from './permissions-add-edit/permissions-
     MatIconModule,
     MatProgressBarModule,
     MatPaginatorModule,
-    MatButtonModule
+    MatButtonModule,
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatInputModule
   ]
 })
 export class RolesModule { }
