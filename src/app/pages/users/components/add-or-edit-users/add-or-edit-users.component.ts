@@ -1,9 +1,9 @@
-import {Component} from '@angular/core';
+import {Component, Inject, Input} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import { Subject} from "rxjs";
 import { User} from "../../../../core/interfaces";
 import {UsersService} from "../../../../core/services/users.service";
-import { MatDialogRef} from "@angular/material/dialog";
+import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 
 @Component({
   selector: 'app-add-or-edit-users',
@@ -11,6 +11,7 @@ import { MatDialogRef} from "@angular/material/dialog";
   styleUrls: ['./add-or-edit-users.component.scss']
 })
 export class AddOrEditUsersComponent {
+  @Input() id?: string
   users!: User
   form: FormGroup = new FormGroup({
     id: new FormControl(null),
@@ -27,15 +28,20 @@ export class AddOrEditUsersComponent {
   constructor(
     private usersService: UsersService,
     public dialogRef: MatDialogRef<AddOrEditUsersComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any
 
   ) {
   }
 
   ngOnInit(): void {
+    if (this.data.userId) {
+      this.usersService.getUser(this.data.userId)
+        .subscribe((res) => {
+          this.form.patchValue(res);
+        })
+    }
   }
-
-
-  submit() {
+  Submit() {
     this.form.markAllAsTouched()
     if (this.form.invalid) {
       return
@@ -44,10 +50,9 @@ export class AddOrEditUsersComponent {
     this.usersService.create(this.form.value)
       .subscribe((res) => {
         this.dialogRef.close(res);
-        this.usersService.getUsers()
       })
-
   }
+
 
   ngOnDestroy(): void {
     this.sub$.next(null);

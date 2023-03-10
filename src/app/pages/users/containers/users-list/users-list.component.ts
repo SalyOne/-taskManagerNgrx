@@ -8,6 +8,9 @@ import {MatPaginator} from "@angular/material/paginator";
 import {ActivatedRoute, Router} from "@angular/router";
 import {DeletePopupComponent} from "../../../../shared/popups/delete-popup/delete-popup.component";
 import {AddOrEditUsersComponent} from "../../components/add-or-edit-users/add-or-edit-users.component";
+import {AddRoleComponent} from "../../components/add-role/add-role.component";
+import {IRoles} from "../../../../core/interfaces/roles";
+
 
 
 @Component({
@@ -56,13 +59,31 @@ export class UsersListComponent implements OnInit {
 
   }
 
-  addUser() {
+  addUser(id?: number) {
 
-    const dialogRef = this.dialog.open(AddOrEditUsersComponent);
+    const dialogRef = this.dialog.open(AddOrEditUsersComponent, {
+      data: {
+        userId: id
+      }
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.getUser();
+      }
+    })
+  }
+  addRole(user: User) {
+    const dialogRef = this.dialog.open(AddRoleComponent, {
+      data: {
+        user: user,
+      }
+    });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
-    });
+      if (result) {
+        this.getUser();
+      }
+    })
   }
 
 

@@ -16,7 +16,9 @@ export class RoleService  extends BaseService{
   editRoles(id:string, editedProject:IRoles):Observable<IRoles>{
     return  this.put<IRoles>(`role/${id}`, editedProject);
   }
-
+  getAllRoles(): Observable<IRoles[]> {
+    return this.get('role/all');
+  }
   getAllRoless() :Observable<IRoles[]>{
     return this.get<IRoles[]>(`role`)
   }
