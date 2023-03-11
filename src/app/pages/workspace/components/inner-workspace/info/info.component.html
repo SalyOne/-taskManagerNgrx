@@ -23,11 +23,11 @@
       </div>
 
       <mat-tab-group animationDuration="0ms">
-        <mat-tab label="Boards">
+        <mat-tab label="Dashboards">
           <ng-template matTabContent>
 
             <div class="workspace-content-row">
-              <mat-card class="boardNameCard" *ngFor="let board of boards$ |async">
+              <mat-card class="boardNameCard" *ngFor="let board of boards$ | async">
                 <mat-card-content [routerLink]="['/dashboard', board.id]">
                     {{board.name}}
                 </mat-card-content>

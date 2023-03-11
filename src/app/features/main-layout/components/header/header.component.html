@@ -11,9 +11,7 @@
     <mat-toolbar-row>
       <span class="logo" routerLink="/home">My App</span>
       
-      <div *ngFor="let board of boards$ |async">
-      <span class="logo"  [routerLink]="['dashboard', board.id]">Dashboard</span>
-      </div>
+ 
 <!--      <div class="img-container">-->
 <!--        <img src="../../../../../assets/Logo/Logo.png" alt="Main Logo">-->
 <!--      </div>-->

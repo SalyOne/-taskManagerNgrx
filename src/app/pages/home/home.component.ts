@@ -4,6 +4,7 @@ import {IWorkspace} from "../../core/interfaces";
 import {WorkspaceService} from "../../core/services/workspace.service";
 import {ThemePalette} from "@angular/material/core";
 import {ProgressSpinnerMode} from "@angular/material/progress-spinner";
+import { BoardService } from 'src/app/core/services/board.service';
 
 @Component({
   selector: 'app-home',
@@ -21,12 +22,17 @@ export class HomeComponent implements OnDestroy{
   loading: Boolean = false;
   color: ThemePalette = 'primary';
   mode: ProgressSpinnerMode = 'indeterminate';
+
+  
   constructor(
-    private workspaceService:WorkspaceService
+    private workspaceService:WorkspaceService,
+    private boardService:BoardService
     
   ) {
       this.getAllWorkspacesForUser()
   }
+
+  boards$ = this.boardService.getBoards()
 
   getAllWorkspacesForUser(){
     this.loading  = true
