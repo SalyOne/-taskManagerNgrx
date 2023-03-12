@@ -23,6 +23,10 @@ const routes: Routes = [
         pathMatch: 'full'
       },
       {
+        path: 'dashboard',
+        loadChildren: () => import('./pages/dashboard/dashboard/dashboard.module').then(m => m.DashboardModule)
+      },
+      {
         path: 'work',
         canActivate: [AuthGuard],
         loadChildren: () => import('./pages/workspace/workspace.module').then(m => m.WorkspaceModule)
@@ -36,6 +40,11 @@ const routes: Routes = [
         path: 'users',
         canActivate: [AuthGuard],
         loadChildren: () => import('./pages/users/users.module').then(m => m.UsersModule)
+      },
+      {
+        path: 'roles',
+        canActivate: [AuthGuard],
+        loadChildren: () => import('./pages/roles/roles.module').then(m => m.RolesModule)
       },
       //es yoveltvis boloshi unda eweros
       // { path: '**',

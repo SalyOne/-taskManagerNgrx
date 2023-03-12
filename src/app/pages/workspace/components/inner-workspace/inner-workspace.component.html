@@ -8,7 +8,7 @@
 </ng-container>
 <ng-template #loaded>
 <mat-sidenav-container #innerSidenav class="sidenav" >
-  <mat-sidenav mode="side" #innerToggable class="start-content" opened="true" position="start">
+  <mat-sidenav mode="side"  class="start-content" opened="true" position="start">
 
     <div class="sidebar-container">
       <div class="sidebar-header">
@@ -18,12 +18,13 @@
         <li routerLinkActive="active" [routerLinkActiveOptions]={exact:true} [routerLink]="['/work/inner', workspace.id]"><span>project</span></li>
         <li routerLinkActive="active" [routerLink]="['/work/inner', workspace.id, 'board']"><span >Boards</span></li>
         <li routerLinkActive="active" [routerLink]="['/work/inner', workspace.id, 'types']"><span>Issue Types</span></li>
+        <li routerLinkActive="active" [routerLink]="['/work/inner', workspace.id, 'epics']"><span>epics</span></li>
         <li routerLinkActive="active" [routerLink]="['/work/inner', workspace.id, 'users']"><span >Members</span></li>
       </ul>
     </div>
   </mat-sidenav>
   <mat-sidenav-content class="main-content" >
-    <button mat-button (click)="innerToggable.toggle()"> settings</button>
+    
     <router-outlet ></router-outlet>
   </mat-sidenav-content>
 </mat-sidenav-container>

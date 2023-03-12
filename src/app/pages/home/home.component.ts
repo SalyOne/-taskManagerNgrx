@@ -25,11 +25,13 @@ export class HomeComponent implements OnDestroy{
   mode: ProgressSpinnerMode = 'indeterminate';
   constructor(
     private workspaceService:WorkspaceService,
-    private boardService:BoardService,
+    private boardService:BoardService
 
   ) {
       this.getAllWorkspacesForUser()
   }
+
+  boards$ = this.boardService.getBoards()
 
   getAllWorkspacesForUser(){
     this.loading  = true

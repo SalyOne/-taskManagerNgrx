@@ -21,10 +21,8 @@
                     matInput
                     placeholder="Password"
                     type="password"
-                    minlength="6"
                     name="password"
                     id="password"
-                    email="required"
                     formControlName="password"
                     matInput [type]="hide ? 'password' : 'text'">
                     
@@ -34,9 +32,14 @@
                     </button>
                     
                     <mat-error *ngIf="getPassword?.errors?.['required']">Password is required</mat-error>
-                    <mat-error *ngIf="getPassword?.errors?.['minlength']">Password minlength must be at least 5 characters</mat-error>
-                    <mat-error *ngIf="getPassword?.errors?.['maxlength']">Password minlength must be less than 25 characters</mat-error>
+                    <mat-error *ngIf="getPassword?.errors?.['minlength']">Password minlength must be at least 4 characters</mat-error>
+                    <mat-error *ngIf="getPassword?.errors?.['maxlength']">Password minlength must be less than 15 characters</mat-error>
+                 
                 </mat-form-field>
+
+              <div>
+                <mat-error >{{errorMsg}}</mat-error>
+              </div>
                 
                 
                 <button

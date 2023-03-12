@@ -68,7 +68,7 @@ export class CreateEditWorkspaceComponent implements OnDestroy , OnInit{
               this.errorMsg = ""
             }
             // console.log("ress: ", res)
-            this.router.navigate(['/work/list'])
+            this.router.navigate(['/work/inner', this.form.value.id])
           },
           error: err=>{
             this.errorMsg = err.error.message;
@@ -84,7 +84,7 @@ export class CreateEditWorkspaceComponent implements OnDestroy , OnInit{
               }
               // console.log("ress: ", res)
               this.ProjectID = res.id
-              this.router.navigate(['/home'])
+              this.router.navigate(['/work/inner', res.id])
 
               // console.log(this.ProjectID)
             },

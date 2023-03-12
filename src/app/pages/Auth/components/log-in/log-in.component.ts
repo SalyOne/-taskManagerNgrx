@@ -11,6 +11,7 @@ import { AuthService } from 'src/app/core/services';
 export class LogInComponent implements OnInit {
 
   
+  errorMsg:any
 
   hide = true
   get getEmail(){
@@ -29,7 +30,7 @@ export class LogInComponent implements OnInit {
   form: FormGroup = new FormGroup({
 
     email : new FormControl('', [Validators.required, Validators.email]),
-    password: new FormControl('', [Validators.required, Validators.minLength(5),Validators.maxLength(25)])
+    password: new FormControl('', [Validators.required, Validators.minLength(4),Validators.maxLength(15),])
   })
   
 
@@ -37,11 +38,16 @@ export class LogInComponent implements OnInit {
   ngOnInit(): void {
     
   }
+  
 
   submit(){
 
     this.authService.login(this.form.value).subscribe(res =>{
       this.router.navigate(['/home'])
+    }, (error)=>{
+      this.errorMsg = error
+      console.log(error)
+      
     })
 
   }

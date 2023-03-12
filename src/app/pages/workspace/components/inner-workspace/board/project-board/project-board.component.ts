@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {AfterViewInit, Component, OnDestroy, OnInit, ChangeDetectorRef} from '@angular/core';
 
 import {Observable, of, Subject, switchMap, takeUntil} from "rxjs";
 
@@ -14,7 +14,7 @@ import { DeletePopupComponent } from 'src/app/shared/popups/delete-popup/delete-
   templateUrl: './project-board.component.html',
   styleUrls: ['./project-board.component.scss']
 })
-export class ProjectBoardComponent implements OnInit, OnDestroy {
+export class ProjectBoardComponent implements OnInit, OnDestroy, AfterViewInit {
 
   displayedColumns = ['id', 'name', 'createdAt', 'actions'];
 
@@ -22,9 +22,15 @@ export class ProjectBoardComponent implements OnInit, OnDestroy {
 
   sub$ = new Subject();
 
+  isLoading = false;
+
+  totalData?: number;
+  pageSizes = [5,10,20];
+
   constructor(
     private boardService: BoardService,
     public dialog: MatDialog,
+    private cd: ChangeDetectorRef
   ) {
 
   }
@@ -39,6 +45,7 @@ export class ProjectBoardComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.sub$))
       .subscribe(boards => {
         this.dataSource.data = boards;
+        this.isLoading =false
       });
   }
 
@@ -69,5 +76,18 @@ export class ProjectBoardComponent implements OnInit, OnDestroy {
           this.getBoards();
         }
       });
+
+      
   }
+
+  ngAfterViewInit(): void {
+    this.isLoading = true
+    this.getBoards()
+    this.cd.detectChanges()
+    
+
+    
+    
+  }
+
 }
