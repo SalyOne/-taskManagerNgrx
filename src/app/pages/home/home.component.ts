@@ -6,6 +6,8 @@ import {ThemePalette} from "@angular/material/core";
 import {ProgressSpinnerMode} from "@angular/material/progress-spinner";
 import {IBoard} from "../../core/interfaces/board";
 import {BoardService} from "../../core/services/board.service";
+import {ProjectFacade} from "../../facades/project.facade";
+import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
   selector: 'app-home',
@@ -25,33 +27,25 @@ export class HomeComponent implements OnDestroy{
   mode: ProgressSpinnerMode = 'indeterminate';
   constructor(
     private workspaceService:WorkspaceService,
-    private boardService:BoardService
+    private projectFacade: ProjectFacade,
+    private  router : Router,
 
   ) {
       this.getAllWorkspacesForUser()
   }
 
-  boards$ = this.boardService.getBoards()
-
   getAllWorkspacesForUser(){
     this.loading  = true
-    return this.workspaceService.getAllWorkspacesForUser()
+    return this.workspaceService.getProjectBoards()
       .pipe(takeUntil(this.sub$))
       .subscribe(res =>{
-        console.log("workspaces",res)
+        console.log("workspaces with boards",res)
         this.loading = false
         this.getWorkspacesForMyUser = res
     })
   }
   getFirstLetter(a:string){
     return a.charAt(0)
-  }
-  deleteProject(id?: number) {
-    return this.workspaceService.deleteProject(String(id))
-      .pipe(takeUntil(this.sub$)).subscribe(res=>{
-        // console.log(res)
-       this.getAllWorkspacesForUser()
-      })
   }
 
   ngOnDestroy(): void {
@@ -60,19 +54,15 @@ export class HomeComponent implements OnDestroy{
   }
 
 
-  getBoardsFormWorkspace(id:number){
-    console.log("workspace board",id)
-    this.boardService.getBoardsWithHeader(id).subscribe(res=>{
-      console.log(res)
-      this.boards = res
-    })
-  }
-
-  getBoards() {
-    this.boardService.getBoards()
+  goToDashboard(id: number, workspaceID:any) {
+    let proj
+     this.workspaceService.getOneProject(workspaceID)
       .pipe(takeUntil(this.sub$))
-      .subscribe(boards => {
-        this.boards = boards;
-      });
+      .subscribe(res =>{
+        proj = res
+        console.log("proj", proj)
+        this.projectFacade.setProject(proj)
+        this.router.navigate(['dashboard/', id])
+      } )
   }
 }

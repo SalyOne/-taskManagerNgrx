@@ -80,13 +80,13 @@
           </div>
         </div>
         <div class="workspace-content-row">
-          <mat-card>
-            <mat-card-content>
-              <button mat-stroked-button color="primary"> + add board</button>
+          <mat-card class="button-card">
+            <mat-card-content [routerLink]="['/work/inner', eachWork.id, 'board','add']">
+              + add board
             </mat-card-content>
           </mat-card>
-          <mat-card *ngFor="let eachBoard of boards" >
-            <mat-card-content> {{eachBoard.name}}</mat-card-content>
+          <mat-card *ngFor="let eachBoard of eachWork.boards" >
+            <mat-card-content (click)="goToDashboard(eachBoard.id, eachWork.id)"> {{eachBoard.name}}</mat-card-content>
           </mat-card>
         </div>
       </div>

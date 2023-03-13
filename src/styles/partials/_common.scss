@@ -1,5 +1,5 @@
 @use '../helpers/mixins' as *;
-
+@use "../globals/variables" as *;
 .container-def{
   width: 95%;
   max-width: 1200px;
@@ -35,10 +35,26 @@
   display: flex;
   gap: 15px ;
   margin: 20px 0;
+  overflow-y: auto;
+  padding: 5px 0;
   mat-card{
     display: flex;
     align-items: center;
     justify-content: center;
     width: 15%;
+    min-width: 160px;
+    min-height: 70px;
+  }
+}
+.button-card{
+  background-color: rgba($main-3, 0.1);
+  border: 1px solid rgba($main-2, 0.1);
+  mat-card-content{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: $main-1;
+    cursor: pointer;
   }
 }

@@ -22,6 +22,10 @@ export class WorkspaceService extends BaseService{
   getOneProject(id:any):Observable<IWorkspace>{
     return  this.get<IWorkspace>(`project/${id}`);
   }
+  //getProject with boards
+  getProjectBoards():Observable<IWorkspace[]>{
+    return  this.get<IWorkspace[]>(`project/withBoards`);
+  }
   // get projects by specific parameters
   getProjectsByParams(params:{}):Observable<IQueryTable<IWorkspace>>{
     return  this.get<IQueryTable<IWorkspace>>(`project`, params);
