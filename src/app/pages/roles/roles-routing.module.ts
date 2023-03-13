@@ -10,16 +10,16 @@ const routes: Routes = [
     component:RolesComponent
   },
   {
-    path:"permissions/:roleId",
-    component:PermissionsAddEditComponent
-  },
-  {
     path:"edit/:roleId",
     component:RoleAddEditComponent
   },
   {
     path:"add",
     component:RoleAddEditComponent
+  },
+  {
+    path:"permissions/:roleId",
+    component:PermissionsAddEditComponent
   },
 ];
 

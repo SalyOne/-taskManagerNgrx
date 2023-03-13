@@ -36,9 +36,9 @@ export class RoleAddEditComponent implements OnDestroy , OnInit{
   ngOnInit(): void {
     this.route.params.pipe(
       switchMap((params: any) => {
-        if (params['id']) {
-          this.pageTitle = "Edit Role"
-          return this.roleService.getRole(params['id'])
+        if (params['roleId']) {
+          this.pageTitle = "edit workspace"
+          return this.roleService.getRole(params['roleId'])
         }
         return of(null)
       })

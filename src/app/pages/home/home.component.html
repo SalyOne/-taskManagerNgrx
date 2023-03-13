@@ -85,8 +85,8 @@
               + add board
             </mat-card-content>
           </mat-card>
-          <mat-card *ngFor="let eachBoard of eachWork.boards" >
-            <mat-card-content (click)="goToDashboard(eachBoard.id, eachWork.id)"> {{eachBoard.name}}</mat-card-content>
+          <mat-card *ngFor="let eachBoard of eachWork.boards" (click)="goToDashboard(eachBoard.id, eachWork.id)">
+            <mat-card-content > {{eachBoard.name}}</mat-card-content>
           </mat-card>
         </div>
       </div>

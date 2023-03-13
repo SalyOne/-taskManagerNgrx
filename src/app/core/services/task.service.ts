@@ -15,7 +15,9 @@ export class TaskService extends BaseService{
   getTasks(params = {}): Observable<ITask[]> {
     return this.get<ITask[]>(`task`, params )
   }
-
+  getMyTasks(): Observable<ITask[]> {
+    return this.get<ITask[]>(`task/my`)
+  }
   createTask(data: any): Observable<ITask> {
     return this.post<ITask>(`task`, data)
   }

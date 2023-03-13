@@ -8,6 +8,8 @@ import {IBoard} from "../../core/interfaces/board";
 import {BoardService} from "../../core/services/board.service";
 import {ProjectFacade} from "../../facades/project.facade";
 import {ActivatedRoute, Router} from "@angular/router";
+import {TaskService} from "../../core/services/task.service";
+import {ITask} from "../../core/interfaces/task";
 
 @Component({
   selector: 'app-home',
@@ -18,7 +20,7 @@ export class HomeComponent implements OnDestroy{
   // getWorkspacesForMyUser$: Observable<IWorkspace[]> = this.workspaceService.getAllWorkspacesForUser();
   getWorkspacesForMyUser :IWorkspace[] = []
 
-  boards:IBoard[]= [];
+  tasks:ITask[]= [];
 
   sub$ = new Subject();
   firstLetter!: string;
@@ -27,22 +29,43 @@ export class HomeComponent implements OnDestroy{
   mode: ProgressSpinnerMode = 'indeterminate';
   constructor(
     private workspaceService:WorkspaceService,
+    private taskService:TaskService,
     private projectFacade: ProjectFacade,
     private  router : Router,
 
   ) {
-      this.getAllWorkspacesForUser()
+    this.getAllWorkspaces()
+    // this.getTasks()
   }
 
-  getAllWorkspacesForUser(){
+  goToDashboard(id: number, workspaceID:any) {
+    let proj
+    this.workspaceService.getOneProject(workspaceID)
+      .pipe(takeUntil(this.sub$))
+      .subscribe(res =>{
+        proj = res
+        // console.log("proj", proj)
+        this.projectFacade.setProject(proj)
+        this.router.navigate(['dashboard/', id])
+      } )
+  }
+  getAllWorkspaces(){
     this.loading  = true
     return this.workspaceService.getProjectBoards()
       .pipe(takeUntil(this.sub$))
       .subscribe(res =>{
-        console.log("workspaces with boards",res)
+        // console.log("workspaces with boards",res)
         this.loading = false
         this.getWorkspacesForMyUser = res
     })
+  }
+  getTasks(){
+    return this.taskService.getMyTasks()
+      .pipe(takeUntil(this.sub$))
+      .subscribe(res=>{
+        this.tasks = res
+        console.log(res)
+      })
   }
   getFirstLetter(a:string){
     return a.charAt(0)
@@ -51,18 +74,5 @@ export class HomeComponent implements OnDestroy{
   ngOnDestroy(): void {
     this.sub$.next(null);
     this.sub$.complete()
-  }
-
-
-  goToDashboard(id: number, workspaceID:any) {
-    let proj
-     this.workspaceService.getOneProject(workspaceID)
-      .pipe(takeUntil(this.sub$))
-      .subscribe(res =>{
-        proj = res
-        console.log("proj", proj)
-        this.projectFacade.setProject(proj)
-        this.router.navigate(['dashboard/', id])
-      } )
   }
 }

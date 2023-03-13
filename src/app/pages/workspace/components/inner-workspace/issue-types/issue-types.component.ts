@@ -20,17 +20,12 @@ export class IssueTypesComponent implements OnDestroy,AfterViewInit, OnInit{
   displayedColumns: string[] = ['id', 'name','description','icon', 'color','type','isActive','createdAt','updatedAt','actions'];
   dataSource = new MatTableDataSource<IIssueType>();
   @ViewChild('paginator') paginator!: MatPaginator;
-
-
   issueTypes: IIssueType[] = [] // EmpData
   sub$ = new Subject();
   empTable!: IQueryTable<IIssueType>;
   isLoading = false;
-
   totalData?: number;
   pageSizes = [5,10,20];
-
-
   constructor(
     private issueTypesService : IssueTypesService,
     private route : ActivatedRoute,
@@ -50,40 +45,16 @@ export class IssueTypesComponent implements OnDestroy,AfterViewInit, OnInit{
         this.isLoading =false
       })
   }
-
-  // getProjectsByParams(limit:number,pageIndex:number ){
-  //   console.log("in getparams")
-  //   return this.issueTypesService.getIssueTypesByParams({
-  //     page:pageIndex,
-  //     totalCount:length,
-  //     limit:limit
-  //   })
-  //   // .pipe(takeUntil(this.sub$))
-  //   // .subscribe(res=>{
-  //   //   console.log("asdasd")
-  //   //   this.issueTypes = res;
-  //   //   this.dataSource =  new MatTableDataSource<IIssueType>(this.issueTypes);
-  //   //   console.log(this.pageEvent)
-  //   // })
-  // }
-
-
   ngAfterViewInit() {
-    // this.dataSource.paginator = this.paginator;
-    // console.log(this.paginator.page)
     this.isLoading = true
     this.getIssueTypes()
     // imistvis rom afterViewInit-is mere shecvlilma isLoading cvladma errori ar amoagdos
     this.cd.detectChanges()
   }
-
   ngOnInit(): void {
     // this.getIssueTypes()
     // this.getProjectsByParams(6,1)
   }
-
-
-
   deleteProject(id?: number):void {
     this.openDialog().afterClosed().subscribe(res=>{
         if(res){
@@ -103,13 +74,8 @@ export class IssueTypesComponent implements OnDestroy,AfterViewInit, OnInit{
       width: '250px',
     });
   }
-
-
   ngOnDestroy(): void {
     this.sub$.next(null);
     this.sub$.complete()
   }
-
-
-
 }
