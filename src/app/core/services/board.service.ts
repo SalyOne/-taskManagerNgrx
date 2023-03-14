@@ -12,6 +12,9 @@ export class BoardService extends BaseService {
     return this.get<IBoard[]>('board')
   }
 
+  getBoardsWithHeader(headerValue :any): Observable<IBoard[]>{
+    return this.getHeader<IBoard[]>('board', headerValue)
+  }
   getBoard(id: number): Observable<IBoard> {
     return this.get<IBoard>(`board/${id}`);
   }
@@ -28,5 +31,5 @@ export class BoardService extends BaseService {
     return this.delete(`board/${id}`);
   }
 }
-  
+
 

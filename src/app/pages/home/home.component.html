@@ -65,7 +65,7 @@
         <p> there are no workspaces </p>
         <button mat-stroked-button color="primary" routerLink="/work/add"> add Workspace</button>
       </div>
-      <div class="each-workspace" *ngFor="let eachWork of getWorkspacesForMyUser">
+      <div class="each-workspace" *ngFor="let eachWork of getWorkspacesForMyUser" >
         <div class="workspace-title-row">
           <h3 class="title" [routerLink]="['/work/inner', eachWork.id]">
             <span class="first-letter" style="background: {{ eachWork.color }}">
@@ -75,21 +75,18 @@
           </h3>
           <span class="line"></span>
           <div class="button-container">
-            <button mat-stroked-button color="primary"> Project Dashboard</button>
-            <button mat-stroked-button color="primary" [routerLink]="['/work/inner', eachWork.id]"> Settings</button>
+            <button mat-stroked-button color="primary"[routerLink]="['/work/inner', eachWork.id]">Project Dashboard</button>
+            <button mat-stroked-button color="primary" [routerLink]="['/work/inner', eachWork.id]">Settings</button>
           </div>
         </div>
         <div class="workspace-content-row">
-          <mat-card>
-            <mat-card-content>
-              <button mat-stroked-button color="primary"> + add board</button>
+          <mat-card class="button-card">
+            <mat-card-content [routerLink]="['/work/inner', eachWork.id, 'board','add']">
+              + add board
             </mat-card-content>
           </mat-card>
-          <mat-card>
-            <mat-card-content>Board Name</mat-card-content>
-          </mat-card>
-          <mat-card>
-            <mat-card-content> Task Managera sdasdaasd asd asa das d</mat-card-content>
+          <mat-card *ngFor="let eachBoard of eachWork.boards" (click)="goToDashboard(eachBoard.id, eachWork.id)">
+            <mat-card-content > {{eachBoard.name}}</mat-card-content>
           </mat-card>
         </div>
       </div>

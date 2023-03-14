@@ -1,7 +1,7 @@
 
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, tap } from 'rxjs';
+import { catchError, Observable, tap, throwError } from 'rxjs';
 import { User } from '../interfaces';
 import { AuthResponse, Login,Register } from '../interfaces/auth';
 import { BaseService } from './base.service';
@@ -30,6 +30,7 @@ export class AuthService extends BaseService {
 login(payload:Login): Observable<AuthResponse>{
   return this.post<AuthResponse>( 'auth/login', payload)
   .pipe(
+    catchError(this.handleError),
     tap((response: AuthResponse) => {
     const cookieExpire = new Date(Date.now()+24 * 60 * 60 * 1000)
 
@@ -66,6 +67,7 @@ get refreshToken():string{
 
   setUser(user: User): void {
     localStorage.setItem('user', JSON.stringify(user))
+    
   }
 
 register(payload:Register): Observable<AuthResponse>{
@@ -78,6 +80,24 @@ signOut(){
   this.cookieStorageService.deleteCookie('refreshToken')
   this.cookieStorageService.deleteAllcookies()
 
+}
+
+
+
+private handleError(error: HttpErrorResponse) {
+ let  errorMsg = ''
+  if (error.status === 401) {
+    errorMsg = 'User does not exit!'} else if (
+  error.status === 404
+ ) {
+  errorMsg = 'Password is wrong'
+  
+  }
+  
+  console.log(error.status)
+  
+  return throwError(() => new Error(errorMsg));
+  
 }
 
 }

@@ -1,3 +1,4 @@
+import {IBoard} from "./board";
 
 export interface IWorkspace {
   "id"?: number,
@@ -5,6 +6,7 @@ export interface IWorkspace {
   "abbreviation": string,
   "description": string,
   "color": string,
+  "boards"?: IBoard[],
   "createdAt"?: string,
   "updatedAt"?: string,
   "deletedAt"?: string

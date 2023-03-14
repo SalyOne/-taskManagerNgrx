@@ -21,6 +21,7 @@ import { WorkspaceListComponent } from './components/workspace-list/workspace-li
 import {MatProgressBarModule} from "@angular/material/progress-bar";
 import {MatStepperModule} from '@angular/material/stepper';
 import {MatSidenavModule} from "@angular/material/sidenav";
+import { AddMembersComponent } from './containers/add-members/add-members.component';
 
 
 
@@ -29,6 +30,7 @@ import {MatSidenavModule} from "@angular/material/sidenav";
   declarations: [
     CreateEditWorkspaceComponent,
     WorkspaceListComponent,
+    AddMembersComponent,
 
 
   ],

@@ -8,7 +8,7 @@
 </ng-container>
 <ng-template #loaded>
 <mat-sidenav-container #innerSidenav class="sidenav" >
-  <mat-sidenav mode="side" #innerToggable class="start-content" opened="true" position="start">
+  <mat-sidenav mode="side"  class="start-content" opened="true" position="start">
 
     <div class="sidebar-container">
       <div class="sidebar-header">
@@ -24,7 +24,7 @@
     </div>
   </mat-sidenav>
   <mat-sidenav-content class="main-content" >
-    <button mat-button (click)="innerToggable.toggle()"> settings</button>
+    
     <router-outlet ></router-outlet>
   </mat-sidenav-content>
 </mat-sidenav-container>

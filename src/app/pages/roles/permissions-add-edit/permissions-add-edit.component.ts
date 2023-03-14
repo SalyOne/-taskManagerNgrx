@@ -25,7 +25,6 @@ export class PermissionsAddEditComponent implements OnInit{
     this.route.params.subscribe(params => {
       if (params['roleId']) {
         this.roleId = params['roleId'];
-        console.log(this.roleId)
         this.getPermissionByRoleId(this.roleId)
       }
     })
@@ -33,14 +32,13 @@ export class PermissionsAddEditComponent implements OnInit{
   }
   getPermissionByRoleId(id:string){
     this.roleService.getRole(id).subscribe(res=>{
-      console.log("in func",res)
+
       res && res.permissions && res.permissions.length && res.permissions.forEach((per:any) => this.permissions.add(per.id))
     })
   }
   getPermission(){
     this.roleService.getPermission()
       .subscribe( per =>{
-        console.log(per)
         const grouped = _.groupBy(per,'groupKey');
         this.groups = Object.keys(grouped).map(key=>{
           return{
