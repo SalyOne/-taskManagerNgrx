@@ -11,34 +11,38 @@
     <span class="line"></span>
   </div>
   <div class="content-row">
-    <mat-card class="each-card">
-      <mat-card-content>
-        <div class="text-container">
-          <p>
-           task title
-          </p>
-        </div>
-        <mat-divider></mat-divider>
-      </mat-card-content>
-      <mat-card-footer>
-        <span>Workspace Name</span>
-        <span>Board Name : ListName</span>
-      </mat-card-footer>
-    </mat-card>
-    <mat-card class="each-card">
-      <mat-card-content>
-        <div class="text-container">
-          <p>
-            make workspace add/redaction
-          </p>
-        </div>
-        <mat-divider></mat-divider>
-      </mat-card-content>
-      <mat-card-footer>
-        <span>first Workspace</span>
-        <span>This ProjectBoard : ToDo</span>
-      </mat-card-footer>
-    </mat-card>
+    <ng-container *ngFor="let task of tasks">
+      <mat-card class="each-card" *ngIf="task.project !== null && task.board !== null && task.boardColumn !== null">
+        <mat-card-content>
+          <div class="text-container">
+            <p>
+              {{task.name}}
+            </p>
+          </div>
+          <mat-divider></mat-divider>
+        </mat-card-content>
+        <mat-card-footer>
+          <span>Project: {{task.project.name}}</span>
+          <span>Board: {{task.board.name}}
+        </span>
+          <span>List: {{task.boardColumn.name}}</span>
+        </mat-card-footer>
+      </mat-card>
+    </ng-container>
+<!--    <mat-card class="each-card">-->
+<!--      <mat-card-content>-->
+<!--        <div class="text-container">-->
+<!--          <p>-->
+<!--            make workspace add/redaction-->
+<!--          </p>-->
+<!--        </div>-->
+<!--        <mat-divider></mat-divider>-->
+<!--      </mat-card-content>-->
+<!--      <mat-card-footer>-->
+<!--        <span>first Workspace</span>-->
+<!--        <span>This ProjectBoard : ToDo</span>-->
+<!--      </mat-card-footer>-->
+<!--    </mat-card>-->
   </div>
 </section>
 

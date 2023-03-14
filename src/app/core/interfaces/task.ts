@@ -2,6 +2,7 @@ import { IEpic } from "./epic";
 import { IIssueType } from "./issue-type";
 import {User} from "./user";
 import { IWorkspace } from "./workspace.interface";
+import {Column, IBoard} from "./board";
 
 export interface ITask {
   id: number;
@@ -14,9 +15,9 @@ export interface ITask {
   projectId: number;
   project: IWorkspace;
   boardId: number;
-  board: string;
+  board: IBoard;
   boardColumnId: number;
-  boardColumn: string;
+  boardColumn: Column;
   isBacklog: boolean;
   priority: string;
   taskStatus: string;
