@@ -27,6 +27,7 @@ import {InfoComponent} from "./info/info.component";
 import {MatCheckboxModule} from "@angular/material/checkbox";
 import { EpicComponent } from './epic/epic.component';
 import { EpicAddEditComponent } from './epic/epic-add-edit/epic-add-edit.component';
+import { MembersComponent } from './members/members.component';
 
 
 @NgModule({
@@ -38,7 +39,8 @@ import { EpicAddEditComponent } from './epic/epic-add-edit/epic-add-edit.compone
     IssueTypesAddEditComponent,
     IssueTypesComponent,
     EpicComponent,
-    EpicAddEditComponent
+    EpicAddEditComponent,
+    MembersComponent
   ],
   imports: [
     CommonModule,

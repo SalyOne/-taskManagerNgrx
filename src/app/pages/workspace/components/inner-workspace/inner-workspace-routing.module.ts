@@ -8,6 +8,7 @@ import {IssueTypesComponent} from "./issue-types/issue-types.component";
 import {IssueTypesAddEditComponent} from "./issue-types/issue-types-add-edit/issue-types-add-edit.component";
 import {EpicComponent} from "./epic/epic.component";
 import {EpicAddEditComponent} from "./epic/epic-add-edit/epic-add-edit.component";
+import {MembersComponent} from "./members/members.component";
 
 const routes: Routes = [
   {
@@ -69,6 +70,24 @@ const routes: Routes = [
             path:'edit/:id',
             component: EpicAddEditComponent
           },
+
+        ]
+      },
+      {
+        path: 'members',
+        children: [
+          {
+            path: '',
+            component: MembersComponent
+          },
+          // {
+          //   path: 'add',
+          //   component: EpicAddEditComponent
+          // },
+          // {
+          //   path:'edit/:id',
+          //   component: EpicAddEditComponent
+          // },
 
         ]
       },
