@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {BaseService} from "./base.service";
-import {IQueryTable, IWorkspace} from "../interfaces/workspace.interface";
+import {IQueryTable, IWorkspace, IWorkspaceUsers} from "../interfaces/workspace.interface";
 import {Observable} from "rxjs";
 
 @Injectable({
@@ -11,7 +11,6 @@ export class WorkspaceService extends BaseService{
   addWorkspace(param: IWorkspace):Observable<IWorkspace>{
     return this.post<IWorkspace>('project', param)
   }
-
   // get project/ workspace diffrent ways
   getAllWorkspacesForUser():Observable<IWorkspace[]>{
     return  this.get<IWorkspace[]>('project/my');
@@ -43,8 +42,11 @@ export class WorkspaceService extends BaseService{
 
 
   //set users for a project
-  addUsersToWorkspace(param: IWorkspace):Observable<IWorkspace>{
-    return this.post<IWorkspace>('project', param)
+  addUsersToWorkspace(param: IWorkspaceUsers):Observable<IWorkspaceUsers>{
+    return this.post<IWorkspaceUsers>('project/users', param)
+  }
+  deleteUsersFromWorkspace(id: number):Observable<IWorkspaceUsers>{
+    return this.delete<IWorkspaceUsers>(`project/users/${id}`)
   }
   getProjectUsers(): Observable<any> {
     return this.get(`project/users`);

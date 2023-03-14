@@ -53,6 +53,11 @@
     display: flex;
     gap: 15px;
     .each-card{
+      cursor: pointer;
+      transition: 0.3s;
+      &:hover{
+        box-shadow: 1px 1px 5px 0px rgba($main-1,0.25);
+      }
       mat-card-footer{
         padding: 16px;
         span{

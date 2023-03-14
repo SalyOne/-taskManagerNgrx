@@ -19,7 +19,7 @@ export interface IQueryTable<T>{
   page: number,
   limit: number,
 }
-export interface IWorksoaceUsers{
+export interface IWorkspaceUsers{
   projectId: number;
   userIds: string[];
 }

@@ -12,7 +12,7 @@
   </div>
   <div class="content-row">
     <ng-container *ngFor="let task of tasks">
-      <mat-card class="each-card" *ngIf="task.project !== null && task.board !== null && task.boardColumn !== null">
+      <mat-card class="each-card" *ngIf="task.project !== null && task.board !== null && task.boardColumn !== null" [routerLink]="['/dashboard', task.board.id]">
         <mat-card-content>
           <div class="text-container">
             <p>
@@ -79,7 +79,7 @@
           </h3>
           <span class="line"></span>
           <div class="button-container">
-            <button mat-stroked-button color="primary"[routerLink]="['/work/inner', eachWork.id]">Project Dashboard</button>
+            <button mat-stroked-button color="primary" [routerLink]="['/work/inner', eachWork.id]">Project Dashboard</button>
             <button mat-stroked-button color="primary" [routerLink]="['/work/inner', eachWork.id]">Settings</button>
           </div>
         </div>
