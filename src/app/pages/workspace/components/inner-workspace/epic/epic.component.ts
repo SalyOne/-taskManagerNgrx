@@ -27,6 +27,7 @@ export class EpicComponent implements OnDestroy,AfterViewInit{
   dataSource = new MatTableDataSource<IEpic>();
   epics:IEpic[] = []
   empTable!: IQueryTable<IEpic>;
+  loading: boolean = false;
 
   constructor(
     private epicService : EpicService,

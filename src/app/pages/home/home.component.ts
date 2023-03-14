@@ -35,7 +35,7 @@ export class HomeComponent implements OnDestroy{
 
   ) {
     this.getAllWorkspaces()
-    // this.getTasks()
+    this.getTasks()
   }
 
   goToDashboard(id: number, workspaceID:any) {
