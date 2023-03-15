@@ -1,7 +1,7 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
-import {Subject, takeUntil} from "rxjs";
+import {ChangeDetectorRef, Component, OnInit, ViewChild} from '@angular/core';
+import {catchError, map, of, startWith, Subject, switchMap, takeUntil} from "rxjs";
 import {UsersService} from "../../../../core/services/users.service";
-import {QueryTable, User} from "../../../../core/interfaces";
+import {IWorkspace, QueryTable, User} from "../../../../core/interfaces";
 import {MatTableDataSource} from "@angular/material/table";
 import {MatDialog} from "@angular/material/dialog";
 import {MatPaginator} from "@angular/material/paginator";
@@ -21,11 +21,9 @@ import {IRoles} from "../../../../core/interfaces/roles";
 export class UsersListComponent implements OnInit {
 
 
-  displayedColumns: string[] = ['id', 'firstName', 'lastName', 'email', 'mobileNumber', 'createdAt', 'actions'];
+  displayedColumns: string[] = ['id', 'firstName', 'lastName', 'email', 'mobileNumber','roles', 'createdAt', 'actions'];
   sub$ = new Subject();
-
-  user!: User
-
+  user: User[] = []
   empTable!: QueryTable<User>;
   isLoading = false;
   chooseUserActive = false;
@@ -41,21 +39,51 @@ export class UsersListComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     public dialog: MatDialog,
+    private cd: ChangeDetectorRef
+
   ) {
   }
 
 
-  getUser() {
-    this.usersService.getUsers()
-      .subscribe(res => {
-        console.log(res, ' log res')
-        this.dataSource.data = res;
-
+  getUser(limit:number,pageIndex:number ) {
+    return this.usersService.getUsers({
+      page: pageIndex,
+      totalCount: length,
+      limit: limit
+    })
+  }
+  ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator;
+    // console.log(this.paginator.page)
+    this.paginator.page
+      .pipe(
+        startWith({}),
+        switchMap(() => {
+          this.isLoading = true;
+          return this.getUser(
+            this.paginator.pageSize,
+            this.paginator.pageIndex + 1
+          ).pipe(catchError(() => of(null)));
+        }),
+        map((empData) => {
+          // console.log("empData", empData)
+          if (empData == null) return [];
+          this.totalData = empData.totalCount;
+          this.isLoading = false;
+          return empData.data;
+        })
+      )
+      .subscribe((empData) => {
+        // console.log(empData)
+        this.user = empData;
+        this.dataSource = new MatTableDataSource(this.user);
       });
+    // imistvis rom afterViewInit-is mere shecvlilma isLoading cvladma erori ar amoagdos
+    this.cd.detectChanges()
   }
 
   ngOnInit(): void {
-    this.getUser()
+    // this.getUser()
 
   }
 
@@ -68,7 +96,6 @@ export class UsersListComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        this.getUser();
       }
     })
   }
@@ -81,7 +108,6 @@ export class UsersListComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        this.getUser();
       }
     })
   }

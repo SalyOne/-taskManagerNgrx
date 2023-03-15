@@ -30,6 +30,10 @@
       <th mat-header-cell *matHeaderCellDef>mobileNumber</th>
       <td mat-cell *matCellDef="let row"> {{row.mobileNumber}} </td>
     </ng-container>
+    <ng-container matColumnDef="roles">
+      <th mat-header-cell *matHeaderCellDef>roles</th>
+      <td mat-cell *matCellDef="let row"> {{row?.roles?.name}} </td>
+    </ng-container>
     <ng-container matColumnDef="createdAt">
       <th mat-header-cell *matHeaderCellDef> createdAt</th>
       <td mat-cell *matCellDef="let row"> {{row.createdAt | date: 'dd/MM/yyyy'}} </td>
