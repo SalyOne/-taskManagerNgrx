@@ -59,9 +59,13 @@ export class AddMemberComponent implements OnInit{
   ngOnInit(): void {
     if (this.data.mems) {
       console.log("mems", this.data.mems)
-      this.form.patchValue({
-        roles: this.data.mems.map((r:User) => r.id)
+
+      this.form = this.formBuilder.group({
+        members:[this.data.mems.map((r:User) => r.id), [Validators.required]]
       })
+      // this.form.patchValue({
+      //   roles: this.data.mems.map((r:User) => r.id)
+      // })
     }
   }
   submit() {
@@ -81,7 +85,7 @@ export class AddMemberComponent implements OnInit{
 
 
   form: FormGroup = new FormGroup({
-    members: new FormControl([], Validators.required)
+    // members: new FormControl([], Validators.required)
   });
 
   members$: Observable<User[]> = this.usersService.getUsers();
