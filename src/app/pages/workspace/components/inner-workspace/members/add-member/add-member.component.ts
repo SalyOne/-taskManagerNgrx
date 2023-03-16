@@ -12,7 +12,7 @@ import {WorkspaceService} from "../../../../../../core/services";
   styleUrls: ['./add-member.component.scss']
 })
 export class AddMemberComponent implements OnInit{
-  form: FormGroup = new FormGroup({});
+  // form: FormGroup = new FormGroup({});
   // members$: Observable<User[]> = this.usersService.getUsers();
   addedMembers:User[] = []
   loading: Boolean  = false;
@@ -20,11 +20,11 @@ export class AddMemberComponent implements OnInit{
   allUsers:User[] = []
 
   constructor(
+    @Inject(MAT_DIALOG_DATA) public data: { project: IWorkspace, mems: User[] },
     public dialogRef: MatDialogRef<AddMemberComponent>,
     private usersService: UsersService,
     private workspaceService: WorkspaceService,
     private formBuilder: FormBuilder,
-    @Inject(MAT_DIALOG_DATA) public data: { project: IWorkspace },
   ) {
 
   }
@@ -51,12 +51,19 @@ export class AddMemberComponent implements OnInit{
         this.allUsers = res
       })
   }
+  // ngOnInit(): void {
+  //   this.loading = true
+  //   this.getAllUsers();
+  //   this.setWorkspaceMembers()
+  // }
   ngOnInit(): void {
-    this.loading = true
-    this.getAllUsers();
-    this.setWorkspaceMembers()
+    if (this.data.mems) {
+      console.log("mems", this.data.mems)
+      this.form.patchValue({
+        roles: this.data.mems.map((r:User) => r.id)
+      })
+    }
   }
-
   submit() {
     if (this.form.invalid) return;
     if (!this.data.project.id) return;
@@ -71,4 +78,15 @@ export class AddMemberComponent implements OnInit{
         this.dialogRef.close(true);
       })
   }
+
+
+  form: FormGroup = new FormGroup({
+    members: new FormControl([], Validators.required)
+  });
+
+  members$: Observable<User[]> = this.usersService.getUsers();
+
+
+
+
 }

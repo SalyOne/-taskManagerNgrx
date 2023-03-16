@@ -76,10 +76,11 @@ export class MembersComponent implements  OnInit,AfterViewInit, OnDestroy{
       }
     )
   }
-  addMember() {
+  addMember(mems:User[]) {
     const dialogRef = this.dialog.open(AddMemberComponent,{
       data:{
-        project: this.project
+        project: this.project,
+        mems:mems
       }
     });
     dialogRef.afterClosed().subscribe(result => {
