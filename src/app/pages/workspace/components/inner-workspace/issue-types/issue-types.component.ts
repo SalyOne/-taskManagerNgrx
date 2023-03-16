@@ -24,6 +24,7 @@ export class IssueTypesComponent implements OnDestroy,AfterViewInit, OnInit{
   sub$ = new Subject();
   empTable!: IQueryTable<IIssueType>;
   isLoading = false;
+  loading: Boolean = false;
   totalData?: number;
   pageSizes = [5,10,20];
   constructor(
@@ -43,10 +44,12 @@ export class IssueTypesComponent implements OnDestroy,AfterViewInit, OnInit{
         this.dataSource =  new MatTableDataSource<IIssueType>(this.issueTypes);
         this.dataSource.paginator = this.paginator;
         this.isLoading =false
+        this.loading = false
       })
   }
   ngAfterViewInit() {
     this.isLoading = true
+    this.loading =true
     this.getIssueTypes()
     // imistvis rom afterViewInit-is mere shecvlilma isLoading cvladma errori ar amoagdos
     this.cd.detectChanges()

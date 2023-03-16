@@ -6,12 +6,17 @@
       <mat-icon>add</mat-icon> add Issue Type
     </button>
   </div>
-
-  <div class="button-container message" *ngIf="issueTypes.length == 0; else values">
-    <p> there are no issue types </p>
-    <button mat-stroked-button color="primary" routerLink="add"> <mat-icon>add</mat-icon> add Issue Type</button>
-  </div>
-  <ng-template #values>
+  <ng-container *ngIf="loading; else loaded">
+    <div class="loader-container">
+      <mat-progress-spinner color="primary" mode="indeterminate"></mat-progress-spinner>
+    </div>
+  </ng-container>
+  <ng-template #loaded>
+    <div class="button-container message" *ngIf="issueTypes.length == 0">
+      <p> there are no epics </p>
+      <button mat-stroked-button color="primary" routerLink="add"> <mat-icon>add</mat-icon> add epic</button>
+    </div>
+    <ng-container *ngIf="issueTypes.length !== 0">
     <table mat-table [dataSource]="dataSource">
       <ng-container matColumnDef="id">
         <th mat-header-cell *matHeaderCellDef>ID</th>
@@ -84,6 +89,7 @@
       [pageSizeOptions]="pageSizes"
       showFirstLastButtons
     ></mat-paginator>
+    </ng-container>
     <!--  <div> Output event: {{(pageEvent | json) || 'No events dispatched yet'}} </div>-->
   </ng-template>
 </div>

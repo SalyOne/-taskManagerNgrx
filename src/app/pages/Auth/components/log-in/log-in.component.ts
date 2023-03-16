@@ -10,7 +10,7 @@ import { AuthService } from 'src/app/core/services';
 })
 export class LogInComponent implements OnInit {
 
-  
+
   errorMsg:any
 
   hide = true
@@ -32,13 +32,11 @@ export class LogInComponent implements OnInit {
     email : new FormControl('', [Validators.required, Validators.email]),
     password: new FormControl('', [Validators.required, Validators.minLength(4),Validators.maxLength(15),])
   })
-  
 
-  
   ngOnInit(): void {
-    
+
   }
-  
+
 
   submit(){
 
@@ -47,11 +45,11 @@ export class LogInComponent implements OnInit {
     }, (error)=>{
       this.errorMsg = error
       console.log(error)
-      
+
     })
 
   }
 
-  
+
 
 }
