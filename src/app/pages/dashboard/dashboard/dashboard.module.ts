@@ -12,6 +12,7 @@ import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatInputModule} from "@angular/material/input";
 import {MatSelectModule} from "@angular/material/select";
 import {MatDividerModule} from "@angular/material/divider";
+import {MatListModule} from '@angular/material/list';
 
 
 @NgModule({
@@ -29,7 +30,8 @@ import {MatDividerModule} from "@angular/material/divider";
     MatFormFieldModule,
     MatInputModule,
     MatSelectModule,
-    MatDividerModule
+    MatDividerModule,
+    MatListModule
   ]
 })
 export class DashboardModule { }

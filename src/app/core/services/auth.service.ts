@@ -96,7 +96,7 @@ private handleError(error: HttpErrorResponse) {
   
   console.log(error.status)
   
-  return throwError(() => new Error(errorMsg));
+  return throwError(errorMsg);
   
 }
 

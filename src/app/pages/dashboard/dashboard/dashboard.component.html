@@ -1,1 +1,18 @@
-<router-outlet></router-outlet>
+<div class="container">
+  
+  <div class="sidebar">
+    <ul>
+      <li  *ngFor="let board of boards$ |async">
+        <mat-list role="list">
+        <div class="boardList" role="listitem" [routerLink]="['/dashboard', board.id]">{{board.name}}</div>
+      </mat-list>
+      </li>
+    </ul>
+  </div>
+  <div class="content">
+
+    <router-outlet></router-outlet>
+  
+  </div>
+</div>
+
