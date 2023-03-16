@@ -19,12 +19,12 @@ export class LoginGuard implements CanActivate {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
       if (this.authService.token) {
-        this.router.navigate(['/work'])
+        this.router.navigate(['/home'])
         return false
-  
+
       }
-  
+
       return true
   }
-  
+
 }

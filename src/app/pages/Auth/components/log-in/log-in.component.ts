@@ -10,7 +10,6 @@ import { AuthService } from 'src/app/core/services';
 })
 export class LogInComponent implements OnInit {
 
-
   errorMsg:any
 
   hide = true
@@ -36,20 +35,12 @@ export class LogInComponent implements OnInit {
   ngOnInit(): void {
 
   }
-
-
   submit(){
-
     this.authService.login(this.form.value).subscribe(res =>{
       this.router.navigate(['/home'])
     }, (error)=>{
       this.errorMsg = error
       console.log(error)
-
     })
-
   }
-
-
-
 }

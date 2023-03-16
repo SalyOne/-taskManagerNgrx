@@ -33,22 +33,20 @@ login(payload:Login): Observable<AuthResponse>{
     catchError(this.handleError),
     tap((response: AuthResponse) => {
     const cookieExpire = new Date(Date.now()+24 * 60 * 60 * 1000)
+    this.cookieStorageService.setCookie('token', response.token.accessToken, cookieExpire);
+    this.cookieStorageService.setCookie('refreshToken', response.token.refreshToken);
 
+    const roles = response.user.roles.map((r:any)=> r.name)
+    this.cookieStorageService.setCookie('roles',JSON.stringify(roles))
 
-    this.cookieStorageService.setCookie(
-         'token',
-         response.token.accessToken,
-         cookieExpire
+    const permissions :string[] =[];
+    response.user.roles.forEach((r:any)=>{
+       permissions.push(...r.permissions.map((p:any)=> p.name))
+    })
+    localStorage.setItem('permissions', JSON.stringify(permissions))
+    this.cookieStorageService.setCookie('roles',JSON.stringify(roles))
 
-      );
-
-      this.cookieStorageService.setCookie(
-        'refreshToken',
-        response.token.refreshToken
-      )
-
-
-      this.setUser(response.user)
+    this.setUser(response.user)
     })
   )
 }
@@ -67,7 +65,7 @@ get refreshToken():string{
 
   setUser(user: User): void {
     localStorage.setItem('user', JSON.stringify(user))
-    
+
   }
 
 register(payload:Register): Observable<AuthResponse>{
@@ -91,13 +89,13 @@ private handleError(error: HttpErrorResponse) {
   error.status === 404
  ) {
   errorMsg = 'Password is wrong'
-  
+
   }
-  
+
   console.log(error.status)
-  
+
   return throwError(errorMsg);
-  
+
 }
 
 }
