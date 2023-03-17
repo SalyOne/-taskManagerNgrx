@@ -1,7 +1,7 @@
 import {ChangeDetectorRef, Component, OnInit, ViewChild} from '@angular/core';
 import {catchError, map, of, startWith, Subject, switchMap, takeUntil} from "rxjs";
 import {UsersService} from "../../../../core/services/users.service";
-import {IWorkspace, QueryTable, User} from "../../../../core/interfaces";
+import { QueryTable, User} from "../../../../core/interfaces";
 import {MatTableDataSource} from "@angular/material/table";
 import {MatDialog} from "@angular/material/dialog";
 import {MatPaginator} from "@angular/material/paginator";
@@ -9,7 +9,6 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {DeletePopupComponent} from "../../../../shared/popups/delete-popup/delete-popup.component";
 import {AddOrEditUsersComponent} from "../../components/add-or-edit-users/add-or-edit-users.component";
 import {AddRoleComponent} from "../../components/add-role/add-role.component";
-import {IRoles} from "../../../../core/interfaces/roles";
 
 
 
@@ -29,7 +28,7 @@ export class UsersListComponent implements OnInit {
   chooseUserActive = false;
 
   totalData?: number;
-  pageSizes = [3, 5, 7];
+  pageSizes = [5, 7];
   dataSource = new MatTableDataSource<User>();
 
   @ViewChild('paginator') paginator!: MatPaginator;
@@ -78,7 +77,6 @@ export class UsersListComponent implements OnInit {
         this.user = empData;
         this.dataSource = new MatTableDataSource(this.user);
       });
-    // imistvis rom afterViewInit-is mere shecvlilma isLoading cvladma erori ar amoagdos
     this.cd.detectChanges()
   }
 
@@ -107,6 +105,7 @@ export class UsersListComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
+        this.usersService.getUsersall()
       }
     })
   }
