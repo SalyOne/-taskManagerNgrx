@@ -39,7 +39,7 @@ import { PagenotfoundComponent } from './pages/pagenotfound/pagenotfound.compone
     UsersComponent,
     UsersListComponent,
     AddOrEditUsersComponent,
-    PagenotfoundComponent
+    PagenotfoundComponent,
  ],
   imports: [
     BrowserModule,

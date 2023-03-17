@@ -88,7 +88,6 @@ export class UsersListComponent implements OnInit {
   }
 
   addUser(id?: number) {
-
     const dialogRef = this.dialog.open(AddOrEditUsersComponent, {
       data: {
         userId: id

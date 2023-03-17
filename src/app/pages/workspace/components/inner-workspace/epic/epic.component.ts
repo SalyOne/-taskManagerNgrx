@@ -20,14 +20,13 @@ export class EpicComponent implements OnDestroy,AfterViewInit{
   displayedColumns: string[] = ['id', 'name','description','createdAt','updatedAt','actions'];
   sub$ = new Subject();
   isLoading = false;
+  loading: boolean = false;
   totalData?: number;
   pageSizes = [5,10,20];
   @ViewChild('paginator') paginator!: MatPaginator;
 
   dataSource = new MatTableDataSource<IEpic>();
   epics:IEpic[] = []
-  empTable!: IQueryTable<IEpic>;
-  loading: boolean = false;
 
   constructor(
     private epicService : EpicService,
@@ -38,19 +37,21 @@ export class EpicComponent implements OnDestroy,AfterViewInit{
   ) { }
 
   getEpics(){
-    console.log("in getIssues")
     return this.epicService.getAllEpics()
       .pipe(takeUntil(this.sub$))
       .subscribe(res=>{
         this.epics = res;
+        // console.log(res)
         this.dataSource =  new MatTableDataSource<IEpic>(this.epics);
         this.dataSource.paginator = this.paginator;
         this.isLoading =false
+        this.loading = false
       })
   }
 
   ngAfterViewInit() {
     this.isLoading = true
+    this.loading =true
     this.getEpics()
     // imistvis rom afterViewInit-is mere shecvlilma isLoading cvladma errori ar amoagdos
     this.cd.detectChanges()
@@ -64,7 +65,7 @@ export class EpicComponent implements OnDestroy,AfterViewInit{
             .pipe(takeUntil(this.sub$))
             .subscribe(res=>{
               // this.router.navigate(['/types'])
-              console.log('get delete issue',  res)
+              // console.log('get delete issue',  res)
               this.getEpics()
             })
         }

@@ -28,6 +28,7 @@ import {MatCheckboxModule} from "@angular/material/checkbox";
 import { EpicComponent } from './epic/epic.component';
 import { EpicAddEditComponent } from './epic/epic-add-edit/epic-add-edit.component';
 import { MembersComponent } from './members/members.component';
+import { AddMemberComponent } from './members/add-member/add-member.component';
 
 
 @NgModule({
@@ -40,7 +41,8 @@ import { MembersComponent } from './members/members.component';
     IssueTypesComponent,
     EpicComponent,
     EpicAddEditComponent,
-    MembersComponent
+    MembersComponent,
+    AddMemberComponent
   ],
   imports: [
     CommonModule,

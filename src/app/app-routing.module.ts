@@ -4,6 +4,7 @@ import { MainLayoutComponent } from './features/main-layout/main-layout.componen
 import { AuthGuard } from './core/guards/auth.guard';
 import { LoginGuard } from './core/guards/login.guard';
 import {PagenotfoundComponent} from "./pages/pagenotfound/pagenotfound.component";
+import {PermissionGuard} from "./core/guards/permission.guard";
 
 
 const routes: Routes = [
@@ -16,7 +17,6 @@ const routes: Routes = [
     path: '',
     component: MainLayoutComponent,
     children: [
-
       {
         path: '',
         redirectTo: 'home',
@@ -38,13 +38,20 @@ const routes: Routes = [
       },
       {
         path: 'users',
-        canActivate: [AuthGuard],
+        canActivate: [AuthGuard , PermissionGuard],
+        data:{
+          permissions:['user:list']
+        },
         loadChildren: () => import('./pages/users/users.module').then(m => m.UsersModule)
       },
       {
         path: 'roles',
         canActivate: [AuthGuard],
         loadChildren: () => import('./pages/roles/roles.module').then(m => m.RolesModule)
+      },
+      {
+        path: 'access-denied',
+        loadComponent: () => import('./pages/access-denied/access-denied.component').then(m => m.AccessDeniedComponent)
       },
       //es yoveltvis boloshi unda eweros
       // { path: '**',

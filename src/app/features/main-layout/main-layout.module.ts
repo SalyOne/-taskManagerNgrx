@@ -10,6 +10,7 @@ import {MatToolbarModule} from "@angular/material/toolbar";
 import {MatButtonModule} from "@angular/material/button";
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import {MatListModule} from "@angular/material/list";
+import {PermissionsDirective} from "../../core/directives/permissions.directive";
 
 
 
@@ -29,7 +30,8 @@ import {MatListModule} from "@angular/material/list";
     RouterModule,
     MatToolbarModule,
     MatButtonModule,
-    MatListModule
+    MatListModule,
+    PermissionsDirective
 
   ],
   exports: [
