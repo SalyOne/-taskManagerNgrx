@@ -14,6 +14,13 @@ import {WorkspaceService} from "../../../../../../core/services";
 export class AddMemberComponent implements OnInit{
   // form: FormGroup = new FormGroup({});
   // members$: Observable<User[]> = this.usersService.getUsers();
+
+
+  form: FormGroup = new FormGroup({
+    // members: new FormControl([], Validators.required)
+  });
+
+  members$: Observable<User[]> = this.usersService.getUsersall();
   addedMembers:User[] = []
   loading: Boolean  = false;
   memIds: number[]=[]
@@ -45,7 +52,7 @@ export class AddMemberComponent implements OnInit{
     })
   }
   getAllUsers(){
-    return this.usersService.getUsers()
+    return this.usersService.getUsersall()
       .subscribe(res=>{
         // console.log("users: ",res)
         this.allUsers = res
@@ -83,12 +90,6 @@ export class AddMemberComponent implements OnInit{
       })
   }
 
-
-  form: FormGroup = new FormGroup({
-    // members: new FormControl([], Validators.required)
-  });
-
-  members$: Observable<User[]> = this.usersService.getUsers();
 
 
 
