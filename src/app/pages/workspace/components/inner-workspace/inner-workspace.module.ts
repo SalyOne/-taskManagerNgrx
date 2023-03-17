@@ -29,6 +29,7 @@ import { EpicComponent } from './epic/epic.component';
 import { EpicAddEditComponent } from './epic/epic-add-edit/epic-add-edit.component';
 import { MembersComponent } from './members/members.component';
 import { AddMemberComponent } from './members/add-member/add-member.component';
+import {PermissionsDirective} from "../../../../core/directives/permissions.directive";
 
 
 @NgModule({
@@ -67,6 +68,7 @@ import { AddMemberComponent } from './members/add-member/add-member.component';
     MatStepperModule,
     MatSidenavModule,
     MatCheckboxModule,
+    PermissionsDirective,
   ],
   exports:[
     InnerWorkspaceComponent

@@ -9,7 +9,7 @@ import * as _ from "lodash";
   styleUrls: ['./permissions-add-edit.component.scss']
 })
 export class PermissionsAddEditComponent implements OnInit{
-
+ pageTitle? :string
   roleId!:string;
   groups: any = [];
   permissions: Set<number> = new Set<number>();
@@ -33,6 +33,7 @@ export class PermissionsAddEditComponent implements OnInit{
   getPermissionByRoleId(id:string){
     this.roleService.getRole(id).subscribe(res=>{
 
+      this.pageTitle = res.name
       res && res.permissions && res.permissions.length && res.permissions.forEach((per:any) => this.permissions.add(per.id))
     })
   }
@@ -46,7 +47,6 @@ export class PermissionsAddEditComponent implements OnInit{
             permissions:grouped[key]
           }
         })
-        console.log("groups: ", this.groups)
       })
   }
   checkPermission(permission: any) {

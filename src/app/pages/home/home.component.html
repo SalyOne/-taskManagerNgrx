@@ -1,8 +1,4 @@
 
-<!--  <section class="title-row">-->
-<!--    <h1>home:</h1>-->
-<!--  </section>-->
-<!--  <button class="button button-def" routerLink="/work/add"><span></span> add workspace</button>-->
 
 <div class="container-def">
 <section class="tasks-row">
@@ -11,6 +7,10 @@
     <span class="line"></span>
   </div>
   <div class="content-row">
+
+    <ng-container *ngIf="tasks.length === 0">
+      <span> there are no tasks</span>
+    </ng-container>
     <ng-container *ngFor="let task of tasks">
       <mat-card class="each-card" *ngIf="task.project !== null && task.board !== null && task.boardColumn !== null" [routerLink]="['/dashboard', task.board.id]">
         <mat-card-content>
@@ -29,20 +29,6 @@
         </mat-card-footer>
       </mat-card>
     </ng-container>
-<!--    <mat-card class="each-card">-->
-<!--      <mat-card-content>-->
-<!--        <div class="text-container">-->
-<!--          <p>-->
-<!--            make workspace add/redaction-->
-<!--          </p>-->
-<!--        </div>-->
-<!--        <mat-divider></mat-divider>-->
-<!--      </mat-card-content>-->
-<!--      <mat-card-footer>-->
-<!--        <span>first Workspace</span>-->
-<!--        <span>This ProjectBoard : ToDo</span>-->
-<!--      </mat-card-footer>-->
-<!--    </mat-card>-->
   </div>
 </section>
 
@@ -50,7 +36,7 @@
   <div class="section-title">
     <h3 class="title" routerLink="/work/list">Workspaces</h3>
     <span class="line"></span>
-    <div class="button-container">
+    <div class="button-container" [appPermissions]="['project:create']">
       <button mat-stroked-button color="primary" routerLink="/work/add"> <mat-icon>add</mat-icon> add Workspace</button>
     </div>
   </div>
@@ -67,7 +53,7 @@
 
       <div class="button-container message" *ngIf="getWorkspacesForMyUser.length == 0">
         <p> there are no workspaces </p>
-        <button mat-stroked-button color="primary" routerLink="/work/add"> add Workspace</button>
+        <button [appPermissions]="['project:create']" mat-stroked-button color="primary" routerLink="/work/add"> add Workspace</button>
       </div>
       <div class="each-workspace" *ngFor="let eachWork of getWorkspacesForMyUser" >
         <div class="workspace-title-row">
@@ -84,11 +70,14 @@
           </div>
         </div>
         <div class="workspace-content-row">
-          <mat-card class="button-card">
-            <mat-card-content [routerLink]="['/work/inner', eachWork.id, 'board','add']">
+          <mat-card class="button-card" [appPermissions]="['board:create']">
+            <mat-card-content  [routerLink]="['/work/inner', eachWork.id, 'board','add']">
               + add board
             </mat-card-content>
           </mat-card>
+          <ng-container *ngIf="eachWork.boards?.length === 0">
+            <span> there are no boards</span>
+          </ng-container>
           <mat-card *ngFor="let eachBoard of eachWork.boards" (click)="goToDashboard(eachBoard.id, eachWork.id)">
             <mat-card-content > {{eachBoard.name}}</mat-card-content>
           </mat-card>

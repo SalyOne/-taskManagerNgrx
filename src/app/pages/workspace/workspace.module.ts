@@ -22,6 +22,7 @@ import {MatProgressBarModule} from "@angular/material/progress-bar";
 import {MatStepperModule} from '@angular/material/stepper';
 import {MatSidenavModule} from "@angular/material/sidenav";
 import { AddMembersComponent } from './containers/add-members/add-members.component';
+import {PermissionsDirective} from "../../core/directives/permissions.directive";
 
 
 
@@ -57,6 +58,7 @@ import { AddMembersComponent } from './containers/add-members/add-members.compon
     MatStepperModule,
     MatSidenavModule,
     FormsModule,
+    PermissionsDirective,
   ],
 })
 export class WorkspaceModule { }

@@ -8,14 +8,13 @@
 </ng-container>
 <ng-template #loaded>
 <mat-sidenav-container #innerSidenav class="sidenav" >
-  <mat-sidenav mode="side"  class="start-content" opened="true" position="start">
-
+  <mat-sidenav mode="side"  class="start-content" opened="true" position="start"  [appPermissions]="['board:create', 'issueType:create','epic:create','project:users:create']">
     <div class="sidebar-container">
       <div class="sidebar-header">
         <h2 class="title">{{ workspace['name']}}</h2>
       </div>
       <ul class="sidebar-menu">
-        <li routerLinkActive="active" [routerLinkActiveOptions]={exact:true} [routerLink]="['/work/inner', workspace.id]"><span>project</span></li>
+        <li routerLinkActive="active" [routerLink]="['/work/inner', workspace.id]" [routerLinkActiveOptions]={exact:true}><span>project</span></li>
         <li routerLinkActive="active" [routerLink]="['/work/inner', workspace.id, 'board']"><span >Boards</span></li>
         <li routerLinkActive="active" [routerLink]="['/work/inner', workspace.id, 'types']"><span>Issue Types</span></li>
         <li routerLinkActive="active" [routerLink]="['/work/inner', workspace.id, 'epics']"><span>epics</span></li>
@@ -24,7 +23,6 @@
     </div>
   </mat-sidenav>
   <mat-sidenav-content class="main-content" >
-    
     <router-outlet ></router-outlet>
   </mat-sidenav-content>
 </mat-sidenav-container>

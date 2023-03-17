@@ -27,6 +27,7 @@ import {MatGridListModule} from "@angular/material/grid-list";
 import {MatInputModule} from "@angular/material/input";
 import {MatDividerModule} from "@angular/material/divider";
 import { PagenotfoundComponent } from './pages/pagenotfound/pagenotfound.component';
+import {PermissionsDirective} from "./core/directives/permissions.directive";
 
 
 
@@ -61,7 +62,8 @@ import { PagenotfoundComponent } from './pages/pagenotfound/pagenotfound.compone
     MatCardModule,
     MatGridListModule,
     MatInputModule,
-    MatDividerModule
+    MatDividerModule,
+    PermissionsDirective
 
   ],
   providers: [
