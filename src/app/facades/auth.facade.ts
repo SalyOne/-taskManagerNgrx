@@ -13,10 +13,10 @@ export class AuthFacade {
 
   get roles():string[]{
     const roles = this.cookieStorageService.getCookie('roles');
-    return( roles? JSON.stringify(roles):[]) as string[];
+    return( roles? JSON.parse(roles):[]) as string[];
   }
   get permissions():string[]{
     const permissions = localStorage.getItem('permissions');
-    return( permissions? JSON.stringify(permissions):[]) as string[];
+    return ( permissions ? JSON.parse(permissions):[]) as string[];
   }
 }

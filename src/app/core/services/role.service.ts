@@ -19,6 +19,9 @@ export class RoleService  extends BaseService{
   getAllRoles(): Observable<IRoles[]> {
     return this.get('role/all');
   }
+  getMyRoles(): Observable<any> {
+    return this.get('role/my');
+  }
   getAllRoless() :Observable<IRoles[]>{
     return this.get<IRoles[]>(`role`)
   }
