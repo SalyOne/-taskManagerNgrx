@@ -1,10 +1,13 @@
-<div class="title-row">
-  <h1>Users List</h1>
-</div>
-<div style="margin: 15px">
-  <button mat-raised-button color="primary" (click)="addUser()">Add User</button>
 
-</div>
+<div class="container-def">
+
+  <div class="title-row">
+    <h1>Users List</h1>
+    <button mat-raised-button  (click)="addUser()" class="example-icon"  aria-label="Example icon-button with menu icon">
+      <mat-icon>add</mat-icon> Add User
+    </button>
+  </div>
+
 <div class="mat-elevation-z8">
   <table mat-table [dataSource]="dataSource">
 
@@ -75,4 +78,4 @@
     showFirstLastButtons
   ></mat-paginator>
 </div>
-
+</div>
