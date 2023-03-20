@@ -32,7 +32,7 @@ export class TaskAddEditComponent implements OnInit, OnDestroy {
   form: FormGroup = new FormGroup({
     id: new FormControl(null),
     name: new FormControl(null, Validators.required),
-    description: new FormControl(null, Validators.required),
+    description: new FormControl(null),
     issueTypeId: new FormControl(null, Validators.required),
     epicId: new FormControl(null),
     priority: new FormControl(null, Validators.required),
@@ -44,7 +44,6 @@ export class TaskAddEditComponent implements OnInit, OnDestroy {
     taskStatus: new FormControl(this.data.column?.taskStatus || 'ToDo', Validators.required),
     taskProperty: new FormArray([])
   })
-
 
   sub$ = new Subject();
   boards$: Observable<IBoard[]> = this.boardService.getBoards();

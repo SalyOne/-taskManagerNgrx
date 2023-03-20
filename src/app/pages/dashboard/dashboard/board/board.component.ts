@@ -10,6 +10,7 @@ import { TaskAddEditComponent } from 'src/app/shared/task-add-edit/task-add-edit
 
 
 import * as _ from 'lodash';
+import {ProjectFacade} from "../../../../facades/project.facade";
 
 
 @Component({
@@ -20,34 +21,16 @@ import * as _ from 'lodash';
 export class BoardComponent implements OnInit{
 
   boardId!: number;
-
+  workspace  = this.projectFacade.getProject();
   board: IBoard = {} as IBoard;
-  tasks: any = {
-    6: [
-      {
-        id: 1,
-        title: 'Task 1',
-      },
-      {
-        id: 2,
-        title: 'Task 2',
-      },
-      {
-        id: 3,
-        title: 'Task 3',
-      }
-    ],
-    7: [],
-    8: [],
-    9: [],
-    10: [],
-  }
+  tasks: any = {}
 
   constructor(
     private boardService: BoardService,
     private route: ActivatedRoute,
     public dialog: MatDialog,
-    private taskService:TaskService
+    private taskService:TaskService,
+    private projectFacade: ProjectFacade
   ){}
 
   ngOnInit(): void {
@@ -60,13 +43,13 @@ export class BoardComponent implements OnInit{
   }
   getBoard() {
     this.boardService.getBoard(this.boardId).subscribe(board => {
-      console.log(board)
+      // console.log(board)
       this.board = board
       this.getTasks()
     })
   }
   drop(event: CdkDragDrop<any>, column: Column) {
-    console.log(event.container)
+    // console.log(event.container)
 
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
@@ -88,10 +71,10 @@ export class BoardComponent implements OnInit{
 
       this.tasks[column.id] = tasks
       const currentTask = tasks[event.currentIndex]
-      console.log(currentTask)
+      // console.log(currentTask)
       this.taskService.updateTask(currentTask.id, currentTask).subscribe(task => {
 
-        console.log(task)
+        // console.log(task)
         this.getTasks()
       })
     }
@@ -112,8 +95,8 @@ addTask(column: Column) {
     }
   })
 }
-  
-  
+
+
 
 private getTasks() {
   this.taskService.getTasks({boardId: this.boardId}).subscribe(tasks => {

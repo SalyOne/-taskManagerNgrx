@@ -1,18 +1,23 @@
-<div class="container">
-  
-  <div class="sidebar">
-    <ul>
-      <li  *ngFor="let board of boards$ |async">
-        <mat-list role="list">
-        <div class="boardList" role="listitem" [routerLink]="['/dashboard', board.id]">{{board.name}}</div>
-      </mat-list>
-      </li>
-    </ul>
-  </div>
-  <div class="content">
 
-    <router-outlet></router-outlet>
-  
-  </div>
-</div>
+<mat-sidenav-container #innerSidenav class="sidenav" >
+  <mat-sidenav mode="side"  class="start-content" opened="true" position="start" >
+    <div class="sidebar-container">
+      <div class="sidebar-header">
+        <h2 class="title">{{ workspace$["name"]}}</h2>
+      </div>
+      <ul class="sidebar-menu">
+        <li routerLinkActive="active" *ngFor="let board of boards$ |async" [routerLink]="['/dashboard', board.id]" [routerLinkActiveOptions]={exact:true}><span>{{board.name}}</span></li>
+      </ul>
+    </div>
+  </mat-sidenav>
+  <mat-sidenav-content class="main-content" >
+    <router-outlet ></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>
+
+
+
+
+
+
 
