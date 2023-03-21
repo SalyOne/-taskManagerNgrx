@@ -52,6 +52,7 @@
   .content-row{
     display: flex;
     overflow-x: auto;
+    padding: 5px;
     gap: 15px;
     .each-card{
       cursor: pointer;

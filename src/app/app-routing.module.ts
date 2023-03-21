@@ -50,6 +50,11 @@ const routes: Routes = [
         loadChildren: () => import('./pages/roles/roles.module').then(m => m.RolesModule)
       },
       {
+        path: 'backlog',
+        canActivate: [AuthGuard],
+        loadComponent: () => import('./pages/backlog/backlog.component').then(m => m.BacklogComponent)
+      },
+      {
         path: 'access-denied',
         loadComponent: () => import('./pages/access-denied/access-denied.component').then(m => m.AccessDeniedComponent)
       },

@@ -6,6 +6,7 @@
   <ul class="sidebar-menu">
     <li [appPermissions]="['user:list']"><span routerLink="/users">users</span></li>
     <li [appPermissions]="['role:list']"><span routerLink="/roles">roles</span></li>
+    <li ><span routerLink="/backlog">backlog</span></li>
     <li [appPermissions]="['project:list']"><span routerLink="/work/list">workspaces</span></li>
     <li><span (click)="signOut()" routerLink="/auth/login">LogOut</span></li>
   </ul>
