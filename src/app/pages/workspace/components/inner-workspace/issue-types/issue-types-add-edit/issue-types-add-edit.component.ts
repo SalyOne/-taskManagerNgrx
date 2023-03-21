@@ -86,7 +86,7 @@ export class IssueTypesAddEditComponent  implements OnDestroy, OnInit{
   }
   submit() {
     this.form.markAllAsTouched()
-    console.log("in issue submit")
+    // console.log("in issue submit")
     if (this.form.invalid) return;
     if(this.editId){
       this.issueService.editIssueType(this.editId, this.form.value)

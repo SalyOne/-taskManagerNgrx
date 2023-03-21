@@ -18,7 +18,7 @@ export class PermissionsDirective implements AfterViewInit{
     return userPerms.some(permission => this.appPermissions.includes(permission));
   }
   ngAfterViewInit() {
-    console.log(this.elementRef.nativeElement)
+    // console.log(this.elementRef.nativeElement)
     if(!this.hasPermission()){
       this.elementRef.nativeElement.remove()
     }

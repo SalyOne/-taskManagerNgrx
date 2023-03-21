@@ -49,7 +49,7 @@ export class MembersComponent implements  OnInit,AfterViewInit, OnDestroy{
     return this.workspaceService.getProjectUsers()
       .pipe(takeUntil(this.sub$))
       .subscribe(res=>{
-        console.log("get members",res)
+        // console.log("get members",res)
         this.members =res;
         this.dataSource =  new MatTableDataSource<User>(this.members);
         this.dataSource.paginator = this.paginator;
@@ -85,7 +85,7 @@ export class MembersComponent implements  OnInit,AfterViewInit, OnDestroy{
     });
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        console.log("after dialog closed")
+        // console.log("after dialog closed")
         this.getMembers();
       }
     })

@@ -36,7 +36,7 @@ export class IssueTypesComponent implements OnDestroy,AfterViewInit, OnInit{
   ) { }
 
   getIssueTypes(){
-    console.log("in getIssues")
+    // console.log("in getIssues")
     return this.issueTypesService.getAllIssueTypes()
       .pipe(takeUntil(this.sub$))
       .subscribe(res=>{
@@ -65,7 +65,7 @@ export class IssueTypesComponent implements OnDestroy,AfterViewInit, OnInit{
             .pipe(takeUntil(this.sub$))
             .subscribe(res=>{
               // this.router.navigate(['/types'])
-              console.log('get delete issue',  res)
+              // console.log('get delete issue',  res)
               this.getIssueTypes()
             })
         }

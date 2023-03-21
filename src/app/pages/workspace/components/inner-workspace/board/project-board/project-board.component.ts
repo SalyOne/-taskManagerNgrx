@@ -50,7 +50,7 @@ export class ProjectBoardComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   addBoard() {
-    console.log('add boards');
+    // console.log('add boards');
   }
 
   ngOnDestroy(): void {
@@ -77,17 +77,17 @@ export class ProjectBoardComponent implements OnInit, OnDestroy, AfterViewInit {
         }
       });
 
-      
+
   }
 
   ngAfterViewInit(): void {
     this.isLoading = true
     this.getBoards()
     this.cd.detectChanges()
-    
 
-    
-    
+
+
+
   }
 
 }

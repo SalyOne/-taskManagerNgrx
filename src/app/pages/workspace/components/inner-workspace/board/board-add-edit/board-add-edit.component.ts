@@ -24,7 +24,7 @@ export class BoardAddEditComponent implements OnInit {
   taskStatuses = Object.values(ETaskStatus);
 
   boardId!: number;
-  workspace!: IWorkspace 
+  workspace!: IWorkspace
 
   get columnsFormArray() {
     return this.form.get('columns') as FormArray;
@@ -45,7 +45,7 @@ export class BoardAddEditComponent implements OnInit {
       }
     })
     this.workspace = this.projectfacade.getProject()
-    console.log(this.workspace)
+    // console.log(this.workspace)
   }
 
   getBoard() {
@@ -101,7 +101,7 @@ export class BoardAddEditComponent implements OnInit {
 
   drop(event: CdkDragDrop<any, any>) {
     moveItemInArray(this.columnsFormArray.controls, event.previousIndex, event.currentIndex);
-    console.log(this.columnsFormArray.controls)
+    // console.log(this.columnsFormArray.controls)
     this.columnsFormArray.controls.forEach((control, index) => {
       control.get('position')?.setValue(index + 1)
     })

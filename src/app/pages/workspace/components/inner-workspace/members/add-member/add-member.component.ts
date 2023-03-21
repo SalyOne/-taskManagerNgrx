@@ -65,7 +65,7 @@ export class AddMemberComponent implements OnInit{
   // }
   ngOnInit(): void {
     if (this.data.mems) {
-      console.log("mems", this.data.mems)
+      // console.log("mems", this.data.mems)
 
       this.form = this.formBuilder.group({
         members:[this.data.mems.map((r:User) => r.id), [Validators.required]]
@@ -80,7 +80,7 @@ export class AddMemberComponent implements OnInit{
     if (!this.data.project.id) return;
 
     const {members} = this.form.value;
-    console.log("on submit values",members)
+    // console.log("on submit values",members)
     this.workspaceService.addUsersToWorkspace({
       projectId: this.data.project.id,
       userIds:members

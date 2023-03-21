@@ -74,7 +74,7 @@ export class AuthService extends BaseService {
     } else if (error.status === 404) {
       errorMsg = 'Password is wrong'
     }
-    console.log(error.status)
+    // console.log(error.status)
     return throwError(errorMsg);
   }
 }

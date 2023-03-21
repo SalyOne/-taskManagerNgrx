@@ -1,5 +1,5 @@
 import {Component, OnDestroy} from '@angular/core';
-import {Observable, Subject, takeUntil} from "rxjs";
+import {map, Observable, Subject, takeUntil, tap} from "rxjs";
 import {IWorkspace} from "../../core/interfaces";
 import {WorkspaceService} from "../../core/services/workspace.service";
 import {ThemePalette} from "@angular/material/core";
@@ -19,7 +19,7 @@ import {ITask} from "../../core/interfaces/task";
 export class HomeComponent implements OnDestroy{
   // getWorkspacesForMyUser$: Observable<IWorkspace[]> = this.workspaceService.getAllWorkspacesForUser();
   getWorkspacesForMyUser :IWorkspace[] = []
-
+  eachworkBoards?: IBoard
   tasks:ITask[]= [];
 
   sub$ = new Subject();
@@ -52,11 +52,14 @@ export class HomeComponent implements OnDestroy{
   getAllWorkspaces(){
     this.loading  = true
     return this.workspaceService.getProjectBoards()
-      .pipe(takeUntil(this.sub$))
+      .pipe(
+        takeUntil(this.sub$)
+      )
       .subscribe(res =>{
         console.log("workspaces with boards",res)
         this.loading = false
         this.getWorkspacesForMyUser = res
+
     })
   }
   getTasks(){
@@ -64,7 +67,7 @@ export class HomeComponent implements OnDestroy{
       .pipe(takeUntil(this.sub$))
       .subscribe(res=>{
         this.tasks = res
-        console.log(res)
+        // console.log(res)
       })
   }
   getFirstLetter(a:string){
