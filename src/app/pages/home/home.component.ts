@@ -56,7 +56,7 @@ export class HomeComponent implements OnDestroy{
         takeUntil(this.sub$)
       )
       .subscribe(res =>{
-        console.log("workspaces with boards",res)
+        // console.log("workspaces with boards",res)
         this.loading = false
         this.getWorkspacesForMyUser = res
 
