@@ -58,11 +58,10 @@ const routes: Routes = [
         path: 'access-denied',
         loadComponent: () => import('./pages/access-denied/access-denied.component').then(m => m.AccessDeniedComponent)
       },
-      //es yoveltvis boloshi unda eweros
-      // { path: '**',
-      //   pathMatch:"full",
-      //   component: PagenotfoundComponent
-      // },
+      { path: '**',
+        pathMatch:"full",
+        component: PagenotfoundComponent
+      },
     ]
   },
 ];
