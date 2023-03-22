@@ -12,7 +12,7 @@
       <span> there are no tasks</span>
     </ng-container>
     <ng-container *ngFor="let task of tasks">
-      <mat-card class="each-card" *ngIf="task.project !== null && task.board !== null && task.boardColumn !== null" [routerLink]="['/dashboard', task.board.id]">
+      <mat-card class="each-card" *ngIf="task.project !== null && task.board !== null && task.boardColumn !== null" [routerLink]="['/dashboard', task.project.id, task.board.id]">
         <mat-card-content>
           <div class="text-container">
             <p>
@@ -66,11 +66,11 @@
           <span class="line"></span>
           <div class="button-container">
 
-<!--            <ng-container *ngIf="eachWork.boards && eachWork.boards?.length !== 0">-->
-<!--              <button mat-stroked-button color="primary" [routerLink]="['/dashboard',eachWork.id, eachWork.boards[0].id]">-->
-<!--                {{eachWork.boards[0].id}} Project Dashboard</button>-->
-<!--            </ng-container>-->
-            <button mat-stroked-button color="primary" [routerLink]="['/dashboard', eachWork.id]">Project Dashboard</button>
+            <ng-container *ngIf="eachWork.boards && eachWork.boards?.length !== 0">
+              <button mat-stroked-button color="primary" [routerLink]="['/dashboard',eachWork.id, eachWork.boards[0].id]">
+                {{eachWork.boards[0].id}} Project Dashboard</button>
+            </ng-container>
+<!--            <button mat-stroked-button color="primary" [routerLink]="['/dashboard', eachWork.id]">Project Dashboard</button>-->
             <button mat-stroked-button color="primary" [routerLink]="['/work/inner', eachWork.id]">Settings</button>
           </div>
         </div>

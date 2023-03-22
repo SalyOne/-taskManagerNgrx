@@ -46,7 +46,7 @@ export class HomeComponent implements OnDestroy{
         proj = res
         // console.log("proj", proj)
         this.projectFacade.setProject(proj)
-        this.router.navigate(['dashboard/', id])
+        this.router.navigate(['dashboard/',workspaceID, id])
       } )
   }
   getAllWorkspaces(){

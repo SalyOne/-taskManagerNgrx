@@ -6,7 +6,7 @@
         <h2 class="title">{{ workspace$["name"]}}</h2>
       </div>
       <ul class="sidebar-menu">
-        <li routerLinkActive="active" *ngFor="let board of boards$ |async" [routerLink]="['/dashboard', board.id]" [routerLinkActiveOptions]={exact:true}><span>{{board.name}}</span></li>
+        <li routerLinkActive="active" *ngFor="let board of boards$ |async" [routerLink]="['/dashboard',workspace$.id, board.id]" [routerLinkActiveOptions]={exact:true}><span>{{board.name}}</span></li>
       </ul>
     </div>
   </mat-sidenav>

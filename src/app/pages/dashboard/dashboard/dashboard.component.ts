@@ -25,7 +25,7 @@ export class DashboardComponent {
 
   boardId: number | null = null
   workspace! :IWorkspace;
-  workspace$ = this.projectFacade.getProject()
+  workspace$ = this.projectFacade.getProject();
   //
   // ngOnInit(): void {
   //   // console.log("facade :", this.projectFacade.getProject())
