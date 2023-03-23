@@ -19,7 +19,7 @@ export class CookieStorageService {
       sameSite: 'Strict',
       secure: true,
       path: '/',
-      domain: `${window.location.hostname}`
+      domain: `http://task-manager-production-40ea.up.railway.app/api/`
     })
   }
 
