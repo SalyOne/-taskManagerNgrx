@@ -19,23 +19,16 @@ export class CookieStorageService {
       sameSite: 'Strict',
       secure: true,
       path: '/',
-      domain: `http://task-manager-production-40ea.up.railway.app/api/`
+      domain: `${window.location.hostname}`
     })
   }
-
-
   getCookie(name: string){
     return this.cookieService.get(name)
   }
-
-
   deleteCookie(name:string){
     this.cookieService.delete(name)
   }
-
-
   deleteAllcookies(){
     this.cookieService.deleteAll()
   }
-
 }
