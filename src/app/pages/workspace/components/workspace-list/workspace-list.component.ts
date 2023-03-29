@@ -13,7 +13,7 @@ import {MatDialog} from "@angular/material/dialog";
   templateUrl: './workspace-list.component.html',
   styleUrls: ['./workspace-list.component.scss']
 })
-export class WorkspaceListComponent implements OnDestroy,AfterViewInit, OnInit{
+export class WorkspaceListComponent implements OnDestroy,AfterViewInit{
 
   displayedColumns: string[] = ['id', 'name', 'abbreviation',  'description', 'color','createdAt','updatedAt','actions'];
   sub$ = new Subject();
@@ -38,16 +38,6 @@ export class WorkspaceListComponent implements OnDestroy,AfterViewInit, OnInit{
     private cd: ChangeDetectorRef
   ) { }
 
-  getWorkspaces(){
-    return this.workspaceService.getAllWorkspaces()
-      .pipe(takeUntil(this.sub$))
-      .subscribe(res=>{
-        this.workspaces =res;
-        this.dataSource =  new MatTableDataSource<IWorkspace>(this.workspaces);
-        this.dataSource.paginator = this.paginator;
-        // console.log(this.paginator)
-      })
-  }
 
   getProjectsByParams(limit:number,pageIndex:number ){
     return this.workspaceService.getProjectsByParams({
@@ -63,8 +53,6 @@ export class WorkspaceListComponent implements OnDestroy,AfterViewInit, OnInit{
       //   console.log(this.pageEvent)
       // })
   }
-
-
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
     // console.log(this.paginator.page)
@@ -94,12 +82,6 @@ export class WorkspaceListComponent implements OnDestroy,AfterViewInit, OnInit{
     // imistvis rom afterViewInit-is mere shecvlilma isLoading cvladma erori ar amoagdos
     this.cd.detectChanges()
   }
-
-  ngOnInit(): void {
-    // this.getWorkspaces()
-    // this.getProjectsByParams(6,1)
-  }
-
   deleteProject(id?: number):void {
     this.openDialog().afterClosed().subscribe(res=>{
         if(res){
@@ -118,13 +100,8 @@ export class WorkspaceListComponent implements OnDestroy,AfterViewInit, OnInit{
     });
   }
 
-
-
   ngOnDestroy(): void {
     this.sub$.next(null);
     this.sub$.complete()
   }
-
-
-
 }

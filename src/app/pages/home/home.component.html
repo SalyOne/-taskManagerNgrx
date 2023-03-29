@@ -50,12 +50,12 @@
       </div>
     </ng-container>
     <ng-template #loaded>
-
-      <div class="button-container message" *ngIf="getWorkspacesForMyUser.length == 0">
+<!--      {{countProjects$ | async}}-->
+      <div class="button-container message" *ngIf="(countProjects$ | async) == 0">
         <p> there are no workspaces </p>
         <button [appPermissions]="['project:create']" mat-stroked-button color="primary" routerLink="/work/add"> add Workspace</button>
       </div>
-      <div class="each-workspace" *ngFor="let eachWork of getWorkspacesForMyUser" >
+      <div class="each-workspace" *ngFor="let eachWork of getWorkspacesForMyUser$ | async" >
         <div class="workspace-title-row">
           <h3 class="title" [routerLink]="['/work/inner', eachWork.id]">
             <span class="first-letter" style="background: {{ eachWork.color }}">

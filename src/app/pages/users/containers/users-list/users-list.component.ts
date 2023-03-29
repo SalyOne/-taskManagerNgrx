@@ -9,6 +9,9 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {DeletePopupComponent} from "../../../../shared/popups/delete-popup/delete-popup.component";
 import {AddOrEditUsersComponent} from "../../components/add-or-edit-users/add-or-edit-users.component";
 import {AddRoleComponent} from "../../components/add-role/add-role.component";
+import {Store} from "@ngrx/store";
+import {UserStateModel} from "../../store/user.reducer";
+import {loadUsers} from "../../store/user.actions";
 
 
 
@@ -35,6 +38,8 @@ export class UsersListComponent implements OnInit {
 
   constructor(
     private usersService: UsersService,
+    private store : Store<{user: UserStateModel}>,
+
     private route: ActivatedRoute,
     private router: Router,
     public dialog: MatDialog,
@@ -59,6 +64,12 @@ export class UsersListComponent implements OnInit {
         startWith({}),
         switchMap(() => {
           this.isLoading = true;
+           this.store.dispatch(loadUsers({
+             page: this.paginator.pageIndex + 1,
+             limit: this.paginator.pageSize,
+           }))
+
+
           return this.getUser(
             this.paginator.pageSize,
             this.paginator.pageIndex + 1

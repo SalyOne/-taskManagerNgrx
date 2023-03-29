@@ -1,3 +1,4 @@
+<ng-container *ngIf="workspace$ | async as workspace">
 <div class="container-def">
   <ng-container *ngIf="loading; else loaded">
     <div class="loader-container">
@@ -8,7 +9,6 @@
     </div>
   </ng-container>
   <ng-template #loaded>
-
     <div class="title-row">
       <h1 class="title"> {{workspace.name}}</h1>
       <div class="button-container" >
@@ -99,3 +99,4 @@
     </div>
   </ng-template>
 </div>
+</ng-container>

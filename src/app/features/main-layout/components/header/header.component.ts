@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {AuthService, SidenavService} from 'src/app/core/services';
+import {Store} from "@ngrx/store";
+import {currentProject, initCurrentProject, loadProjects, ProjectStateModule} from "../../../../store/project";
 
 
 @Component({
@@ -7,19 +9,23 @@ import {AuthService, SidenavService} from 'src/app/core/services';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
-export class HeaderComponent {
+export class HeaderComponent implements OnInit{
 
   constructor(
     private authService: AuthService,
-    private sidenavService : SidenavService,
-    
-  ){}
+    private store : Store<{project: ProjectStateModule}>,
 
-  signOut(){
-    this.authService.signOut()
-  }
+    private sidenavService : SidenavService,
+
+  ){}
   toggleMenu(){
     this.sidenavService.toggleNav()
   }
-  
+  ngOnInit(): void {
+      this.store.dispatch(loadProjects());
+      this.store.dispatch(initCurrentProject())
+
+
+  }
+
 }

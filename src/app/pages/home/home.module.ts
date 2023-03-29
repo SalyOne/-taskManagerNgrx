@@ -9,6 +9,9 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatIconModule} from "@angular/material/icon";
 import {PermissionsDirective} from "../../core/directives/permissions.directive";
+import {StoreModule} from "@ngrx/store";
+import {ProjectEffect, projectReducer} from "../../store/project";
+import {EffectsModule} from "@ngrx/effects";
 
 
 
@@ -18,14 +21,15 @@ import {PermissionsDirective} from "../../core/directives/permissions.directive"
     HomeComponent
   ],
     imports: [
-        CommonModule,
-        HomeRoutingModule,
-        MatCardModule,
-        MatDividerModule,
-        MatButtonModule,
-        MatProgressSpinnerModule,
-        MatIconModule,
-        PermissionsDirective
+      CommonModule,
+      HomeRoutingModule,
+      MatCardModule,
+      MatDividerModule,
+      MatButtonModule,
+      MatProgressSpinnerModule,
+      MatIconModule,
+      PermissionsDirective,
+
     ],
   exports:[
     HomeComponent

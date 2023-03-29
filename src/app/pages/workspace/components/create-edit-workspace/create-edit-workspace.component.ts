@@ -5,6 +5,8 @@ import {WorkspaceService} from "../../../../core/services/workspace.service";
 import {ActivatedRoute, Router, RouterModule} from "@angular/router";
 import {IWorkspace} from "../../../../core/interfaces";
 import {CookieService} from "ngx-cookie-service";
+import {Store} from "@ngrx/store";
+import {ProjectStateModule} from "../../../../store/project";
 
 @Component({
   selector: 'app-create-workspace',
@@ -26,6 +28,8 @@ export class CreateEditWorkspaceComponent implements OnDestroy , OnInit{
 
   projects$: Observable<IWorkspace[]> = this.workspaceService.getAllWorkspacesForUser()
   constructor(
+    private store : Store<{project: ProjectStateModule}>,
+
     private workspaceService:WorkspaceService,
     private router: Router,
     private route: ActivatedRoute,

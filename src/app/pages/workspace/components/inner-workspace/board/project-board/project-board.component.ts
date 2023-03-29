@@ -8,6 +8,8 @@ import {MatDialog} from "@angular/material/dialog";
 import { BoardService } from 'src/app/core/services/board.service';
 import { IBoard } from 'src/app/core/interfaces/board';
 import { DeletePopupComponent } from 'src/app/shared/popups/delete-popup/delete-popup.component';
+import {Store} from "@ngrx/store";
+import {currentProject, ProjectStateModule} from "../../../../../../store/project";
 
 @Component({
   selector: 'app-project-board',
@@ -29,6 +31,7 @@ export class ProjectBoardComponent implements OnInit, OnDestroy, AfterViewInit {
 
   constructor(
     private boardService: BoardService,
+    private store : Store<{project: ProjectStateModule}>,
     public dialog: MatDialog,
     private cd: ChangeDetectorRef
   ) {
@@ -37,9 +40,14 @@ export class ProjectBoardComponent implements OnInit, OnDestroy, AfterViewInit {
 
 
   ngOnInit(): void {
-    this.getBoards();
+    this.store.select(currentProject)
+      .subscribe((proj)=>{
+        if (proj){
+          this.getBoards();
+        }
+      }
+    )
   }
-
   getBoards() {
     this.boardService.getBoards()
       .pipe(takeUntil(this.sub$))
@@ -49,9 +57,6 @@ export class ProjectBoardComponent implements OnInit, OnDestroy, AfterViewInit {
       });
   }
 
-  addBoard() {
-    // console.log('add boards');
-  }
 
   ngOnDestroy(): void {
     this.sub$.next(null);
@@ -84,10 +89,6 @@ export class ProjectBoardComponent implements OnInit, OnDestroy, AfterViewInit {
     this.isLoading = true
     this.getBoards()
     this.cd.detectChanges()
-
-
-
-
   }
 
 }

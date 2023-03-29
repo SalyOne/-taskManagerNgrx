@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { WorkspaceRoutingModule } from './workspace-routing.module';
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatSelectModule} from "@angular/material/select";
-import {FormGroup, FormsModule, ReactiveFormsModule} from "@angular/forms";
+import { FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {MatInputModule} from "@angular/material/input";
 import {HttpClientModule} from "@angular/common/http";
 import {MatButtonModule} from "@angular/material/button";
@@ -21,7 +21,6 @@ import { WorkspaceListComponent } from './components/workspace-list/workspace-li
 import {MatProgressBarModule} from "@angular/material/progress-bar";
 import {MatStepperModule} from '@angular/material/stepper';
 import {MatSidenavModule} from "@angular/material/sidenav";
-import { AddMembersComponent } from './containers/add-members/add-members.component';
 import {PermissionsDirective} from "../../core/directives/permissions.directive";
 
 
@@ -30,8 +29,7 @@ import {PermissionsDirective} from "../../core/directives/permissions.directive"
 @NgModule({
   declarations: [
     CreateEditWorkspaceComponent,
-    WorkspaceListComponent,
-    AddMembersComponent,
+    WorkspaceListComponent
 
 
   ],

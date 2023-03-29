@@ -9,6 +9,8 @@ import {MatDialog} from "@angular/material/dialog";
 import {DeletePopupComponent} from "../../../../../shared/popups/delete-popup/delete-popup.component";
 import {AddMemberComponent} from "./add-member/add-member.component";
 import {ProjectFacade} from "../../../../../facades/project.facade";
+import {Store} from "@ngrx/store";
+import {currentProject, ProjectStateModule} from "../../../../../store/project";
 
 @Component({
   selector: 'app-members',
@@ -29,6 +31,8 @@ export class MembersComponent implements  OnInit,AfterViewInit, OnDestroy{
   dataSource = new MatTableDataSource<User>();
   members: User[] = [];
   constructor(
+    private store : Store<{project: ProjectStateModule}>,
+
     private workspaceService: WorkspaceService,
     private projectFacade: ProjectFacade,
     private route : ActivatedRoute,
@@ -60,7 +64,14 @@ export class MembersComponent implements  OnInit,AfterViewInit, OnDestroy{
   ngAfterViewInit() {
     this.isLoading = true
     this.loading =true
-    this.getMembers()
+
+    this.store.select(currentProject)
+      .subscribe((proj)=>{
+          if (proj){
+            this.getMembers()
+          }
+        }
+      )
     // imistvis rom afterViewInit-is mere shecvlilma isLoading cvladma errori ar amoagdos
     this.cd.detectChanges()
   }

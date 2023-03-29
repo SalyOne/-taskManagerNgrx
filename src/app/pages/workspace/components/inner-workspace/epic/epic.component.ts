@@ -9,6 +9,8 @@ import {MatDialog} from "@angular/material/dialog";
 import {EpicService} from "../../../../../core/services/epic.service";
 import {IIssueType} from "../../../../../core/interfaces/issue-type";
 import {DeletePopupComponent} from "../../../../../shared/popups/delete-popup/delete-popup.component";
+import {currentProject, ProjectStateModule} from "../../../../../store/project";
+import {Store} from "@ngrx/store";
 
 @Component({
   selector: 'app-epic',
@@ -30,6 +32,8 @@ export class EpicComponent implements OnDestroy,AfterViewInit{
 
   constructor(
     private epicService : EpicService,
+    private store : Store<{project: ProjectStateModule}>,
+
     private route : ActivatedRoute,
     private router:Router,
     public dialog: MatDialog,
@@ -52,7 +56,14 @@ export class EpicComponent implements OnDestroy,AfterViewInit{
   ngAfterViewInit() {
     this.isLoading = true
     this.loading =true
-    this.getEpics()
+
+    this.store.select(currentProject)
+      .subscribe((proj)=>{
+          if (proj){
+            this.getEpics();
+          }
+        }
+      )
     // imistvis rom afterViewInit-is mere shecvlilma isLoading cvladma errori ar amoagdos
     this.cd.detectChanges()
   }

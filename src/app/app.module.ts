@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, isDevMode } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -28,6 +28,11 @@ import {MatInputModule} from "@angular/material/input";
 import {MatDividerModule} from "@angular/material/divider";
 import { PagenotfoundComponent } from './pages/pagenotfound/pagenotfound.component';
 import {PermissionsDirective} from "./core/directives/permissions.directive";
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
+import {projectReducer} from "./store/project/project.reducer";
+import {ProjectEffect} from "./store/project";
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 
 
@@ -63,7 +68,10 @@ import {PermissionsDirective} from "./core/directives/permissions.directive";
     MatGridListModule,
     MatInputModule,
     MatDividerModule,
-    PermissionsDirective
+    PermissionsDirective,
+    StoreModule.forRoot({}, {}),
+    EffectsModule.forRoot([]),
+    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() })
 
   ],
   providers: [

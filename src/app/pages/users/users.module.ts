@@ -10,6 +10,10 @@ import {MatButtonModule} from "@angular/material/button";
 import { AddRoleComponent } from './components/add-role/add-role.component';
 import {MatDialogModule} from "@angular/material/dialog";
 import {MatCardModule} from "@angular/material/card";
+import {StoreModule} from "@ngrx/store";
+import {userReducer} from "./store/user.reducer";
+import {UserEffects} from "./store/user.effects";
+import {EffectsModule} from "@ngrx/effects";
 
 
 @NgModule({
@@ -31,6 +35,10 @@ import {MatCardModule} from "@angular/material/card";
     MatDialogModule,
     MatCardModule,
 
+    StoreModule.forFeature(
+      'user', userReducer
+    ),
+    EffectsModule.forFeature([UserEffects])
   ],
 })
 export class UsersModule { }

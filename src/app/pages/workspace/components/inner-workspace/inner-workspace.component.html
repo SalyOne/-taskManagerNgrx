@@ -1,8 +1,10 @@
+
+<ng-container *ngIf="workspace$ | async as workspace">
 <ng-container *ngIf="loading; else loaded">
   <div class="loader-container">
     <mat-progress-spinner
-      [color]="color"
-      [mode]="mode">
+      color="primary"
+      mode="indeterminate">
     </mat-progress-spinner>
   </div>
 </ng-container>
@@ -28,7 +30,7 @@
 </mat-sidenav-container>
 </ng-template>
 
-
+</ng-container>
 
 
 

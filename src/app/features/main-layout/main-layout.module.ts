@@ -11,6 +11,9 @@ import {MatButtonModule} from "@angular/material/button";
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import {MatListModule} from "@angular/material/list";
 import {PermissionsDirective} from "../../core/directives/permissions.directive";
+import {StoreModule} from "@ngrx/store";
+import {ProjectEffect, projectReducer} from "../../store/project";
+import {EffectsModule} from "@ngrx/effects";
 
 
 
@@ -31,7 +34,11 @@ import {PermissionsDirective} from "../../core/directives/permissions.directive"
     MatToolbarModule,
     MatButtonModule,
     MatListModule,
-    PermissionsDirective
+    PermissionsDirective,
+    StoreModule.forFeature(
+      'project', projectReducer
+    ),
+    EffectsModule.forFeature([ProjectEffect])
 
   ],
   exports: [
