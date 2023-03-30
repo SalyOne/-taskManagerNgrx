@@ -25,21 +25,21 @@
       <mat-tab-group animationDuration="0ms">
         <mat-tab label="Boards">
           <ng-template matTabContent>
-            <ng-container *ngIf="loadBoard; else loaded">
-              <div class="loader-container">
-                <mat-progress-spinner color="primary" mode="indeterminate"></mat-progress-spinner>
-              </div>
-            </ng-container>
-            <ng-template #loaded>
+<!--            <ng-container *ngIf="loadBoard; else loaded">-->
+<!--              <div class="loader-container">-->
+<!--                <mat-progress-spinner color="primary" mode="indeterminate"></mat-progress-spinner>-->
+<!--              </div>-->
+<!--            </ng-container>-->
+<!--            <ng-template #loaded>-->
             <div class="workspace-content-row">
-              <mat-card class="boardNameCard" *ngFor="let board of boards">
+              <mat-card class="boardNameCard" *ngFor="let board of boards ">
                 <mat-card-content [routerLink]="['/dashboard', board.id]">
                     {{board.name}}
                 </mat-card-content>
               </mat-card>
 
             </div>
-            </ng-template>
+<!--            </ng-template>-->
           </ng-template>
         </mat-tab>
         <mat-tab label="Members">

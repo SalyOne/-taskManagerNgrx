@@ -4,6 +4,8 @@ import {ProjectFacade} from "../../../facades/project.facade";
 import {IWorkspace} from "../../../core/interfaces";
 import {ActivatedRoute} from "@angular/router";
 import {WorkspaceService} from "../../../core/services";
+import {Store} from "@ngrx/store";
+import {BoardStateModule, getBoards} from "../../../store";
 
 @Component({
   selector: 'app-dashboard',
@@ -14,6 +16,7 @@ export class DashboardComponent {
   // implements OnInit{
 
   constructor(
+    private store : Store<{board: BoardStateModule}>,
     private boardService: BoardService,
     private projectFacade: ProjectFacade,
     private workspaceService: WorkspaceService,
@@ -21,7 +24,7 @@ export class DashboardComponent {
     private route : ActivatedRoute,
   ) {}
 
-  boards$ = this.boardService.getBoards()
+  boards$ = this.store.select(getBoards)
 
   boardId: number | null = null
   workspace! :IWorkspace;

@@ -1,6 +1,6 @@
 import {AfterViewInit, Component, OnDestroy, OnInit, ChangeDetectorRef} from '@angular/core';
 
-import {Observable, of, Subject, switchMap, takeUntil} from "rxjs";
+import {Observable, of, Subject, switchMap, takeUntil, tap} from "rxjs";
 
 import {DataSource} from "@angular/cdk/collections";
 import {MatTableDataSource} from "@angular/material/table";
@@ -10,6 +10,7 @@ import { IBoard } from 'src/app/core/interfaces/board';
 import { DeletePopupComponent } from 'src/app/shared/popups/delete-popup/delete-popup.component';
 import {Store} from "@ngrx/store";
 import {currentProject, ProjectStateModule} from "../../../../../../store/project";
+import {BoardStateModule, deleteBoard, getBoards, loadBoards} from "../../../../../../store";
 
 @Component({
   selector: 'app-project-board',
@@ -31,7 +32,7 @@ export class ProjectBoardComponent implements OnInit, OnDestroy, AfterViewInit {
 
   constructor(
     private boardService: BoardService,
-    private store : Store<{project: ProjectStateModule}>,
+    private store : Store<{project: ProjectStateModule, board: BoardStateModule}>,
     public dialog: MatDialog,
     private cd: ChangeDetectorRef
   ) {
@@ -40,27 +41,28 @@ export class ProjectBoardComponent implements OnInit, OnDestroy, AfterViewInit {
 
 
   ngOnInit(): void {
+    // this.getBoards()
     this.store.select(currentProject)
+      .pipe()
       .subscribe((proj)=>{
         if (proj){
-          this.getBoards();
+          this.store.dispatch(loadBoards())
         }
       }
     )
   }
+  ngAfterViewInit(): void {
+    this.isLoading = true
+    this.getBoards()
+    this.cd.detectChanges()
+  }
   getBoards() {
-    this.boardService.getBoards()
+    this.store.select(getBoards)
       .pipe(takeUntil(this.sub$))
       .subscribe(boards => {
         this.dataSource.data = boards;
         this.isLoading =false
       });
-  }
-
-
-  ngOnDestroy(): void {
-    this.sub$.next(null);
-    this.sub$.complete();
   }
 
   deleteBoard(id: number) {
@@ -69,26 +71,20 @@ export class ProjectBoardComponent implements OnInit, OnDestroy, AfterViewInit {
     dialogRef.afterClosed()
       .pipe(
         takeUntil(this.sub$),
-        switchMap((result) => {
+        tap((result) => {
           if (result) {
-            return this.boardService.deleteBoard(id);
+            return this.store.dispatch(deleteBoard({boardId: id}))
           }
-          return of(null);
         })
       )
-      .subscribe(result => {
-        if (result) {
-          this.getBoards();
-        }
-      });
-
-
+      .subscribe();
   }
 
-  ngAfterViewInit(): void {
-    this.isLoading = true
-    this.getBoards()
-    this.cd.detectChanges()
+  ngOnDestroy(): void {
+    this.sub$.next(null);
+    this.sub$.complete();
   }
+
+
 
 }

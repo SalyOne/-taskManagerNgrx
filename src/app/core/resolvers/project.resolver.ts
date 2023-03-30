@@ -7,6 +7,8 @@ import {
 import {map, Observable, of} from 'rxjs';
 import {WorkspaceService} from "../services";
 import {ProjectFacade} from "../../facades/project.facade";
+import {ProjectStateModule, setProjects} from "../../store/project";
+import {Store} from "@ngrx/store";
 
 @Injectable({
   providedIn: 'root'
@@ -14,15 +16,18 @@ import {ProjectFacade} from "../../facades/project.facade";
 export class ProjectResolver implements Resolve<boolean> {
   constructor(
     private workspaceService: WorkspaceService,
-    private projectFacade: ProjectFacade
+    private projectFacade: ProjectFacade,
+    private  store: Store<{project: ProjectStateModule}>
   ) {
   }
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> {
-    const projectId: string = route.params['projectId']
+    const projectId: number = route.params['projectId']
+
+
+    this.store.dispatch(setProjects({projectId}))
     return this.workspaceService.getOneProject(projectId)
       .pipe(
         map(res=>{
-          this.projectFacade.setProject(res)
           return true
         })
       );

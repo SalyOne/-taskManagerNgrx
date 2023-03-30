@@ -20,3 +20,11 @@ export const setProjects = createAction(
 export const initCurrentProject = createAction(
   '[Project] Init Current Project'
 )
+export const createProject = createAction(
+  '[Project] Create Project',
+  props<{project: any}>()
+)
+export const updateProject = createAction(
+  '[Project] Update Project',
+  props<{project: any}>()
+)

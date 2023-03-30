@@ -6,6 +6,10 @@ import { ETaskStatus } from 'src/app/core/enums/task-status.enum';
 import { BoardService } from 'src/app/core/services/board.service';
 import { IWorkspace } from 'src/app/core/interfaces';
 import { ProjectFacade } from 'src/app/facades/project.facade';
+import {Store} from "@ngrx/store";
+import {createBoard, currentProject, getBoard, updateBoard} from "../../../../../../store";
+import {map, Observable, tap} from "rxjs";
+import {IBoard} from "../../../../../../core/interfaces/board";
 
 @Component({
   selector: 'app-board-add-edit',
@@ -24,7 +28,7 @@ export class BoardAddEditComponent implements OnInit {
   taskStatuses = Object.values(ETaskStatus);
 
   boardId!: number;
-  workspace!: IWorkspace
+  workspaceId!: number;
 
   get columnsFormArray() {
     return this.form.get('columns') as FormArray;
@@ -34,7 +38,7 @@ export class BoardAddEditComponent implements OnInit {
     private readonly boardService: BoardService,
     private router: Router,
     private route: ActivatedRoute,
-    private projectfacade: ProjectFacade
+    private store: Store
   ) { }
 
   ngOnInit(): void {
@@ -44,12 +48,20 @@ export class BoardAddEditComponent implements OnInit {
         this.getBoard()
       }
     })
-    this.workspace = this.projectfacade.getProject()
     // console.log(this.workspace)
+     this.store.select(currentProject)
+      .pipe(
+        map((res)=> {
+          return this.workspaceId = res.id
+        })
+      )
   }
 
   getBoard() {
-    this.boardService.getBoard(this.boardId).subscribe(res => {
+
+    this.store.select(getBoard,{boardId: this.boardId}).subscribe((res: IBoard | undefined) => {
+
+      if(!res){ return }
       this.form.patchValue(res)
       res.columns.forEach(column => {
         this.columnsFormArray.push(new FormGroup({
@@ -85,18 +97,10 @@ export class BoardAddEditComponent implements OnInit {
       return;
     }
     if (this.boardId) {
-      this.boardService.updateBoard(this.form.value)
-        .subscribe( res => {
-          this.router.navigate(['/work/inner', this.workspace.id, 'board']).then()
-        })
+      this.store.dispatch(updateBoard({board: this.form.value , projectId: this.workspaceId} ))
     } else {
-      this.boardService.createBoard(this.form.value)
-        .subscribe( res => {
-          this.router.navigate(['/work/inner', this.workspace.id, 'board']).then()
-        })
+      this.store.dispatch(createBoard ({board: this.form.value , projectId: this.workspaceId} ))
     }
-
-
   }
 
   drop(event: CdkDragDrop<any, any>) {

@@ -31,8 +31,8 @@ export class WorkspaceService extends BaseService{
   }
 
   // edit new project/ workspace
-  editOneProject(id:string, editedProject:IWorkspace):Observable<IWorkspace>{
-    return  this.put<IWorkspace>(`project/${id}`, editedProject);
+  editOneProject(editedProject:IWorkspace):Observable<IWorkspace>{
+    return  this.put<IWorkspace>(`project/${editedProject.id}`, editedProject);
   }
 
   // delete new project/ workspace

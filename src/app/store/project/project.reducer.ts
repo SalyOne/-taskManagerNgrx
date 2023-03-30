@@ -24,6 +24,7 @@ export const projectReducer = createReducer(
   initialState,
   on(loadProjects, state => state),
   on(loadProjectsSuccess, (state, action)=>{
+    console.log(action)
     return{
       ...state,
       projects:action.data

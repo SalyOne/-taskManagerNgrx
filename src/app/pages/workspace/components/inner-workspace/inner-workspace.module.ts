@@ -30,6 +30,9 @@ import { EpicAddEditComponent } from './epic/epic-add-edit/epic-add-edit.compone
 import { MembersComponent } from './members/members.component';
 import { AddMemberComponent } from './members/add-member/add-member.component';
 import {PermissionsDirective} from "../../../../core/directives/permissions.directive";
+import {StoreModule} from "@ngrx/store";
+import {BoardEffects, ProjectEffect, reducers} from "../../../../store";
+import {EffectsModule} from "@ngrx/effects";
 
 
 @NgModule({
@@ -69,6 +72,8 @@ import {PermissionsDirective} from "../../../../core/directives/permissions.dire
     MatSidenavModule,
     MatCheckboxModule,
     PermissionsDirective,
+    StoreModule.forFeature('app', reducers),
+    EffectsModule.forFeature([ProjectEffect, BoardEffects])
   ],
   exports:[
     InnerWorkspaceComponent

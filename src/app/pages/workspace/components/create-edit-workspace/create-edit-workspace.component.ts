@@ -6,7 +6,8 @@ import {ActivatedRoute, Router, RouterModule} from "@angular/router";
 import {IWorkspace} from "../../../../core/interfaces";
 import {CookieService} from "ngx-cookie-service";
 import {Store} from "@ngrx/store";
-import {ProjectStateModule} from "../../../../store/project";
+import {createProject, getProject, ProjectStateModule, updateProject} from "../../../../store/project";
+import {update} from "lodash";
 
 @Component({
   selector: 'app-create-workspace',
@@ -42,7 +43,7 @@ export class CreateEditWorkspaceComponent implements OnDestroy , OnInit{
       switchMap((params: any) => {
         if (params['id']) {
           this.pageTitle = "edit workspace"
-          return this.workspaceService.getOneProject(params['id'])
+          return this.store.select(getProject, {projectId: +params['id']})
         }
         return of(null)
       })
@@ -50,53 +51,49 @@ export class CreateEditWorkspaceComponent implements OnDestroy , OnInit{
       if (res) {
         this.form.patchValue(res)
       }
+      return
     })
 
   }
-  ProjectID?:number;
-  isEditable: boolean = false;
   submit(){
-
-    // console.log("test test")
     this.form.markAllAsTouched();
     if(this.form.invalid) return;
 
-    // console.log(this.form.value)
-
     if(this.form.value.id){
-      this.workspaceService.editOneProject(this.form.value.id ,this.form.value)
-        .pipe(takeUntil(this.sub$))
-        .subscribe({
-          next: res =>{
-            if (this.errorMsg){
-              this.errorMsg = ""
-            }
-            // console.log("ress: ", res)
-            this.router.navigate(['/work/inner', this.form.value.id])
-          },
-          error: err=>{
-            this.errorMsg = err.error.message;
-          }
-        })
+      this.store.dispatch(updateProject({project:this.form.value}))
+        // .subscribe({
+        //   next: res =>{
+        //     if (this.errorMsg){
+        //       this.errorMsg = ""
+        //     }
+        //     // console.log("ress: ", res)
+        //     this.router.navigate(['/work/inner', this.form.value.id])
+        //   },
+        //   error: err=>{
+        //     this.errorMsg = err.error.message;
+        //   }
+        // })
     }else{
-      this.workspaceService.addWorkspace(this.form.value)
-        .pipe(takeUntil(this.sub$))
-        .subscribe({
-            next: res =>{
-              if (this.errorMsg){
-                this.errorMsg = ""
-              }
-              // console.log("ress: ", res)
-              this.ProjectID = res.id
-              this.router.navigate(['/work/inner', res.id])
+      this.store.dispatch(createProject({project: this.form.value}))
 
-              // console.log(this.ProjectID)
-            },
-            error: err=>{
-              this.errorMsg = err.error.message;
-            }
-          }
-        )
+      //   this.workspaceService.addWorkspace(this.form.value)
+    //     .pipe(takeUntil(this.sub$))
+    //     .subscribe({
+    //         next: res =>{
+    //           if (this.errorMsg){
+    //             this.errorMsg = ""
+    //           }
+    //           // console.log("ress: ", res)
+    //           this.ProjectID = res.id
+    //           this.router.navigate(['/work/inner', res.id])
+    //
+    //           // console.log(this.ProjectID)
+    //         },
+    //         error: err=>{
+    //           this.errorMsg = err.error.message;
+    //         }
+    //       }
+    //     )
     }
   }
 

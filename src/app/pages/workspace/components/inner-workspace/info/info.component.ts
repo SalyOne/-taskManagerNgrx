@@ -14,6 +14,7 @@ import {MatPaginator} from "@angular/material/paginator";
 import {IBoard} from "../../../../../core/interfaces/board";
 import {Store} from "@ngrx/store";
 import {currentProject, ProjectStateModule} from "../../../../../store/project";
+import {BoardStateModule, getBoards, loadBoards} from "../../../../../store";
 
 @Component({
   selector: 'app-info',
@@ -40,7 +41,7 @@ export class InfoComponent implements OnDestroy, OnInit, AfterViewInit{
   dataSource = new MatTableDataSource<User>();
   members: User[] = [];
   constructor(
-    private store : Store<{project: ProjectStateModule}>,
+    private store : Store<{project: ProjectStateModule, board:BoardStateModule}>,
     private workspaceService : WorkspaceService,
     private router:Router,
     public dialog: MatDialog,
@@ -51,11 +52,14 @@ export class InfoComponent implements OnDestroy, OnInit, AfterViewInit{
   boards:IBoard[] =[];
   // boards$ = this.boardService.getBoards()
   getBoards(){
-    return this.boardService.getBoards().subscribe((res)=>{
-        this.loadBoard = false;
-        this.boards = res
-      }
-    )
+    this.store.select(getBoards)
+      .pipe(takeUntil(this.sub$))
+      .subscribe(boards => {
+        console.log("boardssss: ", boards)
+        this.boards = boards;
+        this.isLoading =true
+        console.log("this boardssss: ", this.boards)
+      });
   }
   ngOnInit(): void {
     this.loadBoard =true
@@ -63,6 +67,7 @@ export class InfoComponent implements OnDestroy, OnInit, AfterViewInit{
     this.store.select(currentProject)
       .subscribe((proj)=>{
           if (proj){
+            this.store.dispatch(loadBoards())
             this.getBoards();
           }
         }

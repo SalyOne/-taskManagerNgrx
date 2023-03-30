@@ -11,8 +11,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {TaskService} from "../../core/services/task.service";
 import {ITask} from "../../core/interfaces/task";
 import {Store} from "@ngrx/store";
-import {loadProjects, ProjectStateModule, setProjects} from "../../store/project";
-import {ProjectSelectors} from "../../store/project/project.selectors";
+import {loadProjects, projects, ProjectStateModule, setProjects} from "../../store/project";
 
 @Component({
   selector: 'app-home',
@@ -21,8 +20,12 @@ import {ProjectSelectors} from "../../store/project/project.selectors";
 })
 export class HomeComponent implements OnDestroy{
   // getWorkspacesForMyUser$: Observable<IWorkspace[]> = this.workspaceService.getAllWorkspacesForUser();
-  getWorkspacesForMyUser$ = this.store.select(sta=> sta.project.projects)
-  countProjects$: Observable<number> = this.store.select(ProjectSelectors.totalProjects)
+  getWorkspacesForMyUser$ = this.store.select(projects)
+  countProjects$: Observable<number> = this.store.select(projects).pipe(
+    map((res)=> {
+      return res.length
+    })
+  )
   // eachworkBoards?: IBoard
   tasks:ITask[]= [];
 

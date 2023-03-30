@@ -14,6 +14,7 @@ import {PermissionsDirective} from "../../core/directives/permissions.directive"
 import {StoreModule} from "@ngrx/store";
 import {ProjectEffect, projectReducer} from "../../store/project";
 import {EffectsModule} from "@ngrx/effects";
+import {BoardEffects, boardReducer, reducers} from "../../store";
 
 
 
@@ -35,10 +36,8 @@ import {EffectsModule} from "@ngrx/effects";
     MatButtonModule,
     MatListModule,
     PermissionsDirective,
-    StoreModule.forFeature(
-      'project', projectReducer
-    ),
-    EffectsModule.forFeature([ProjectEffect])
+    StoreModule.forFeature('app', reducers),
+    EffectsModule.forFeature([ProjectEffect, BoardEffects])
 
   ],
   exports: [
