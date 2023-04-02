@@ -21,6 +21,10 @@ export const getProject =  createSelector(
   (projects: IWorkspace[], props:{projectId:number}) => projects.find((project)=>project.id === +props.projectId)
 )
 
+export const getProjectUsers = createSelector(
+  (state: any) => state.app.project.projectUsers,
+  (projectUsers) => projectUsers
+)
 
 
 // export const ProjectSelectors = {

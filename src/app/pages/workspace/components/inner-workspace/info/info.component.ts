@@ -55,10 +55,10 @@ export class InfoComponent implements OnDestroy, OnInit, AfterViewInit{
     this.store.select(getBoards)
       .pipe(takeUntil(this.sub$))
       .subscribe(boards => {
-        console.log("boardssss: ", boards)
+        // console.log("boardssss: ", boards)
         this.boards = boards;
         this.isLoading =true
-        console.log("this boardssss: ", this.boards)
+        // console.log("this boardssss: ", this.boards)
       });
   }
   ngOnInit(): void {

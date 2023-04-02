@@ -15,6 +15,8 @@ import {StoreModule} from "@ngrx/store";
 import {ProjectEffect, projectReducer} from "../../store/project";
 import {EffectsModule} from "@ngrx/effects";
 import {BoardEffects, boardReducer, reducers} from "../../store";
+import {IssueTypesEffects} from "../../store/issue-types";
+import {EpicsEffect} from "../../store/epics";
 
 
 
@@ -37,7 +39,7 @@ import {BoardEffects, boardReducer, reducers} from "../../store";
     MatListModule,
     PermissionsDirective,
     StoreModule.forFeature('app', reducers),
-    EffectsModule.forFeature([ProjectEffect, BoardEffects])
+    EffectsModule.forFeature([ProjectEffect, BoardEffects, IssueTypesEffects, EpicsEffect])
 
   ],
   exports: [

@@ -23,11 +23,11 @@ export class UsersService extends BaseService {
   getUsersAll(params: {}): Observable<IQueryTable<User>> {
     return this.get<IQueryTable<User>>(`users/all`, params);
   }
-  getUsers(params: {}): Observable<IQueryTable<User>> {
+  getUsers(params?: {}): Observable<IQueryTable<User>> {
     return this.get<IQueryTable<User>>(`users`, params);
   }
 
-  create(data: any) {
+  createUser(data: any) {
     return this.post('users', data);
   }
 
@@ -42,6 +42,9 @@ export class UsersService extends BaseService {
   //   return this.post<IQueryTable<User>>(`procedures`, params);
   // }
 
+  updateUser(data: User):Observable<User> {
+    return this.put(`users/${data.id}`, data);
+  }
   deleteUser(id: any): Observable<User> {
     return this.delete<User>(`users/${id}`);
   }

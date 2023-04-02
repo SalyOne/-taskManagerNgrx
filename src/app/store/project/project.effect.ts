@@ -2,15 +2,16 @@ import {Injectable} from "@angular/core";
 import {Actions, createEffect, ofType} from "@ngrx/effects";
 import {WorkspaceService} from "../../core/services";
 import {
-  createProject,
+  createProject, deleteProjectUser,
   loadProjects,
   loadProjectsFailure,
-  loadProjectsSuccess, setProjects, updateProject
+  loadProjectsSuccess, loadProjectUser, loadProjectUsersSuccess, setProjects, setProjectUsers, updateProject
 } from "./project.actions";
 import {catchError, map, of, switchMap, tap} from "rxjs";
 import {Store} from "@ngrx/store";
 import {IWorkspace} from "../../core/interfaces";
 import {Router} from "@angular/router";
+import {deleteIssueType, loadIssueTypes, loadIssueTypesFailure} from "../issue-types";
 
 @Injectable()
 export class ProjectEffect{
@@ -54,6 +55,31 @@ export class ProjectEffect{
       catchError((error)=>of(loadProjectsFailure({error})))
     ))
   ))
+  loadProjectUsers$ = createEffect(() => this.actions$.pipe(
+    ofType(loadProjectUser),
+    switchMap((action) => this.workspaceService.getProjectUsers().pipe(
+      map((data) => loadProjectUsersSuccess({users: data})),
+      catchError((error) => of(loadProjectsFailure({error})))
+    ))
+  ))
+  setProjectUsers$ = createEffect(() => this.actions$.pipe(
+    ofType(setProjectUsers),
+    switchMap((action) => this.workspaceService.addUsersToWorkspace(action).pipe(
+      map((data) => loadProjectUser()),
+      catchError((error) => of(loadProjectsFailure({error})))
+    ))
+  ))
+
+
+  deleteProjectUser$ = createEffect(() => this.actions$.pipe(
+      ofType(deleteProjectUser),
+      switchMap((action) => this.workspaceService.deleteUsersFromWorkspace(action.userId).pipe(
+          map((data: any) => loadProjectUser()),
+          catchError((error) => of(loadProjectsFailure({error})))
+        )
+      )
+    )
+  );
 
   // initCurrentProject$ =  createEffect(()=> this.actions$.pipe(
   //   ofType(setProjects),

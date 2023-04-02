@@ -21,6 +21,6 @@ export interface IQueryTable<T>{
 }
 export interface IWorkspaceUsers{
   projectId: number;
-  userIds: string[];
+  userIds: number[];
 }
 

@@ -1,4 +1,4 @@
-import {ChangeDetectorRef, Component, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, ChangeDetectorRef, Component, OnInit, ViewChild} from '@angular/core';
 import {catchError, map, of, startWith, Subject, switchMap, takeUntil} from "rxjs";
 import {UsersService} from "../../../../core/services/users.service";
 import { QueryTable, User} from "../../../../core/interfaces";
@@ -11,7 +11,9 @@ import {AddOrEditUsersComponent} from "../../components/add-or-edit-users/add-or
 import {AddRoleComponent} from "../../components/add-role/add-role.component";
 import {Store} from "@ngrx/store";
 import {UserStateModel} from "../../store/user.reducer";
-import {loadUsers} from "../../store/user.actions";
+import {deleteUser, loadUsers} from "../../store/user.actions";
+import {getUsers, isLoading, userTotal} from "../../store";
+import {result} from "lodash";
 
 
 
@@ -20,82 +22,56 @@ import {loadUsers} from "../../store/user.actions";
   templateUrl: './users-list.component.html',
   styleUrls: ['./users-list.component.scss']
 })
-export class UsersListComponent implements OnInit {
-
+export class UsersListComponent implements AfterViewInit{
 
   displayedColumns: string[] = ['id', 'firstName', 'lastName', 'email', 'mobileNumber','roles', 'createdAt', 'actions'];
   sub$ = new Subject();
   user: User[] = []
-  empTable!: QueryTable<User>;
-  isLoading = false;
-  chooseUserActive = false;
-
-  totalData?: number;
-  pageSizes = [5, 7];
+  pageSizes = [10,15,20];
   dataSource = new MatTableDataSource<User>();
+  isLoading$ = this.store.select(isLoading);
+  totalData$ = this.store.select(userTotal);
 
   @ViewChild('paginator') paginator!: MatPaginator;
 
   constructor(
-    private usersService: UsersService,
     private store : Store<{user: UserStateModel}>,
-
-    private route: ActivatedRoute,
-    private router: Router,
     public dialog: MatDialog,
     private cd: ChangeDetectorRef
 
   ) {
   }
 
-
-  getUser(limit:number,pageIndex:number ) {
-    return this.usersService.getUsers({
-      page: pageIndex,
-      totalCount: length,
-      limit: limit
-    })
-  }
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
     // console.log(this.paginator.page)
+    this.loadUsers()
     this.paginator.page
       .pipe(
         startWith({}),
         switchMap(() => {
-          this.isLoading = true;
-           this.store.dispatch(loadUsers({
-             page: this.paginator.pageIndex + 1,
-             limit: this.paginator.pageSize,
-           }))
-
-
-          return this.getUser(
-            this.paginator.pageSize,
-            this.paginator.pageIndex + 1
-          ).pipe(catchError(() => of(null)));
+          this.loadUsers(this.paginator.pageIndex + 1,  this.paginator.pageSize)
+          return this.store.select(getUsers).pipe(catchError(() => of(null)));
         }),
         map((empData) => {
-          // console.log("empData", empData)
           if (empData == null) return [];
-          this.totalData = empData.totalCount;
-          this.isLoading = false;
-          return empData.data;
+          return empData;
         })
       )
       .subscribe((empData) => {
         // console.log(empData)
-        this.user = empData;
-        this.dataSource = new MatTableDataSource(this.user);
+        // this.user = empData;
+        this.dataSource = new MatTableDataSource(empData);
       });
     this.cd.detectChanges()
   }
 
-  ngOnInit(): void {
-    // this.getUser()
-
+  loadUsers(page: number = 1, limit: number =10){
+    this.store.dispatch(loadUsers({
+      page: page,
+      limit:limit,
+    }))
   }
-
   addUser(id?: number) {
     const dialogRef = this.dialog.open(AddOrEditUsersComponent, {
       data: {
@@ -104,34 +80,42 @@ export class UsersListComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
+        console.log("after closed ")
+        this.loadUsers()
       }
     })
   }
   addRole(user: User) {
     const dialogRef = this.dialog.open(AddRoleComponent, {
       data: {
-        user: user,
+        userData: user,
       }
     });
 
-    dialogRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed()
+      .subscribe(result => {
       if (result) {
-        this.usersService.getUsersall()
+       this.loadUsers()
       }
     })
   }
 
 
-  deleteProject(id?: number): void {
+  deleteProject(id: number): void {
     this.openDialog()
       .afterClosed()
+      .pipe(
+        takeUntil(this.sub$),
+        switchMap((result)=>{
+          if (result){
+            this.store.dispatch(deleteUser({id}))
+          }
+          return of(null)
+        })
+      )
       .subscribe(res => {
           if (res) {
-            this.usersService.deleteUser(String(id))
-              .pipe(takeUntil(this.sub$))
-              .subscribe(res => {
-                this.router.navigate(['/users'])
-              })
+           this.loadUsers()
           }
         }
       )

@@ -15,8 +15,8 @@ export class EpicService  extends  BaseService{
     return this.post<IEpic>('epics', param)
   }
 
-  editEpic(id:string, editedProject:IEpic):Observable<IEpic>{
-    return  this.put<IEpic>(`epics/${id}`, editedProject);
+  editEpic(editedProject:IEpic):Observable<IEpic>{
+    return  this.put<IEpic>(`epics/${editedProject.id}`, editedProject);
   }
 
   getAllEpics() :Observable<IEpic[]>{
@@ -26,7 +26,7 @@ export class EpicService  extends  BaseService{
     return this.get<IEpic>(`epics/${id}`)
   }
 
-  deleteEpic(id:string){
+  deleteEpic(id:number){
     return this.delete(`epics/${id}`);
   }
 }

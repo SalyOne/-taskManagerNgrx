@@ -31,9 +31,8 @@ export class BoardEffects{
   createBoard$ = createEffect(()=> this.actions$.pipe(
     ofType(createBoard),
     switchMap((action) => this.boardService.createBoard(action.board).pipe(
-      map(()=> {
-        console.log(" inn create board",action.projectId)
-        this.router.navigate(['/work/inner', action.projectId, 'board']).then()
+      map((res)=> {
+        this.router.navigate(['/work/inner', res.projectId, 'board']).then()
         return loadBoards()
       }),
       catchError((error)=> of(loadBoardsFailure({error})))
@@ -43,10 +42,8 @@ export class BoardEffects{
   updateBoard$ = createEffect(()=> this.actions$.pipe(
     ofType(updateBoard),
     switchMap((action) => this.boardService.updateBoard(action.board).pipe(
-      map(()=> {
-        console.log(" inn create board",action.projectId)
-        this.router.navigate(['/work/inner', action.projectId, 'board']).then()
-
+      map((res)=> {
+        this.router.navigate(['/work/inner', res.projectId, 'board']).then()
         return loadBoards()
       }),
       catchError((error)=> of(loadBoardsFailure({error})))

@@ -2,11 +2,20 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {FormArray, FormControl, FormGroup, Validators} from "@angular/forms";
 import {EIssueTypes} from "../../../../../../core/enums/issue-type";
 import {IssueTypesService} from "../../../../../../core/services/issue-types.service";
-import {of, Subject, switchMap, takeUntil} from "rxjs";
+import {of, Subject, switchMap, takeUntil, tap} from "rxjs";
 import {ActivatedRoute, Router} from "@angular/router";
 import {MatDialog} from "@angular/material/dialog";
 import {DeletePopupComponent} from "../../../../../../shared/popups/delete-popup/delete-popup.component";
 import {ProjectFacade} from "../../../../../../facades/project.facade";
+import {Store} from "@ngrx/store";
+import {
+  createIssueType, getIssueType,
+  getIssueTypes,
+  IssueTypesStateModule,
+  updateIssueType
+} from "../../../../../../store/issue-types";
+import {currentProject} from "../../../../../../store";
+import {IIssueType} from "../../../../../../core/interfaces/issue-type";
 
 @Component({
   selector: 'app-issue-types-add-edit',
@@ -16,7 +25,7 @@ import {ProjectFacade} from "../../../../../../facades/project.facade";
 export class IssueTypesAddEditComponent  implements OnDestroy, OnInit{
 
   pageTitle: string =  "IssueType";
-  editId!:string;
+  editId!:number;
   projectID?: number
   sub$ = new Subject();
   form: FormGroup =  new FormGroup({
@@ -32,18 +41,19 @@ export class IssueTypesAddEditComponent  implements OnDestroy, OnInit{
   issueTypes = Object.values(EIssueTypes);
   errorMsg?: string;
   constructor(
-    private issueService: IssueTypesService,
-    private projectFacade: ProjectFacade,
+    // private issueService: IssueTypesService,
+    // private projectFacade: ProjectFacade,
     private route: ActivatedRoute,
-    private router: Router,
-    private dialog: MatDialog
+    // private router: Router,
+    private dialog: MatDialog,
+    private store:Store<{issueTypes: IssueTypesStateModule}>
   ) {
   }
   ngOnInit(): void {
-    this.projectID = this.projectFacade.getProject().id
+    // this.projectID = this.projectFacade.getProject().id
     this.route.params.subscribe(params => {
       if (params['id']) {
-        this.editId = params['id'];
+        this.editId = +params['id'];
         this.getIssueType()
       }
     })
@@ -60,9 +70,11 @@ export class IssueTypesAddEditComponent  implements OnDestroy, OnInit{
     }, Validators.required));
   }
   getIssueType(){
-    return this.issueService.getIssueType(this.editId)
+    this.store.select(getIssueType, {issueId: this.editId})
       .pipe(takeUntil(this.sub$))
-      .subscribe(res=>{
+      .subscribe((res:IIssueType| undefined)=>{
+        if(!res) return
+
           this.form.patchValue(res)
           res.issueTypeColumns.forEach(column =>{
             this.issueFormArray.push(new FormGroup({
@@ -86,39 +98,52 @@ export class IssueTypesAddEditComponent  implements OnDestroy, OnInit{
   }
   submit() {
     this.form.markAllAsTouched()
-    // console.log("in issue submit")
     if (this.form.invalid) return;
     if(this.editId){
-      this.issueService.editIssueType(this.editId, this.form.value)
-        .pipe(takeUntil(this.sub$))
-        .subscribe({
-            next: res =>{
-              if (this.errorMsg){
-                this.errorMsg = ""
-              }
-              this.router.navigate(['work/inner/', this.projectID,'types'])
-            },
-            error: err=>{
-              this.errorMsg = err.error.message;
-            }
-          }
-        )
+
+      this.store.select(currentProject).pipe(
+        takeUntil(this.sub$),
+        tap((res)=>{
+          this.store.dispatch(updateIssueType({issueTypes:this.form.value, projectId: res.id }))
+        })
+      ).subscribe()
+
+      // this.issueService.editIssueType(this.form.value)
+      //   .pipe(takeUntil(this.sub$))
+      //   .subscribe({
+      //       next: res =>{
+      //         if (this.errorMsg){
+      //           this.errorMsg = ""
+      //         }
+      //         this.router.navigate(['work/inner/', this.projectID,'types'])
+      //       },
+      //       error: err=>{
+      //         this.errorMsg = err.error.message;
+      //       }
+      //     }
+      //   )
 
     }else {
-      this.issueService.addIssueType(this.form.value)
-        .pipe(takeUntil(this.sub$))
-        .subscribe({
-            next: res =>{
-              if (this.errorMsg){
-                this.errorMsg = ""
-              }
-              this.router.navigate(['work/inner/', this.projectID,'types'])
-            },
-            error: err=>{
-              this.errorMsg = err.error.message;
-            }
-          }
-        )
+      this.store.select(currentProject).pipe(
+        takeUntil(this.sub$),
+        tap((res)=>{
+          this.store.dispatch(createIssueType({issueTypes:this.form.value, projectId: res.id }))
+        })
+      ).subscribe()
+      // this.issueService.addIssueType(this.form.value)
+      //   .pipe(takeUntil(this.sub$))
+      //   .subscribe({
+      //       next: res =>{
+      //         if (this.errorMsg){
+      //           this.errorMsg = ""
+      //         }
+      //         this.router.navigate(['work/inner/', this.projectID,'types'])
+      //       },
+      //       error: err=>{
+      //         this.errorMsg = err.error.message;
+      //       }
+      //     }
+      //   )
     }
   }
   ngOnDestroy(): void {

@@ -1,23 +1,27 @@
 import {AfterViewInit, ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import {WorkspaceService} from "../../../../../core/services";
-import {Subject, takeUntil} from "rxjs";
+import {map, Observable, Subject, takeUntil, tap} from "rxjs";
 import {User} from "../../../../../core/interfaces";
 import {MatPaginator} from "@angular/material/paginator";
 import {MatTableDataSource} from "@angular/material/table";
-import {ActivatedRoute, Router} from "@angular/router";
 import {MatDialog} from "@angular/material/dialog";
 import {DeletePopupComponent} from "../../../../../shared/popups/delete-popup/delete-popup.component";
 import {AddMemberComponent} from "./add-member/add-member.component";
-import {ProjectFacade} from "../../../../../facades/project.facade";
 import {Store} from "@ngrx/store";
-import {currentProject, ProjectStateModule} from "../../../../../store/project";
+import {
+  currentProject,
+  deleteProjectUser,
+  loadProjectUser, projects,
+  ProjectStateModule,
+} from "../../../../../store/project";
+import {getProjectUsers} from "../../../../../store/project/project.selectors";
+import {createIssueType} from "../../../../../store/issue-types";
 
 @Component({
   selector: 'app-members',
   templateUrl: './members.component.html',
   styleUrls: ['./members.component.scss']
 })
-export class MembersComponent implements  OnInit,AfterViewInit, OnDestroy{
+export class MembersComponent implements  AfterViewInit, OnDestroy{
 
   displayedColumns: string[] = ['id', 'name','email','createdAt','updatedAt','actions'];
   sub$ = new Subject();
@@ -30,27 +34,28 @@ export class MembersComponent implements  OnInit,AfterViewInit, OnDestroy{
 
   dataSource = new MatTableDataSource<User>();
   members: User[] = [];
+
+
+  countMembers$: Observable<number> = this.store.select(getProjectUsers).pipe(
+    map((res)=> {
+      console.log("in countMembers",res)
+      return res.length
+    })
+  )
   constructor(
     private store : Store<{project: ProjectStateModule}>,
 
-    private workspaceService: WorkspaceService,
-    private projectFacade: ProjectFacade,
-    private route : ActivatedRoute,
-    private router:Router,
     public dialog: MatDialog,
     private cd: ChangeDetectorRef
   ) {
   }
 
-  ngOnInit(): void {
-    // this.getMembers()
-  }
   get project(){
-    return this.projectFacade.getProject()
+    return this.store.select(currentProject)
   }
 
   getMembers(){
-    return this.workspaceService.getProjectUsers()
+    return this.store.select(getProjectUsers)
       .pipe(takeUntil(this.sub$))
       .subscribe(res=>{
         // console.log("get members",res)
@@ -68,6 +73,7 @@ export class MembersComponent implements  OnInit,AfterViewInit, OnDestroy{
     this.store.select(currentProject)
       .subscribe((proj)=>{
           if (proj){
+            this.store.dispatch(loadProjectUser())
             this.getMembers()
           }
         }
@@ -76,30 +82,34 @@ export class MembersComponent implements  OnInit,AfterViewInit, OnDestroy{
     this.cd.detectChanges()
   }
   delete(id: number):void {
-    this.openDialog().afterClosed().subscribe(res=>{
-        if(res){
-          this.workspaceService.deleteUsersFromWorkspace(id)
-            .pipe(takeUntil(this.sub$))
-            .subscribe(res=>{
-              this.getMembers()
-            })
-        }
-      }
-    )
+    this.openDialog().afterClosed()
+      .pipe(
+        takeUntil(this.sub$),
+        tap((res)=>{
+          if(res){
+            this.store.dispatch(deleteProjectUser({userId: id}))
+          }
+        })
+      )
+      .subscribe()
   }
   addMember(mems:User[]) {
-    const dialogRef = this.dialog.open(AddMemberComponent,{
-      data:{
-        project: this.project,
-        mems:mems
-      }
-    });
-    dialogRef.afterClosed().subscribe(result => {
-      if (result) {
-        // console.log("after dialog closed")
-        this.getMembers();
-      }
-    })
+    this.store.select(currentProject).pipe(
+      takeUntil(this.sub$),
+      tap((res)=>{
+        const dialogRef = this.dialog.open(AddMemberComponent,{
+          data:{
+            mems:mems
+          }
+        });
+        dialogRef.afterClosed().subscribe(result => {
+          if (result) {
+            // console.log("after dialog closed")
+            this.getMembers();
+          }
+        })
+      })
+    ).subscribe()
   }
   openDialog(){
     return  this.dialog.open(DeletePopupComponent, {

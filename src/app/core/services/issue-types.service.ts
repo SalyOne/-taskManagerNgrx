@@ -14,8 +14,8 @@ export class IssueTypesService  extends BaseService{
     return this.post<IIssueType>('issue-type', param)
   }
 
-  editIssueType(id:string, editedProject:IIssueType):Observable<IIssueType>{
-    return  this.put<IIssueType>(`issue-type/${id}`, editedProject);
+  editIssueType(editedProject:IIssueType):Observable<IIssueType>{
+    return  this.put<IIssueType>(`issue-type/${editedProject.id}`, editedProject);
   }
 
   getAllIssueTypes() :Observable<IIssueType[]>{
@@ -28,7 +28,7 @@ export class IssueTypesService  extends BaseService{
     return this.get<IQueryTable<IIssueType>>(`issue-type`, params)
   }
 
-  deleteIssueType(id:string){
+  deleteIssueType(id:number){
     return this.delete(`issue-type/${id}`);
   }
 }

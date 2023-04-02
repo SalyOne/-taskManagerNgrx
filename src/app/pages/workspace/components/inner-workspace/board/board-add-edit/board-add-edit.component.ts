@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {FormArray, FormControl, FormGroup, Validators} from "@angular/forms";
 import {ActivatedRoute, Router} from "@angular/router";
 import {CdkDragDrop, moveItemInArray} from "@angular/cdk/drag-drop";
@@ -8,7 +8,7 @@ import { IWorkspace } from 'src/app/core/interfaces';
 import { ProjectFacade } from 'src/app/facades/project.facade';
 import {Store} from "@ngrx/store";
 import {createBoard, currentProject, getBoard, updateBoard} from "../../../../../../store";
-import {map, Observable, tap} from "rxjs";
+import {map, Observable, Subject, takeUntil, tap} from "rxjs";
 import {IBoard} from "../../../../../../core/interfaces/board";
 
 @Component({
@@ -16,7 +16,7 @@ import {IBoard} from "../../../../../../core/interfaces/board";
   templateUrl: './board-add-edit.component.html',
   styleUrls: ['./board-add-edit.component.scss']
 })
-export class BoardAddEditComponent implements OnInit {
+export class BoardAddEditComponent implements OnInit , OnDestroy{
 
   form: FormGroup = new FormGroup({
     id: new FormControl(null),
@@ -26,7 +26,7 @@ export class BoardAddEditComponent implements OnInit {
     columns: new FormArray([], Validators.required),
   })
   taskStatuses = Object.values(ETaskStatus);
-
+  sub$ = new Subject();
   boardId!: number;
   workspaceId!: number;
 
@@ -35,11 +35,11 @@ export class BoardAddEditComponent implements OnInit {
   }
 
   constructor(
-    private readonly boardService: BoardService,
     private router: Router,
     private route: ActivatedRoute,
     private store: Store
   ) { }
+
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
@@ -49,12 +49,7 @@ export class BoardAddEditComponent implements OnInit {
       }
     })
     // console.log(this.workspace)
-     this.store.select(currentProject)
-      .pipe(
-        map((res)=> {
-          return this.workspaceId = res.id
-        })
-      )
+
   }
 
   getBoard() {
@@ -96,10 +91,26 @@ export class BoardAddEditComponent implements OnInit {
     if (this.form.invalid) {
       return;
     }
+
     if (this.boardId) {
-      this.store.dispatch(updateBoard({board: this.form.value , projectId: this.workspaceId} ))
+
+      this.store.select(currentProject)
+        .pipe(
+          tap((res)=> {
+            this.store.dispatch(updateBoard({board: this.form.value , projectId: res.id} ))
+          }),
+          takeUntil(this.sub$)
+        ).subscribe()
+
+
     } else {
-      this.store.dispatch(createBoard ({board: this.form.value , projectId: this.workspaceId} ))
+      this.store.select(currentProject)
+        .pipe(
+          tap((res)=> {
+            this.store.dispatch(createBoard ({board: this.form.value , projectId: this.workspaceId} ))
+          }),
+          takeUntil(this.sub$)
+        ).subscribe()
     }
   }
 
@@ -109,5 +120,11 @@ export class BoardAddEditComponent implements OnInit {
     this.columnsFormArray.controls.forEach((control, index) => {
       control.get('position')?.setValue(index + 1)
     })
+  }
+
+
+  ngOnDestroy(): void {
+    this.sub$.next(null);
+    this.sub$.complete()
   }
 }

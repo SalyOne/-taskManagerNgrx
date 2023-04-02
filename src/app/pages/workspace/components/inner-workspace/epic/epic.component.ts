@@ -1,16 +1,16 @@
-import {AfterViewInit, ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, ChangeDetectorRef, Component, OnDestroy, ViewChild} from '@angular/core';
 import {MatTableDataSource} from "@angular/material/table";
 import {IEpic} from "../../../../../core/interfaces/epic";
-import {Subject, takeUntil} from "rxjs";
+import {Subject, switchMap, takeUntil, tap} from "rxjs";
 import {MatPaginator} from "@angular/material/paginator";
-import {IQueryTable} from "../../../../../core/interfaces";
 import {ActivatedRoute, Router} from "@angular/router";
 import {MatDialog} from "@angular/material/dialog";
 import {EpicService} from "../../../../../core/services/epic.service";
-import {IIssueType} from "../../../../../core/interfaces/issue-type";
 import {DeletePopupComponent} from "../../../../../shared/popups/delete-popup/delete-popup.component";
 import {currentProject, ProjectStateModule} from "../../../../../store/project";
 import {Store} from "@ngrx/store";
+import {deleteEpics, getEpics, IEpicStateModule, loadEpics} from "../../../../../store/epics";
+import {result} from "lodash";
 
 @Component({
   selector: 'app-epic',
@@ -32,7 +32,7 @@ export class EpicComponent implements OnDestroy,AfterViewInit{
 
   constructor(
     private epicService : EpicService,
-    private store : Store<{project: ProjectStateModule}>,
+    private store : Store<{project: ProjectStateModule, epic: IEpicStateModule}>,
 
     private route : ActivatedRoute,
     private router:Router,
@@ -41,7 +41,7 @@ export class EpicComponent implements OnDestroy,AfterViewInit{
   ) { }
 
   getEpics(){
-    return this.epicService.getAllEpics()
+    return this.store.select(getEpics)
       .pipe(takeUntil(this.sub$))
       .subscribe(res=>{
         this.epics = res;
@@ -61,6 +61,7 @@ export class EpicComponent implements OnDestroy,AfterViewInit{
       .subscribe((proj)=>{
           if (proj){
             this.getEpics();
+            this.store.dispatch(loadEpics());
           }
         }
       )
@@ -69,19 +70,17 @@ export class EpicComponent implements OnDestroy,AfterViewInit{
   }
 
 
-  delete(id?: number):void {
-    this.openDialog().afterClosed().subscribe(res=>{
-        if(res){
-          this.epicService.deleteEpic(String(id))
-            .pipe(takeUntil(this.sub$))
-            .subscribe(res=>{
-              // this.router.navigate(['/types'])
-              // console.log('get delete issue',  res)
-              this.getEpics()
-            })
-        }
-      }
-    )
+  delete(id: number):void {
+    this.openDialog().afterClosed()
+      .pipe(
+        takeUntil(this.sub$),
+        tap((result)=>{
+          if(result){
+            this.store.dispatch(deleteEpics({epicId:id}))
+          }
+        })
+      )
+      .subscribe()
   }
 
   openDialog(){

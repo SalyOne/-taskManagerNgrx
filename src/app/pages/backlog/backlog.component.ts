@@ -10,11 +10,11 @@ import {CommonModule} from "@angular/common";
 import {MatButtonModule} from "@angular/material/button";
 import {RouterModule} from "@angular/router";
 import {MatIconModule} from "@angular/material/icon";
+import {Store} from "@ngrx/store";
+import {BacklogStateModel, loadBacklogTasks} from "./store";
 
 @Component({
   selector: 'app-backlog',
-  standalone: true,
-  imports: [CommonModule, MatButtonModule, RouterModule, MatIconModule,MatTableModule, MatDialogModule,],
   templateUrl: './backlog.component.html',
   styleUrls: ['./backlog.component.scss']
 })
@@ -28,23 +28,22 @@ export class BacklogComponent  implements OnInit, OnDestroy {
   constructor(
     private taskService: TaskService,
     public dialog: MatDialog,
+    private store: Store<{backlog: BacklogStateModel}>,
   ) {
 
   }
 
 
   ngOnInit(): void {
-    this.getIssueTypes();
-  }
+    this.store.select(state => state.backlog)
+      .subscribe((backlog)=>{
+        this.dataSource.data = backlog.tasks
+      })
 
-  getIssueTypes() {
-    this.taskService.getTasks({
-      isBacklog: true
-    })
-      .pipe(takeUntil(this.sub$))
-      .subscribe(boards => {
-        this.dataSource.data = boards;
-      });
+    this.store.dispatch(loadBacklogTasks())
+  }
+  loadBacklog() {
+    this.store.dispatch(loadBacklogTasks())
   }
 
 
@@ -68,7 +67,7 @@ export class BacklogComponent  implements OnInit, OnDestroy {
       )
       .subscribe(result => {
         if (result) {
-          this.getIssueTypes();
+          this.loadBacklog();
         }
       });
   }
@@ -84,7 +83,7 @@ export class BacklogComponent  implements OnInit, OnDestroy {
 
     doalogRef.afterClosed().subscribe((task: ITask) => {
       if (task) {
-        this.getIssueTypes()
+        this.loadBacklog()
       }
     })
   }

@@ -5,9 +5,9 @@ import {
   HttpEvent,
   HttpInterceptor
 } from '@angular/common/http';
-import {map, Observable, switchMap} from 'rxjs';
+import {first, map, Observable, switchMap} from 'rxjs';
 import {ProjectFacade} from "../../facades/project.facade";
-import {Store} from "@ngrx/store";
+import {select, Store} from "@ngrx/store";
 import {currentProject, ProjectStateModule} from "../../store/project";
 
 @Injectable()
@@ -21,9 +21,10 @@ export class ProjectInterceptor implements HttpInterceptor {
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
 
-    return  this.store.select(currentProject)
-      .pipe(
-        switchMap((project)=>{
+    return  this.store.pipe(
+      select(currentProject),
+      first(),
+      switchMap((project)=>{
           if (project){
             request = request.clone({
               setHeaders:{
@@ -32,8 +33,9 @@ export class ProjectInterceptor implements HttpInterceptor {
             })
           }
           return next.handle(request)
-        })
-      )
+      })
+    )
+
     //
     // const project = this.projectFacade.getProject();
     //

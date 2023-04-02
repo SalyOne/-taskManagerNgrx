@@ -30,8 +30,6 @@ import { PagenotfoundComponent } from './pages/pagenotfound/pagenotfound.compone
 import {PermissionsDirective} from "./core/directives/permissions.directive";
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
-import {projectReducer} from "./store/project/project.reducer";
-import {ProjectEffect} from "./store/project";
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 

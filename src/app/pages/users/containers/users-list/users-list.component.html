@@ -70,10 +70,10 @@
   </table>
 
 
-  <mat-progress-bar mode="indeterminate" *ngIf="isLoading"></mat-progress-bar>
+  <mat-progress-bar mode="indeterminate" *ngIf="(isLoading$ | async)"></mat-progress-bar>
   <mat-paginator
     #paginator
-    [length]="totalData"
+    [length]="(totalData$ | async)"
     [pageSizeOptions]="pageSizes"
     showFirstLastButtons
   ></mat-paginator>

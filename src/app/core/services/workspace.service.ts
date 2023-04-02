@@ -41,7 +41,7 @@ export class WorkspaceService extends BaseService{
   }
 
   //set users for a project
-  addUsersToWorkspace(param: IWorkspaceUsers):Observable<IWorkspaceUsers>{
+  addUsersToWorkspace(param: IWorkspaceUsers):Observable<any>{
     return this.post<IWorkspaceUsers>('project/users', param)
   }
   deleteUsersFromWorkspace(id: number):Observable<IWorkspaceUsers>{

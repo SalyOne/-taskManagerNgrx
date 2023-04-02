@@ -5,7 +5,7 @@ import {
   initCurrentProject,
   loadProjects,
   loadProjectsFailure,
-  loadProjectsSuccess,
+  loadProjectsSuccess, loadProjectUsersSuccess,
   setProjects
 } from "./project.actions";
 
@@ -24,7 +24,7 @@ export const projectReducer = createReducer(
   initialState,
   on(loadProjects, state => state),
   on(loadProjectsSuccess, (state, action)=>{
-    console.log(action)
+    // console.log(action)
     return{
       ...state,
       projects:action.data
@@ -40,13 +40,20 @@ export const projectReducer = createReducer(
     }
   }),
   on(initCurrentProject, (state, action)=>{
-    console.log("state: ",state)
+    // console.log("state: ",state)
     const project = localStorage.getItem('project')
-    console.log("project: ",project)
+    // console.log("project: ",project)
     return{
       ...state,
       currentProject: project ? JSON.parse(project) : null
     }
-  })
+  }),
+  on(loadProjectUsersSuccess, (state, action) => {
+      return {
+        ...state,
+        projectUsers: action.users
+      }
+    }
+  )
 
 )

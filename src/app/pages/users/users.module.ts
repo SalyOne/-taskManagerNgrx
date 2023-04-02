@@ -18,8 +18,6 @@ import {EffectsModule} from "@ngrx/effects";
 
 @NgModule({
   declarations: [
-
-
     AddRoleComponent
   ],
   imports: [
